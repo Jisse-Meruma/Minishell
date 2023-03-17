@@ -3,15 +3,15 @@ NAME		:=	minishell
 
 DEBUGGING	?=
 
-LIBS		:=	./libft/libft.a
+LIBS		:=	./libft/libft.a -lreadline
 
-HEADER		:=	-I libft -I includes
+HEADER		:=	-I libft -I includes 
 HEADERS		:=	libft/libft.h includes/minishell.h
 OBJ_DIR		:=	./obj
 SRC_DIR 	:=	./src
 
 ### UTILS #####################################################
-CFLAGS	:=	-Wall -Wextra
+CFLAGS	:=	-Wall -Wextra 
 RM		:=	rm -rf
 
 SRC 	:=	main.c
