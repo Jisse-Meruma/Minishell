@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/19 15:37:14 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/03/19 17:30:33 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(void)
 {
 	char *line;
+	char *path;
 
 	line = readline("Minishell$ ");
 	while (line)
