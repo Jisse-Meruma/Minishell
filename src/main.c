@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/17 17:57:43 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/03/19 15:37:14 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(void)
 	line = readline("Minishell$ ");
 	while (line)
 	{
-		printf("%s\n", line);
+		add_history(line);
 		free(line);
 		line = readline("Minishell$ ");
 	}
