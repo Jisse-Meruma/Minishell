@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 15:50:57 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/19 17:20:44 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/03/20 12:08:52 by jisse            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,6 @@ char	*path_creation(char *command)
 	char	*path_var;
 	char	*path_command;
 
-	int i;
-
-	i = 0;
 	if (*command == '\0')
 		return (NULL);
 	if (access(command, F_OK | X_OK) == FOUND)
