@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:59:25 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/19 16:53:27 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/03/20 12:28:12 by jisse            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
  * @return path of the given command. if path does not exist return NULL
  */
 char	*path_creation(char *command);
+
+void	execute_cmd(char *argv[], char *envp[]);
 
 #endif

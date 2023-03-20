@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/20 12:28:27 by jisse            ###   ########.fr       */
+/*   Created: 2023/03/20 12:15:39 by jisse             #+#    #+#             */
+/*   Updated: 2023/03/20 12:26:40 by jisse            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/types.h>
+#include <sys/wait.h>
+#define CHILD 0
 
-int	main(int argc, char *argv[], char *envp[])
+void	execute_cmd(char *argv[], char *envp[])
 {
-	char *line;
-
-	line = readline("Minishell$ ");
-	while (line)
+	char	*path;
+	pid_t	pid;
+	
+	pid = fork();
+	if (pid == -1)
+		printf("fork Error\n");
+	if (pid == CHILD)
 	{
-		add_history(line);
-		argv = ft_split(line, ' ');
-		execute_cmd(argv, envp);
-		ft_2dfree(argv);		
-		free(line);
-		line = readline("Minishell$ ");
+		path = path_creation(argv[0]);
+		if (path)
+			execve(path, argv, envp);
+		printf("ERROR\n");
+		return ;
 	}
-	return (0);
+	waitpid(pid, NULL, 0);
 }
