@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:59:25 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/20 12:28:12 by jisse            ###   ########.fr       */
+/*   Updated: 2023/03/22 14:38:43 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@
 char	*path_creation(char *command);
 
 void	execute_cmd(char *argv[], char *envp[]);
+
+char	*dubble_quotes(char *line);
 
 #endif

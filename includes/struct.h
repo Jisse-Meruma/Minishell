@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/23 12:16:30 by jmeruma          ###   ########.fr       */
+/*   Created: 2023/03/22 13:28:50 by jmeruma           #+#    #+#             */
+/*   Updated: 2023/03/22 13:33:36 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	main(int argc, char *argv[], char *envp[])
+# include <stdbool.h>
+
+typedef struct s_parse
 {
-	char *line;
-
-	line = readline("Minishell$ ");
-	while (line)
-	{
-		add_history(line);
-		argv = ft_split(line, ' ');
-		execute_cmd(argv, envp);
-		ft_2dfree(argv);		
-		free(line);
-		line = readline("Minishell$ ");
-	}
-	return (0);
-}
+	bool	dubble_quote;
+	bool	single_quote;
+}	t_parse;
+	
+#endif
