@@ -1,6 +1,6 @@
+
 #include "minishell.h"
 #include "struct.h"
-
 
 static int	len_till_quote(char const *line, int index, int c)
 {

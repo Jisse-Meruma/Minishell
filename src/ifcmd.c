@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/03/23 11:46:57 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/03/23 13:03:24 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/03/23 13:19:17 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ifcmd(char *argv[], char *envp[])
 	if (!compare(argv[0], "pwd"))
 		cmd_pwd();
 	else if (!compare(argv[0], "env"))
-		cmd_env();
+		cmd_env(argv, envp);
 	else
 		execute_cmd(argv, envp);
 }
