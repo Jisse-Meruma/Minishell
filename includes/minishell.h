@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:59:25 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/23 12:56:26 by jmeruma          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -33,6 +22,17 @@
 char	*path_creation(char *command);
 
 void	execute_cmd(char *argv[], char *envp[]);
+
+void	ifcmd(char *argv[], char *envp[]);
+int     compare(char *s1, char *s2);
+void	cmd_pwd();
+void	cmd_env();
+
+char	**ft_command_split(char *line);
+void	ifcmd(char *argv[], char *envp[]);
+int     compare(char *s1, char *s2);
+void	cmd_pwd();
+void	cmd_env();
 
 char	**ft_command_split(char *line);
 

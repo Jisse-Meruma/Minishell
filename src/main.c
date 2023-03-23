@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/23 13:00:49 by jmeruma          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
 int	main(int argc, char *argv[], char *envp[])
@@ -29,6 +17,10 @@ int	main(int argc, char *argv[], char *envp[])
 			i++;
 		}
 		execute_cmd(argv, envp);
+		argv = ft_split(line, ' ');
+		//call a if statement now to check for builtins cmds
+		ifcmd(argv, envp);
+		//execute_cmd(argv, envp);
 		ft_2dfree(argv);		
 		free(line);
 		line = readline("Minishell$ ");
