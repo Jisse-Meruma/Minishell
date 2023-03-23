@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   dubble_quotes.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 12:29:35 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/23 12:42:19 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   dubble_quotes.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/03/22 12:29:35 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/03/23 13:14:58 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "struct.h"
-
 
 static int	find_next_quote(char const *line, int index, int c)
 {

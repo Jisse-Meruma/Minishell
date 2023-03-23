@@ -6,9 +6,8 @@ DEBUGGING	?=
 LIBS		:=	./libft/libft.a -lreadline
 
 HEADER		:=	-I libft -I includes 
-HEADERS		:=	libft/libft.h includes/minishell.h includes/struct.h
+HEADERS		:=	libft/libft.h includes/minishell.h
 OBJ_DIR		:=	./obj
-PARSE_DIR	:=	./src/parser
 SRC_DIR 	:=	./src
 
 ### UTILS #####################################################
@@ -22,11 +21,10 @@ SRC 	:=	main.c \
 			cmd_pwd.c \
 			cmd_env.c \
 			compare.c
-			execution.c	\
-			parser/dubble_quotes.c
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
+
 ## BON_SRC :=
 
 ## BON_OBJ :=  $(BON_SRC:_bonus.c=_bonus.o)
@@ -59,10 +57,12 @@ $(NAME): $(OBJ)
 	@echo -----------------------
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
-	@mkdir -p $(@D)
 	@echo $(Purple) Compiling.. 🧱 $< $(Color_Off)
 	@echo -----------------------
 	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@ 
+
+$(OBJ_DIR):
+	@mkdir $@
 
 clean:
 	@echo $(Cyan) Sweeping.. 💥 $(Color_Off)
