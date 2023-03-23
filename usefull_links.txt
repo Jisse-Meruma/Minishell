@@ -1,0 +1,3 @@
+signal handling for console : 
+https://learn.microsoft.com/en-us/windows/console/ctrl-c-and-ctrl-break-signals
+https://learn.microsoft.com/en-us/windows/console/creation-of-a-console

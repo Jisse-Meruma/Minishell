@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:58:15 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/20 12:28:27 by jisse            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jisse <jisse@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/03/17 15:58:15 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/03/23 11:47:26 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		argv = ft_split(line, ' ');
-		execute_cmd(argv, envp);
+		//call a if statement now to check for builtins cmds
+		ifcmd(argv, envp);
+		//execute_cmd(argv, envp);
 		ft_2dfree(argv);		
 		free(line);
 		line = readline("Minishell$ ");

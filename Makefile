@@ -16,7 +16,11 @@ RM		:=	rm -rf
 
 SRC 	:=	main.c \
 			path_creation.c \
-			execution.c 
+			execution.c \
+			ifcmd.c \
+			cmd_pwd.c \
+			cmd_env.c \
+			compare.c
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jisse <jisse@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 15:59:25 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/20 12:28:12 by jisse            ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jisse <jisse@student.42.fr>                  +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/03/17 15:59:25 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/03/23 13:03:50 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,10 @@
 char	*path_creation(char *command);
 
 void	execute_cmd(char *argv[], char *envp[]);
+
+void	ifcmd(char *argv[], char *envp[]);
+int     compare(char *s1, char *s2);
+void	cmd_pwd();
+void	cmd_env();
 
 #endif
