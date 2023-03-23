@@ -46,8 +46,6 @@ static int	substring_len(char const *line, int len_s1, int i)
 		{
 			len += len_till_quote(line, i, line[i]);
 			i += len;
-			i += 1;
-			continue ;
 		}
 		len++;
 		i++;

@@ -17,7 +17,8 @@ int	main(int argc, char *argv[], char *envp[])
 			i++;
 		}
 		//call a if statement now to check for builtins cmds
-		ifcmd(argv, envp);
+		if (ft_2d_arrlen(argv))
+			ifcmd(argv, envp);
 		//execute_cmd(argv, envp);
 		ft_2dfree(argv);		
 		free(line);
