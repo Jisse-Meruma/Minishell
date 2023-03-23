@@ -18,7 +18,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		//call a if statement now to check for builtins cmds
 		ifcmd(argv, envp);
-		execute_cmd(argv, envp);
+		//execute_cmd(argv, envp);
 		ft_2dfree(argv);		
 		free(line);
 		line = readline("Minishell$ ");
