@@ -18,8 +18,8 @@ SRC 	:=	main.c \
 			path_creation.c \
 			execution.c \
 			ifcmd.c \
-			cmd_pwd.c \
-			cmd_env.c \
+			builtins/cmd_pwd.c \
+			builtins/cmd_env.c \
 			compare.c \
 			parser/dubble_quotes.c
 
