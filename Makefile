@@ -6,7 +6,7 @@ DEBUGGING	?=
 LIBS		:=	./libft/libft.a -lreadline
 
 HEADER		:=	-I libft -I includes 
-HEADERS		:=	libft/libft.h includes/minishell.h
+HEADERS		:=	libft/libft.h includes/minishell.h includes/struct.h
 OBJ_DIR		:=	./obj
 SRC_DIR 	:=	./src
 
@@ -20,11 +20,11 @@ SRC 	:=	main.c \
 			ifcmd.c \
 			cmd_pwd.c \
 			cmd_env.c \
-			compare.c
+			compare.c \
+			parser/dubble_quotes.c
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
-
 ## BON_SRC :=
 
 ## BON_OBJ :=  $(BON_SRC:_bonus.c=_bonus.o)
@@ -57,9 +57,10 @@ $(NAME): $(OBJ)
 	@echo -----------------------
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
+	@mkdir -p $(@D)
 	@echo $(Purple) Compiling.. 🧱 $< $(Color_Off)
 	@echo -----------------------
-	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@ 
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
 $(OBJ_DIR):
 	@mkdir $@
@@ -78,4 +79,4 @@ fclean:
 
 re: fclean all
 
-.PHONY: clean all fclean re libmlx,
+.PHONY: clean all fclean re libmlx
