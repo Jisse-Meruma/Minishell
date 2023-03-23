@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:59:25 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/22 14:38:43 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/03/23 12:56:26 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ char	*path_creation(char *command);
 
 void	execute_cmd(char *argv[], char *envp[]);
 
-char	*dubble_quotes(char *line);
+char	**ft_command_split(char *line);
 
 #endif
