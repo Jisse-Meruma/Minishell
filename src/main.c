@@ -16,11 +16,9 @@ int	main(int argc, char *argv[], char *envp[])
 			printf("[%d]-[%s]\n", i, argv[i]);
 			i++;
 		}
-		execute_cmd(argv, envp);
-		argv = ft_split(line, ' ');
 		//call a if statement now to check for builtins cmds
 		ifcmd(argv, envp);
-		//execute_cmd(argv, envp);
+		execute_cmd(argv, envp);
 		ft_2dfree(argv);		
 		free(line);
 		line = readline("Minishell$ ");
