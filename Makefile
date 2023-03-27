@@ -21,7 +21,9 @@ SRC 	:=	main.c \
 			builtins/cmd_pwd.c \
 			builtins/cmd_env.c \
 			compare.c \
-			parser/dubble_quotes.c
+			parser/quotes_split.c \
+			parser/parser.c			\
+			parser/remove_quotes.c
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "struct.h"
 
-static int	len_till_quote(char const *line, int index, int c)
+static int	len_with_quote(char const *line, int index, int c)
 {
 	int	len;
 
@@ -9,8 +9,8 @@ static int	len_till_quote(char const *line, int index, int c)
 	while (line[index + len] != c && line[index + len])
 		len++;
 	if (line[index + len] != '\0')
-		return (len);
-	return (0);
+		return (len + 1);
+	return (1);
 }
 
 static int	word_count(char const *line, int len_s1)
@@ -28,9 +28,15 @@ static int	word_count(char const *line, int len_s1)
 			return (word);
 		word++;
 		if (line[i] == '\"' || line[i] == '\'')
-			i += len_till_quote(line, i, line[i]);
+			i += len_with_quote(line, i, line[i]);
 		while (!ft_isspace(line[i]) && i < len_s1)
+		{
+			if (line[i] == '\"' || line[i] == '\'')
+				i += len_with_quote(line, i, line[i]);
+			if (ft_isspace(line[i]) || i == len_s1)
+				break ;
 			i++;
+		}
 	}
 	return (word);
 }
@@ -38,14 +44,18 @@ static int	word_count(char const *line, int len_s1)
 static int	substring_len(char const *line, int len_s1, int i)
 {
 	int	len;
+	int	len_quote;
 
 	len = 0;
 	while (!ft_isspace(line[i]) && i < len_s1)
 	{
 		if (line[i] == '\"' || line[i] == '\'')
 		{
-			len += len_till_quote(line, i, line[i]);
-			i += len;
+			len_quote = len_with_quote(line, i, line[i]);
+			i += len_quote;
+			len += len_quote;
+			if (ft_isspace(line[i]) || i == len_s1)
+				return (len);
 		}
 		len++;
 		i++;
