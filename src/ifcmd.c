@@ -2,15 +2,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void	ifcmd(char *argv[], char *envp[])
+void	ifcmd(char *argv[], char *envp[], t_infos *infos)
 {
-	char	*path;
-	pid_t	pid;
-
 	if (!compare(argv[0], "pwd"))
-		cmd_pwd();
+		cmd_pwd(infos);
 	else if (!compare(argv[0], "env"))
-		cmd_env(argv, envp);
+		cmd_env(infos);
+	else if (!compare(argv[0], "cd"))
+		cmd_cd(infos);
 	else
-		execute_cmd(argv, envp);
+		execute_cmd(argv, envp, infos);
 }
