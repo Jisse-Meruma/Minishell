@@ -4,7 +4,10 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	int		i;
 	char	*line;
+	t_infos	infos;
 
+	if (init(&infos, envp))
+		ret_error("Error init\n", 1, 1);
 	line = readline("Minishell$ ");
 	while (line)
 	{
@@ -16,9 +19,8 @@ int	main(int argc, char *argv[], char *envp[])
 			printf("[%d]-[%s]\n", i, argv[i]);
 			i++;
 		}
-		//call a if statement now to check for builtins cmds
-		ifcmd(argv, envp);
-		//execute_cmd(argv, envp);
+		if (ft_2d_arrlen(argv))
+			ifcmd(argv, envp, &infos);
 		ft_2dfree(argv);		
 		free(line);
 		line = readline("Minishell$ ");
