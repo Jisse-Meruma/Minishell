@@ -9,10 +9,10 @@ void	execute_cmd(char *argv[], char *envp[], t_infos *infos)
 	char	*path;
 	
 	infos->pid = fork();
-	signal_cmd(infos);
+	// signal_cmd(infos);
 	if (infos->pid == -1)
 		printf("fork Error\n");
-	printf("%d\n", infos->pid);
+	//printf("%d\n", infos->pid);
 	if (infos->pid == CHILD)
 	{
 		path = path_creation(argv[0]);

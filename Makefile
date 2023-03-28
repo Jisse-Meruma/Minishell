@@ -11,27 +11,26 @@ OBJ_DIR		:=	./obj
 SRC_DIR 	:=	./src
 
 ### UTILS #####################################################
-CFLAGS	:=	-Wall -Wextra 
+CFLAGS	:=	-Wall -Wextra
 RM		:=	rm -rf
 
-SRC 	:=	main.c \
-			init.c \
+SRC 	:=	main.c			\
+			init.c			\
 			path_creation.c \
-			execution.c \
-			ifcmd.c \
-			compare.c \
-			ret_error.c \
+			execution.c		\
+			ifcmd.c			\
+			compare.c		\
+			ret_error.c		\
 			builtins/cmd_pwd.c \
 			builtins/cmd_env.c \
-			compare.c \
-			parser/quotes_split.c \
+			compare.c		\
+			parser/quotes_split.c	\
 			parser/parser.c			\
-			parser/remove_quotes.c
-			builtins/cmd_cd.c \
-			builtins/cmd_get_env.c \
-			parser/dubble_quotes.c \
-			parser/list_env.c \
-			signal/signal.c \
+			parser/remove_quotes.c	\
+			builtins/cmd_cd.c 		\
+			builtins/cmd_get_env.c 	\
+			parser/list_env.c 		\
+			signal/signal.c 
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
