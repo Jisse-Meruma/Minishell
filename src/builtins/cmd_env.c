@@ -1,17 +1,13 @@
 #include "minishell.h"
-#include <sys/types.h>
-#include <sys/wait.h>
 
-void	cmd_env(char *argv[], char *envp[])
+void	cmd_env(t_infos *infos)
 {
-	char	*env;
-	int i;
+    t_node *current;
 
-	i = 0;
-	while (envp[i])
-	{
-		ft_putstr_fd(envp[i], 1);
-		write(1, "\n", 1);
-		++i;
-	}
+    current = infos->head;
+    while (current != NULL) 
+    {
+        printf("%s=%s\n",current->name, current->data);
+        current = current->next;
+    }
 }

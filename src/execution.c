@@ -4,32 +4,16 @@
 #include <signal.h>
 #define CHILD 0
 
-int glopid;
-
-void	f_sig(int sig)
-{
-	kill(glopid, SIGKILL);
-}
-
-void	signall(int pid)
-{
-	if (pid != CHILD)
-	{
-		glopid = pid;
-		signal(SIGINT, f_sig);
-	}
-}
-
-void	execute_cmd(char *argv[], char *envp[])
+void	execute_cmd(char *argv[], char *envp[], t_infos *infos)
 {
 	char	*path;
-	pid_t	pid;
 	
-	pid = fork();
-	if (pid == -1)
+	infos->pid = fork();
+	signal_cmd(infos);
+	if (infos->pid == -1)
 		printf("fork Error\n");
-	signall(pid);
-	if (pid == CHILD)
+	printf("%d\n", infos->pid);
+	if (infos->pid == CHILD)
 	{
 		path = path_creation(argv[0]);
 		if (path)
@@ -37,5 +21,5 @@ void	execute_cmd(char *argv[], char *envp[])
 		printf("ERROR\n");
 		return ;
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(infos->pid, NULL, 0);
 }
