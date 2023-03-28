@@ -1,24 +1,24 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   struct.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 13:28:50 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/03/22 13:33:36 by jmeruma          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef STRUCT_H
 # define STRUCT_H
 
 # include <stdbool.h>
 
-typedef struct s_parse
+typedef enum s_tokens
 {
-	bool	dubble_quote;
-	bool	single_quote;
-}	t_parse;
+	REDIRECT_IN,
+	REDIRECT_OUT,
+	HERE_DOC,
+	REDIRECT_OUT_APP,
+	PIPE,
+	COMMAND,
+	ARGUMENT,
+}	t_tokens;
+
+typedef struct s_arg
+{
+	char 			*argument;
+	t_tokens		token;
+	struct s_arg	*next;
+}	t_arg;
 	
 #endif
