@@ -28,7 +28,10 @@ SRC 	:=	main.c			\
 			parser/parser.c			\
 			parser/remove_quotes.c	\
 			builtins/cmd_cd.c 		\
+			builtins/cmd_unset.c	\
+			builtins/cmd_export.c	\
 			builtins/cmd_get_env.c 	\
+			builtins/cmd_exit.c 	\
 			parser/list_env.c 		\
 			signal/signal.c 
 

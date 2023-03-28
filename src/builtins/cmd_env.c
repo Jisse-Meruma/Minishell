@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+// print the linked list
 void	cmd_env(t_infos *infos)
 {
     t_node *current;

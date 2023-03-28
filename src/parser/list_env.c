@@ -2,7 +2,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void ft_free(t_node* head) 
+void ft_free_lst(t_node* head) 
 {
     t_node* current = head;
     t_node* next;
@@ -43,7 +43,7 @@ int insert_node(t_node** head, char *str)
 
     new_node = create_node(str);
     if (!new_node)
-        return (ft_free(*head), 1);
+        return (ft_free_lst(*head), 1);
     if (*head == NULL) 
     {
         *head = new_node;

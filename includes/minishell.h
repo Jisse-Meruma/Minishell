@@ -29,11 +29,15 @@ void	ifcmd(char *argv[], char *envp[], t_infos *infos);
 int     compare(char *s1, char *s2);
 
 void	execute_cmd(char *argv[], char *envp[], t_infos *infos);
-void	cmd_cd(t_infos *infos);
+void	cmd_cd(t_infos *infos, char *input);
 void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
+void	cmd_unset(t_infos *infos, char *node);
+void	cmd_export(t_infos *infos, char *str);
+void    cmd_exit(t_infos *infos);
+void    ft_free_lst(t_node* head);
 
 void    signal_cmd(t_infos *infos);
 int     list_env(char **env, t_infos *infos);

@@ -8,7 +8,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (init(&infos, envp))
 		ret_error("Error init\n", 1, 1);
-	line = readline("Minishell$ ");
+	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	while (line)
 	{
 		i = 0;
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[], char *envp[])
 			ifcmd(argv, envp, &infos);
 		ft_2dfree(argv);		
 		free(line);
-		line = readline("Minishell$ ");
+		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}
 	return (0);
 }

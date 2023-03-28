@@ -8,8 +8,14 @@ void	ifcmd(char *argv[], char *envp[], t_infos *infos)
 		cmd_pwd(infos);
 	else if (!compare(argv[0], "env"))
 		cmd_env(infos);
+	else if (!compare(argv[0], "exit"))
+		cmd_exit(infos);
 	else if (!compare(argv[0], "cd"))
-		cmd_cd(infos);
+		cmd_cd(infos, argv[1]);
+	else if (!compare(argv[0], "unset"))
+		cmd_unset(infos, argv[1]);
+	else if (!compare(argv[0], "export"))
+		cmd_export(infos, argv[1]);
 	else
 		execute_cmd(argv, envp, infos);
 }
