@@ -14,11 +14,10 @@ typedef enum s_tokens
 	ARGUMENT,
 }	t_tokens;
 
-typedef struct s_arg
+typedef struct s_lexer
 {
 	char 			*argument;
-	t_tokens		token;
 	struct s_arg	*next;
-}	t_arg;
+}	t_lexer;
 	
 #endif

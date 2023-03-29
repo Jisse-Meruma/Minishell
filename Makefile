@@ -30,7 +30,9 @@ SRC 	:=	main.c			\
 			builtins/cmd_cd.c 		\
 			builtins/cmd_get_env.c 	\
 			parser/list_env.c 		\
-			signal/signal.c 
+			signal/signal.c 		\
+			parser/lexer/lexer.c	\
+			parser/lexer/list_lexer.c	\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

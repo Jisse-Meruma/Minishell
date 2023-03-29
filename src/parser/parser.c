@@ -7,8 +7,6 @@ char	**parser(char *line)
 
 	i = 0;
 	argv = ft_command_split(line);
-
-	
 	argv = remove_quotes(argv);
 	while (argv[i] != NULL)
 	{

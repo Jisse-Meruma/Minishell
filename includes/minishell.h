@@ -6,10 +6,14 @@
 #include <stdio.h>
 #include "infos.h"
 #include "libft.h"
+#include "struct.h"
 #include <stdbool.h>
 #include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+#define ERROR 1
+#define SUCCES 0
 
 
 //----------------------------------//
@@ -72,4 +76,6 @@ char	**ft_command_split(char *line);
  */
 char	**remove_quotes(char *argv[]);
 
+
+t_lexer	*create_node(char *line, int start, int len);
 #endif
