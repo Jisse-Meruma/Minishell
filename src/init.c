@@ -9,8 +9,11 @@
  */
 int init(t_infos *infos, char **envp)
 {
+    //char s[100];
+
     if (list_env(envp, infos))
 		  ret_error("Error in list_env", 1, 1);
+    //getcwd(s, 100);
     cmd_get_env_pwd(infos, "PWD");
     return (0);
 }

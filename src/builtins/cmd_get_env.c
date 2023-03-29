@@ -22,6 +22,7 @@ void	cmd_get_env(t_infos *infos, char *env)
     }
 }
 
+//used in init to get the pwd at the start of the program and save it in the structure
 void	cmd_get_env_pwd(t_infos *infos, char *env)
 {
     t_node *current;
