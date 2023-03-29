@@ -1,24 +1,27 @@
 #include "minishell.h"
 #define CHILD 0
 
-void execute_img(t_infos *infos) {
+void execute_img(t_infos *infos) 
+{
     char *path;
+
     infos->pid = fork();
-    if (infos->pid == -1) {
+    if (infos->pid == -1) 
+	{
         printf("fork Error\n");
         return;
     }
-    if (infos->pid == CHILD) {
+    if (infos->pid == CHILD) 
+	{
         path = ft_strdup("./imgcat");
-        if (path) {
+        if (path) 
+		{
             char *args[] = {"imgcat", "download.png", NULL};
             execve(path, args, NULL);
-            // execve only returns if there's an error
             printf("execve error\n");
         }
-        else {
+        else 
             printf("ft_strdup error\n");
-        }
         return;
     }
     waitpid(infos->pid, NULL, 0);

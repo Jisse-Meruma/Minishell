@@ -36,6 +36,7 @@ void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
+void	cmd_echo(t_infos *infos, char *input);
 void    cmd_exit(t_infos *infos);
 void    ft_free_lst(t_node* head);
 

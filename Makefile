@@ -32,6 +32,7 @@ SRC 	:=	main.c			\
 			builtins/cmd_export.c	\
 			builtins/cmd_get_env.c 	\
 			builtins/cmd_exit.c 	\
+			builtins/cmd_echo.c		\
 			parser/list_env.c 		\
 			signal/signal.c 
 
