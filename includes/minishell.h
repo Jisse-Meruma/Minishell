@@ -36,10 +36,11 @@ void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
-void	cmd_echo(t_infos *infos, char *input);
-void    cmd_exit(t_infos *infos);
+void	cmd_echo(t_infos *infos, char **str);
+int	    cmd_exit(t_infos *infos, char **args);
 void    ft_free_lst(t_node* head);
 
+void    mainsignal(t_infos *infos);
 void    signal_cmd(t_infos *infos);
 int     list_env(char **env, t_infos *infos);
 int     ret_error(char *str, int fd, int ret);
