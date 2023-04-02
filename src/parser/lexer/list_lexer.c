@@ -44,3 +44,33 @@ int	lexer_node(t_lexer **lst, char *line, int start, int len)
 	lexer_lstadd_back(lst, node);
 	return (SUCCES);
 }
+
+t_lst_redirects	*parse_lstlast(t_lst_redirects *lst)
+{
+	t_lst_redirects	*current;
+
+	if (lst == NULL)
+		return (NULL);
+	if (lst->next == NULL)
+		return (lst);
+	current = lst;
+	while (current->next != NULL)
+		current = current->next;
+	return (current);
+}
+
+void	parse_lstadd_back(t_lst_redirects *lst,  t_lst_redirects *new)
+{
+	t_lexer	*node;
+
+	node = lst;
+	if (new == NULL)
+		return ;
+	if (lst == NULL)
+	{
+		lst = new;
+		return ;
+	}
+	node = lexer_lstlast(lst);
+	node->next = new;
+}

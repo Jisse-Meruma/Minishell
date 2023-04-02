@@ -12,6 +12,7 @@ char	**parser(char *line)
 	argv = remove_quotes(argv);
 	if (ft_lexer(&lexer, line))
 		printf("PARSING ERROR\n");
+	
 	while (lexer != NULL)
 	{
 		printf("[%d]-[%s]\n", i, lexer->argument);
