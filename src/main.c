@@ -6,7 +6,7 @@ void execute_img(t_infos *infos) {
     infos->pid = fork();
     if (infos->pid == -1) {
         printf("fork Error\n");
-        return;
+        return ;
     }
     if (infos->pid == CHILD) {
         path = ft_strdup("./imgcat");
@@ -19,7 +19,7 @@ void execute_img(t_infos *infos) {
         else {
             printf("ft_strdup error\n");
         }
-        return;
+        return ;
     }
     waitpid(infos->pid, NULL, 0);
 }

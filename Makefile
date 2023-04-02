@@ -36,6 +36,7 @@ SRC 	:=	main.c			\
 			signal/signal.c 		\
 			parser/lexer/lexer.c	\
 			parser/lexer/list_lexer.c	\
+			parser/lexer/ft_islexer.c	\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

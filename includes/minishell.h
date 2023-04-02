@@ -81,5 +81,11 @@ char	**ft_command_split(char *line);
 char	**remove_quotes(char *argv[]);
 
 
-t_lexer	*create_node(char *line, int start, int len);
+int	lexer_node(t_lexer **lst, char *line, int start, int len);
+int	ft_lexer(t_lexer **lexer, char *line);
+
+int ft_isquote(char quote);
+int ft_ismeta(char meta);
+int ft_isspecial(char c);
+int double_meta(int index, char *line);
 #endif

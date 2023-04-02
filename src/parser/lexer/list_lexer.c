@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_list	*lexer_lstlast(t_lexer *lst)
+t_lexer	*lexer_lstlast(t_lexer *lst)
 {
 	t_lexer	*current;
 
@@ -26,11 +26,11 @@ void	lexer_lstadd_back(t_lexer **lst, t_lexer *new)
 		*lst = new;
 		return ;
 	}
-	node = ft_lstlast(*lst);
+	node = lexer_lstlast(*lst);
 	node->next = new;
 }
 
-int	create_node(t_lexer **lst, char *line, int start, int len)
+int	lexer_node(t_lexer **lst, char *line, int start, int len)
 {
 	t_lexer	*node;
 
