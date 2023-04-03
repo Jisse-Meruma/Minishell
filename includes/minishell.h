@@ -88,4 +88,8 @@ int ft_isquote(char quote);
 int ft_ismeta(char meta);
 int ft_isspecial(char c);
 int double_meta(int index, char *line);
+
+void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
+
+int	parse_struct_command(t_lexer **lexer, t_command *command);
 #endif

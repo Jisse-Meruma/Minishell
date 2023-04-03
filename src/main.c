@@ -30,8 +30,8 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*line;
 	t_infos	infos;
 
-	if (init(&infos, envp))
-		ret_error("Error init\n", 1, 1);
+	// if (init(&infos, envp))
+	// 	ret_error("Error init\n", 1, 1);
 	execute_img(&infos);
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	while (line)

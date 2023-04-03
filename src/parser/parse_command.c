@@ -1,40 +1,86 @@
 #include "minishell.h"
 
-
+int	parse_struct_command(t_lexer **lexer, t_command *command);
 
 int	pipe_parse(t_lexer *lexer, t_command *command)
 {
-
+	command->next = ft_calloc(1, sizeof(t_command));
+	if (!(command->next))
+		return (ERROR);
+	parse_struct_command(&(lexer->next), command->next);
+	return (SUCCES);
 }
 
 int	here_parse(t_lexer *lexer, t_command *command)
 {
-	command->redirects.lst_heredoc = malloc(sizeof(t_lst_redirects));
-	if (!(command->redirects.lst_heredoc))
+	t_lst_redirects	*here_doc;
+
+	here_doc = malloc(sizeof(t_lst_redirects));
+	if (!here_doc)
 		return (ERROR);
-	command->redirects.lst_heredoc->filename = lexer->argument;
-	command->redirects.lst_heredoc->next = NULL;
-	
+	here_doc->filename = lexer->argument;
+	here_doc->next = NULL;
+	parse_lstadd_back(&(command->redirects.lst_heredoc), here_doc);
+	return (SUCCES);
 }
 
 int	stdinn_parse(t_lexer *lexer, t_command *command)
 {
-	
+	t_lst_redirects	*stdinn_file;
+
+	stdinn_file = malloc(sizeof(t_lst_redirects));
+	if (!stdinn_file)
+		return (ERROR);
+	stdinn_file->filename = lexer->argument;
+	stdinn_file->next = NULL;
+	parse_lstadd_back(&(command->redirects.lst_redirect_inn), stdinn_file);
+	return (SUCCES);
 }
 
 int	stdout_parse(t_lexer *lexer, t_command *command)
 {
-	
+		t_lst_redirects	*stdout_file;
+
+	stdout_file = malloc(sizeof(t_lst_redirects));
+	if (!stdout_file)
+		return (ERROR);
+	stdout_file->filename = lexer->argument;
+	stdout_file->next = NULL;
+	parse_lstadd_back(&(command->redirects.lst_heredoc), stdout_file);
+	return (SUCCES);
 }
 
 int	append_parse(t_lexer *lexer, t_command *command)
 {
-	
+		t_lst_redirects	*append;
+
+	append = malloc(sizeof(t_lst_redirects));
+	if (!append)
+		return (ERROR);
+	append->filename = lexer->argument;
+	append->next = NULL;
+	parse_lstadd_back(&(command->redirects.lst_heredoc), append);
+	return (SUCCES);
 }
 
-int	parse_struct_command(t_lexer **lexer)
+t_token	tokenizer(char *token)
 {
-	const t_parse_meta	parse_meta[128] = {
+	if (ft_strncmp(token, "|", 2))
+		return (PIPE);
+	else if (ft_strncmp(token, "<", 2))
+		return (STDINN_FILE);
+	else if (ft_strncmp(token, ">", 2))
+		return (STDOUT_FILE);
+	else if (ft_strncmp(token, ">>", 3))
+		return (APPEND_FILE);
+	else if (ft_strncmp(token, "<<", 3))
+		return (HERE_DOC);
+	return (ERROR);
+}
+
+int	parse_struct_command(t_lexer **lexer, t_command *command)
+{
+	const t_parse_meta	parse_meta[5] = {
 	[PIPE] = pipe_parse,
 	[HERE_DOC] = here_parse,
 	[STDINN_FILE] = stdinn_parse,
@@ -42,17 +88,29 @@ int	parse_struct_command(t_lexer **lexer)
 	[APPEND_FILE] = append_parse,
 	};
 	t_lexer				*node;
+	char	**arguments;
 
 	node = *lexer;
-
+	command->cmd_argv = ft_calloc(1, sizeof(char *));
+	if (!(command->cmd_argv))
+		return (ERROR);
 	while (node->next != NULL)
 	{
 		if (ft_ismeta(node->argument[0]))
 		{
-			if(node->next != NULL && ft_ismeta(node->next->argument[0]))
+			if(node->next != NULL && !ft_ismeta(node->next->argument[0]))
 				return (ERROR);
-			if ()
+			node = node->next;
+			if (parse_meta[tokenizer(node->argument)](node, command))
+				return (ERROR);
+		}
+		else
+		{
+			arguments = command->cmd_argv;
+			command->cmd_argv = ft_2d_add(arguments, node->argument);
+			ft_2dfree(arguments);
 		}
 		node = node->next;
 	}
+	return (SUCCES);
 }
