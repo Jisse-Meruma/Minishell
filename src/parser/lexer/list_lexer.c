@@ -64,9 +64,9 @@ void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new)
 	t_lst_redirects	*node;
 
 	node = *lst;
-	if (new == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	if (lst == NULL)
+	if (*lst == NULL)
 	{
 		*lst = new;
 		return ;

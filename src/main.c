@@ -38,7 +38,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		i = 0;
 		add_history(line);
-		argv = parser(line);
+		parser(line);
 		if (ft_2d_arrlen(argv))
 			ifcmd(argv, envp, &infos);
 		ft_2dfree(argv);		
