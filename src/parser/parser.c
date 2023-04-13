@@ -21,34 +21,38 @@ void	printing(t_command *command)
 		}
 		printf("\n");
 		printf("stdin redirect = ");
-		redirect = command->redirects.lst_redirect_inn;
+		redirect = command->redirects.lst_redirect_read;
 		while (redirect)
 		{
-			printf("%s, ", redirect->filename);
+			if (redirect->token == STDINN_FILE)
+				printf("%s, ", redirect->filename);
 			redirect = redirect->next;
 		}
 		printf("\n");
 		printf("stdout redirect = ");
-		redirect = command->redirects.lst_redirect_out;
+		redirect = command->redirects.lst_redirect_write;
 		while (redirect)
 		{
-			printf("%s, ", redirect->filename);
+			if (redirect->token == STDOUT_FILE)
+				printf("%s, ", redirect->filename);
 			redirect = redirect->next;
 		}
 		printf("\n");
 		printf("append redirect = ");
-		redirect = command->redirects.lst_append;
+		redirect = command->redirects.lst_redirect_write;
 		while (redirect)
 		{
-			printf("%s, ", redirect->filename);
+			if (redirect->token == APPEND_FILE)
+				printf("%s, ", redirect->filename);
 			redirect = redirect->next;
 		}
 		printf("\n");
 		printf("here_doc redirect = ");
-		redirect = command->redirects.lst_heredoc;
+		redirect = command->redirects.lst_redirect_read;
 		while (redirect)
 		{
-			printf("%s, ", redirect->filename);
+			if (redirect->token == HERE_DOC)
+				printf("%s, ", redirect->filename);
 			redirect = redirect->next;
 		}
 		printf("\n");
@@ -67,6 +71,8 @@ char	**parser(char *line)
 
 	i = 0;
 	lexer = NULL;
+	if (*line == '\0')
+	 return (NULL);
 	// argv = ft_command_split(line);
 	// argv = remove_quotes(argv);
 	if (ft_lexer(&lexer, line))
@@ -76,12 +82,7 @@ char	**parser(char *line)
 		printf("Malloc Allocation\n");
 	if (parse_struct_command(&lexer, command))
 		printf("struct parsing ERROR\n");
+	lexer_free(&lexer);
 	printing(command);
-	// while (lexer != NULL)
-	// {
-	// 	printf("[%d]-[%s]\n", i, lexer->argument);
-	// 	lexer = lexer->next;
-	// 	i++;
-	// }
 	return (NULL);
 }

@@ -28,6 +28,7 @@ SRC 	:=	main.c			\
 			parser/parser.c			\
 			parser/remove_quotes.c	\
 			parser/parse_command.c	\
+			parser/parse_redirect.c	\
 			builtins/cmd_cd.c 		\
 			builtins/cmd_unset.c	\
 			builtins/cmd_export.c	\
@@ -38,6 +39,9 @@ SRC 	:=	main.c			\
 			parser/lexer/lexer.c	\
 			parser/lexer/list_lexer.c	\
 			parser/lexer/ft_islexer.c	\
+			parser/lexer/lexer_cleanup.c\
+			redirects/here_doc.c		\
+			redirects/open.c			\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

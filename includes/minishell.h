@@ -83,6 +83,7 @@ char	**remove_quotes(char *argv[]);
 
 int	lexer_node(t_lexer **lst, char *line, int start, int len);
 int	ft_lexer(t_lexer **lexer, char *line);
+void	lexer_free(t_lexer **lexer);
 
 int ft_isquote(char quote);
 int ft_ismeta(char meta);
@@ -92,4 +93,10 @@ int double_meta(int index, char *line);
 void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
 
 int	parse_struct_command(t_lexer **lexer, t_command *command);
+
+int	pipe_parse(t_lexer *lexer, t_command *command, t_token token);
+int	here_parse(t_lexer *lexer, t_command *command, t_token token);
+int	stdinn_parse(t_lexer *lexer, t_command *command, t_token token);
+int	stdout_parse(t_lexer *lexer, t_command *command, t_token token);
+int	append_parse(t_lexer *lexer, t_command *command, t_token token);
 #endif
