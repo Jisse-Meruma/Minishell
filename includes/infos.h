@@ -1,6 +1,7 @@
 #ifndef INFOS_H
 # define INFOS_H
 
+#include <signal.h>
 #include <sys/types.h>
 #include <errno.h>
 

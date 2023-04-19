@@ -3,22 +3,41 @@
 
 # include <stdbool.h>
 
-typedef enum s_tokens
+typedef enum s_token
 {
-	REDIRECT_IN,
-	REDIRECT_OUT,
-	HERE_DOC,
-	REDIRECT_OUT_APP,
 	PIPE,
-	COMMAND,
-	ARGUMENT,
-}	t_tokens;
+	HERE_DOC,
+	STDINN_FILE,
+	STDOUT_FILE,
+	APPEND_FILE,
+}	t_token;
 
-typedef struct s_arg
+typedef struct s_lexer
 {
 	char 			*argument;
-	t_tokens		token;
-	struct s_arg	*next;
-}	t_arg;
-	
+	struct s_lexer	*next;
+}	t_lexer;
+
+typedef struct s_lst_redirects
+{
+	char					*filename;
+	t_token					token;
+	struct s_lst_redirects	*next;
+}	t_lst_redirects;
+
+typedef struct s_redirects
+{
+	t_lst_redirects	*lst_redirect_write;
+	t_lst_redirects	*lst_redirect_read;
+}	t_redirects;
+
+typedef struct s_command
+{
+	char				**cmd_argv;
+	t_redirects 		redirects;
+	struct s_command	*next;
+}	t_command;
+
+typedef int (* t_parse_meta)(t_lexer *, t_command *, t_token);
+
 #endif
