@@ -31,10 +31,11 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	int		i;
 	char	*line;
+	char	**argument;
 	t_infos	infos;
 
-	// if (init(&infos, envp))
-	// 	ret_error("Error init\n", 1, 1);
+	if (init(&infos, envp))
+		ret_error("Error init\n", 1, 1);
 	execute_img(&infos);
 	//mainsignal(&infos);
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
@@ -42,10 +43,12 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		i = 0;
 		add_history(line);
-		parser(line);
-		if (ft_2d_arrlen(argv))
-			ifcmd(argv, envp, &infos);
-		ft_2dfree(argv);		
+		argument = parser(line);
+		if (argument && argument[0] != '\0')
+		{
+			ifcmd(argument, envp, &infos);
+			ft_2dfree(argument);		
+		}
 		free(line);
 		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}

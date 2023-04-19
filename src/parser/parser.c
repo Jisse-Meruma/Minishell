@@ -52,8 +52,10 @@ void	printing(t_command *command)
 		while (redirect)
 		{
 			if (redirect->token == HERE_DOC)
+			{
 				printf("%s, ", redirect->filename);
-			here_doc(redirect->filename);
+				here_doc(redirect->filename);
+			}
 			redirect = redirect->next;
 		}
 		printf("\n");
@@ -77,13 +79,22 @@ char	**parser(char *line)
 	// argv = ft_command_split(line);
 	// argv = remove_quotes(argv);
 	if (ft_lexer(&lexer, line))
+	{
 		printf("PARSING ERROR\n");
+		return (NULL);
+	}
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
+	{
 		printf("Malloc Allocation\n");
+		return (NULL);
+	}
 	if (parse_struct_command(&lexer, command))
+	{
 		printf("struct parsing ERROR\n");
+		return (NULL);
+	}
 	lexer_free(&lexer);
 	printing(command);
-	return (NULL);
+	return (command->cmd_argv);
 }

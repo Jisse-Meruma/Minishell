@@ -11,7 +11,7 @@ void	ifcmd(char *argv[], char *envp[], t_infos *infos)
 	else if (!compare(argv[0], "env"))
 		cmd_env(infos);
 	else if (!compare(argv[0], "exit"))
-		cmd_exit(infos);
+		cmd_exit(infos, argv);
 	else if (!compare(argv[0], "cd"))
 		cmd_cd(infos, argv[1]);
 	else if (!compare(argv[0], "unset"))
