@@ -6,6 +6,8 @@ void	ifcmd(char *argv[], char *envp[], t_infos *infos)
 {
 	if (!compare(argv[0], "pwd"))
 		cmd_pwd(infos);
+	else if (!compare(argv[0], "echo"))
+		cmd_echo(infos, argv);
 	else if (!compare(argv[0], "env"))
 		cmd_env(infos);
 	else if (!compare(argv[0], "exit"))

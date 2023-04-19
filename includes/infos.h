@@ -3,6 +3,7 @@
 
 #include <signal.h>
 #include <sys/types.h>
+#include <errno.h>
 
 typedef struct s_node 
 {
@@ -15,6 +16,7 @@ typedef struct s_infos
 {
     pid_t	pid;
     char    *pwd;
+    int     error;
     struct sigaction	sa;
     pid_t     **pids;
     t_node  *head;

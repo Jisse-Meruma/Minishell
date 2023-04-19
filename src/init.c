@@ -15,5 +15,6 @@ int init(t_infos *infos, char **envp)
 		  ret_error("Error in list_env", 1, 1);
     //getcwd(s, 100);
     cmd_get_env_pwd(infos, "PWD");
+    infos->error = 0;
     return (0);
 }
