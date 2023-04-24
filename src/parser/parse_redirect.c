@@ -6,7 +6,8 @@ int	pipe_parse(t_lexer *lexer, t_command *command, t_token token)
 	command->next = ft_calloc(1, sizeof(t_command));
 	if (!(command->next))
 		return (ERROR);
-	parse_struct_command(&lexer, command->next);
+	if (parse_struct_command(&lexer, command->next))
+		return (ERROR);
 	return (SUCCES);
 }
 

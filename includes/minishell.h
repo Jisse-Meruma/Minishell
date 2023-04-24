@@ -38,6 +38,7 @@ void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
+char    *cmd_get_env_char(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
 void	cmd_echo(t_infos *infos, char **str);
@@ -86,6 +87,7 @@ char	**remove_quotes(char *argv[]);
 int	lexer_node(t_lexer **lst, char *line, int start, int len);
 int	ft_lexer(t_lexer **lexer, char *line);
 void	lexer_free(t_lexer **lexer);
+void	tokenizer(t_lexer **lexer);
 
 int ft_isquote(char quote);
 int ft_ismeta(char meta);

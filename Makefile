@@ -40,7 +40,9 @@ SRC 	:=	main.c			\
 			parser/lexer/lexer.c	\
 			parser/lexer/list_lexer.c	\
 			parser/lexer/ft_islexer.c	\
+			parser/lexer/tokenizer.c	\
 			parser/lexer/lexer_cleanup.c\
+			parser/expander/expander.c \
 			redirects/here_doc.c		\
 			redirects/open.c			\
 

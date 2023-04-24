@@ -1,20 +1,5 @@
 #include "minishell.h"
 
-t_token	tokenizer(char *token)
-{
-	if (!ft_strncmp(token, "|", 2))
-		return (PIPE);
-	else if (!ft_strncmp(token, "<", 2))
-		return (STDINN_FILE);
-	else if (!ft_strncmp(token, ">", 2))
-		return (STDOUT_FILE);
-	else if (!ft_strncmp(token, ">>", 3))
-		return (APPEND_FILE);
-	else if (!ft_strncmp(token, "<<", 3))
-		return (HERE_DOC);
-	return (ERROR);
-}
-
 int	fill_struct(t_lexer *node, t_command *command, const t_parse_meta *meta)
 {
 	t_token	token;
@@ -22,14 +7,13 @@ int	fill_struct(t_lexer *node, t_command *command, const t_parse_meta *meta)
 
 	while (node != NULL)
 	{
-		if (ft_ismeta(node->argument[0]))
+		if (node->token != TEXT_TOKEN)
 		{
-			if (node->next == NULL || ft_ismeta(node->next->argument[0]))
+			if (node->next == NULL || node->next->token != TEXT_TOKEN)
 				return (ERROR);
-			token = tokenizer(node->argument);
-			if (meta[token](node->next, command, token))
+			if (meta[node->token](node->next, command, node->token))
 				return (ERROR);
-			if (tokenizer(node->argument) == PIPE)
+			if (node->token == PIPE)
 				break ;
 			node = node->next;
 		}

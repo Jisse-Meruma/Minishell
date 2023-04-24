@@ -27,6 +27,10 @@ void execute_img(t_infos *infos)
     waitpid(infos->pid, NULL, 0);
 }
 
+void	f() {
+	system("leaks -q minishell");
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	int		i;
@@ -34,8 +38,9 @@ int	main(int argc, char *argv[], char *envp[])
 	char	**argument;
 	t_infos	infos;
 
-	if (init(&infos, envp))
-		ret_error("Error init\n", 1, 1);
+	atexit(f);
+	// if (init(&infos, envp))
+	// 	ret_error("Error init\n", 1, 1);
 	execute_img(&infos);
 	//mainsignal(&infos);
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
@@ -44,11 +49,11 @@ int	main(int argc, char *argv[], char *envp[])
 		i = 0;
 		add_history(line);
 		argument = parser(line);
-		if (argument && argument[0] != '\0')
-		{
-			ifcmd(argument, envp, &infos);
-			ft_2dfree(argument);		
-		}
+		// if (argument && argument[0] != '\0')
+		// {
+		// 	ifcmd(argument, envp, &infos);
+		// 	ft_2dfree(argument);		
+		// }
 		free(line);
 		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}

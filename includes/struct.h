@@ -10,11 +10,13 @@ typedef enum s_token
 	STDINN_FILE,
 	STDOUT_FILE,
 	APPEND_FILE,
+	TEXT_TOKEN,
 }	t_token;
 
 typedef struct s_lexer
 {
 	char 			*argument;
+	t_token			token;
 	struct s_lexer	*next;
 }	t_lexer;
 

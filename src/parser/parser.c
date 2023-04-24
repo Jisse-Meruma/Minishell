@@ -83,6 +83,7 @@ char	**parser(char *line)
 		printf("PARSING ERROR\n");
 		return (NULL);
 	}
+	tokenizer(&lexer);
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
 	{
