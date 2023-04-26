@@ -59,7 +59,7 @@ int     ret_error(char *str, int fd, int ret);
  * @param line line to check.
  * @return Linked_list. if Return == NULL execute an ERROR
  */
-char	**parser(char *line, t_infos *infos);
+t_command	*parser(char *line, t_infos *infos);
 
 //----------------------------------//
 //			parser/quotes_split		//

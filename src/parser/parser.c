@@ -62,7 +62,7 @@ void	printing(t_command *command)
 	}
 }
 
-char	**parser(char *line, t_infos *infos)
+t_command	*parser(char *line, t_infos *infos)
 {
 	int			i;
 	t_lexer		*lexer;
@@ -93,5 +93,6 @@ char	**parser(char *line, t_infos *infos)
 	}
 	lexer_free(&lexer);
 	printing(command);
-	return (command->cmd_argv);
+	system("leaks -q minishell");
+	return (command);
 }

@@ -3,12 +3,14 @@
 char	*env_strjoin(char *line, char *env_expand, char *begin, int total)
 {
 	char	*new_line;
+	char	*end_of_line;
 
 	new_line = ft_strjoin_free(begin, env_expand);
 	if (!new_line)
 		return (NULL);
-	new_line = ft_strjoin_free(new_line, \
-				ft_substr(line, total, ft_strlen(line) - total));
+	end_of_line = ft_substr(line, total, ft_strlen(line) - total);
+	new_line = ft_strjoin_free(new_line, end_of_line);
+	free(end_of_line);
 	return (new_line);
 }
 
@@ -32,11 +34,12 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	}
 	env = ft_substr(line, index, i);
 	if (!env || !begin)
-		return (free(line), NULL);
+		return (free(line), free(env),  NULL);
 	env_expand = cmd_get_env_char(infos, env);
 	new_line = env_strjoin(line, env_expand, begin, index + i);
 	if (env_expand)
 		*len = ft_strlen(env_expand);
+	free(env);
 	return (free(line), new_line);
 }
 
@@ -86,6 +89,7 @@ bool	find_env_var(char *line)
 void	expanding(t_lexer **lexer, t_infos *infos)
 {
 	t_lexer	*node;
+	char	*string_free;
 
 	node = *lexer;
 	while (node != NULL)
@@ -95,6 +99,7 @@ void	expanding(t_lexer **lexer, t_infos *infos)
 			node = node->next;
 			continue ;
 		}
+		string_free = node->argument;
 		node->argument = search_env_var(node->argument, infos);
 		node = node->next;
 	}
