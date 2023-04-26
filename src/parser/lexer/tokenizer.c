@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:52:59 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/04/24 14:06:04 by jmeruma          ###   ########.fr       */
+/*   Updated: 2023/04/26 12:30:50 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ t_token	token(char *token)
 
 void	tokenizer(t_lexer **lexer)
 {
-	t_lexer *node;
+	t_lexer	*node;
 
 	node = *lexer;
-
 	while (node != NULL)
 	{
 		if (ft_ismeta(node->argument[0]))

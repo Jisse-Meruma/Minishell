@@ -1,65 +1,81 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 12:32:55 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/04/24 16:57:38 by jmeruma          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-
-
-int	skip_single_quote(char *line, int index)
+char	*env_strjoin(char *line, char *env_expand, char *begin, int total)
 {
-	while (line[index] != '\'' && line[index])
-		index++;
-	return (index);
+	char	*new_line;
+
+	new_line = ft_strjoin_free(begin, env_expand);
+	if (!new_line)
+		return (NULL);
+	new_line = ft_strjoin_free(new_line, \
+				ft_substr(line, total, ft_strlen(line) - total));
+	return (new_line);
 }
 
-void	search_env_var(char *line, t_infos *info)
+char	*env_creation(char *line, t_infos *infos, int index, int *len)
 {
-	int index;
-	int position;
-	bool quotes;
+	char	*env;
+	char	*begin;
+	char	*new_line;
+	char	*env_expand;
+	int		i;
+
+	i = *len;
+	begin = ft_substr(line, 0, index);
+	index++;
+	while (line[index + i])
+	{
+		if (line[index + i] == '\"' || line[index + i] == '$'\
+				|| line[index + i] == '\'' || ft_isspace(line[index + i]))
+			break ;
+		i++;
+	}
+	env = ft_substr(line, index, i);
+	if (!env || !begin)
+		return (free(line), NULL);
+	env_expand = cmd_get_env_char(infos, env);
+	new_line = env_strjoin(line, env_expand, begin, index + i);
+	if (env_expand)
+		*len = ft_strlen(env_expand);
+	return (free(line), new_line);
+}
+
+char	*search_env_var(char *line, t_infos *infos)
+{
+	int		index;
+	bool	quotes;
+	int		position;
 
 	index = 0;
-	position = 0;
 	quotes = false;
 	while (line[index])
 	{
-		if (line[index] == '\'')
-			index = skip_single_quote(line, index);
-		if (line[index] == '$')
+		position = 0;
+		if (line[index] == '\"')
+			quotes = quote_status(quotes);
+		else if (line[index] == '\'' && quotes == false)
+			index = skip_single_quote(line, index + 1);
+		else if (line[index] == '$')
 		{
-			ft_substr(line, position, index);
-			cmd_get_env_char(info, ) // need to figure out how to do this!
+			line = env_creation(line, infos, index, &position);
+			if (!line)
+				return (NULL);
+			index += position - 1;
 		}
-		
-		
-		
+		index++;
 	}
+	return (line);
 }
 
 bool	find_env_var(char *line)
 {
-	bool check;
-	int index; 
+	int		index;
+	bool	check;
 
 	index = 0;
 	check = true;
 	while (line[index])
 	{
-		if (line[index] == '\'')
-		{
-			index++;
-			while (line[index] != '\'')
-				index++;
-		}
 		if (line[index] == '$')
 			check = false;
 		index++;
@@ -67,7 +83,7 @@ bool	find_env_var(char *line)
 	return (check);
 }
 
-void	expanding(t_command **lexer, t_infos *info)
+void	expanding(t_lexer **lexer, t_infos *infos)
 {
 	t_lexer	*node;
 
@@ -76,10 +92,10 @@ void	expanding(t_command **lexer, t_infos *info)
 	{
 		if (node->token != TEXT_TOKEN || find_env_var(node->argument))
 		{
-			node->next;
-			continue;
+			node = node->next;
+			continue ;
 		}
-		
-		
+		node->argument = search_env_var(node->argument, infos);
+		node = node->next;
 	}
 }

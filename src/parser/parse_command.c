@@ -2,7 +2,6 @@
 
 int	fill_struct(t_lexer *node, t_command *command, const t_parse_meta *meta)
 {
-	t_token	token;
 	char	**arguments;
 
 	while (node != NULL)

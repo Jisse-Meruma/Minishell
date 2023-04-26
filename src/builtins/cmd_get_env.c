@@ -47,9 +47,9 @@ char    *cmd_get_env_char(t_infos *infos, char *env)
     current = infos->head;
     while (current != NULL) 
     {
-        if (!ft_strncmp(env, current->name, ft_strlen(env)))
+        if (!ft_strncmp(env, current->name, ft_strlen(env) + 1))
         {
-            return (current->name);
+            return (current->data);
         }
         current = current->next;
     }

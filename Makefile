@@ -21,10 +21,9 @@ SRC 	:=	main.c			\
 			ifcmd.c			\
 			compare.c		\
 			ret_error.c		\
-			builtins/cmd_pwd.c \
-			builtins/cmd_env.c \
-			compare.c		\
-			parser/quotes_split.c	\
+			builtins/cmd_pwd.c 	\
+			builtins/cmd_env.c 	\
+			compare.c			\
 			parser/parser.c			\
 			parser/remove_quotes.c	\
 			parser/parse_command.c	\
@@ -42,7 +41,8 @@ SRC 	:=	main.c			\
 			parser/lexer/ft_islexer.c	\
 			parser/lexer/tokenizer.c	\
 			parser/lexer/lexer_cleanup.c\
-			parser/expander/expander.c \
+			parser/expander/expander.c 	\
+			parser/expander/exp_utils.c	\
 			redirects/here_doc.c		\
 			redirects/open.c			\
 

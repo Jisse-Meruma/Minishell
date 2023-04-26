@@ -79,24 +79,20 @@ char	*create_string(char *line)
 	return (new_line);
 }
 
-char	**remove_quotes(char *argv[])
+int	remove_quotes(t_lexer **lexer)
 {
-	char	**arguments;
+	t_lexer	*node;
 	char	*new_line;
-	int		index;
-	int		length;
 
-	length = ft_2d_arrlen(argv);
-	arguments = ft_calloc(length + 1, sizeof(char *));
-	if (!arguments)
-		return (NULL);
-	index = 0;
-	while (argv[index])
+	node = *lexer;
+	while (node != NULL)
 	{
-		new_line = create_string(argv[index]);
-		free(argv[index]);
-		arguments[index] = new_line;
-		index++;
+		new_line = create_string(node->argument);
+		if (!new_line)
+			return (ERROR);
+		free(node->argument);
+		node->argument = new_line;
+		node = node->next;
 	}
-	return (arguments);
+	return (SUCCES);
 }
