@@ -1,16 +1,13 @@
 #include "minishell.h"
 
-
 void	printing(t_command *command)
 {
-	int i;
-	t_lst_redirects *redirect;
+	int				i;
+	t_lst_redirects	*redirect;
 
 	i = 1;
-
 	while (command)
 	{
-
 		printf("/----------------------------\\\n");
 		printf("CMD = %s\n", command->cmd_argv[0]);
 		printf("ARG = ");
@@ -65,24 +62,24 @@ void	printing(t_command *command)
 	}
 }
 
-char	**parser(char *line)
+t_command	*parser(char *line, t_infos *infos)
 {
 	int			i;
-	char		**argv;
 	t_lexer		*lexer;
 	t_command	*command;
 
 	i = 0;
 	lexer = NULL;
 	if (*line == '\0')
-	 return (NULL);
-	// argv = ft_command_split(line);
-	// argv = remove_quotes(argv);
+		return (NULL);
 	if (ft_lexer(&lexer, line))
 	{
 		printf("PARSING ERROR\n");
 		return (NULL);
 	}
+	tokenizer(&lexer);
+	expanding(&lexer, infos);
+	remove_quotes(&lexer);
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
 	{
@@ -96,5 +93,6 @@ char	**parser(char *line)
 	}
 	lexer_free(&lexer);
 	printing(command);
-	return (command->cmd_argv);
+	system("leaks -q minishell");
+	return (command);
 }

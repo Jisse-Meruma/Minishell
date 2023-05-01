@@ -59,7 +59,7 @@ t_lst_redirects	*parse_lstlast(t_lst_redirects *lst)
 	return (current);
 }
 
-void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new)
+void	parse_lstadd_back(t_lst_redirects **lst, t_lst_redirects *new)
 {
 	t_lst_redirects	*node;
 

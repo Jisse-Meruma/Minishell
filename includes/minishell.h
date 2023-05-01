@@ -38,7 +38,7 @@ void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
-char	*cmd_getstr_env(t_infos *infos, char *env);
+char    *cmd_get_env_char(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
 void	cmd_echo(t_infos *infos, char **str);
@@ -59,7 +59,7 @@ int     ret_error(char *str, int fd, int ret);
  * @param line line to check.
  * @return Linked_list. if Return == NULL execute an ERROR
  */
-char	**parser(char *line);
+t_command	*parser(char *line, t_infos *infos);
 
 //----------------------------------//
 //			parser/quotes_split		//
@@ -81,17 +81,22 @@ char	**ft_command_split(char *line);
  * @param argv 2d_array to remove quotes from.
  * @return new_2d_array with removed quotes . if Return == NULL execute an ERROR
  */
-char	**remove_quotes(char *argv[]);
+int	remove_quotes(t_lexer **lexer);
 
 
 int	lexer_node(t_lexer **lst, char *line, int start, int len);
 int	ft_lexer(t_lexer **lexer, char *line);
 void	lexer_free(t_lexer **lexer);
+void	tokenizer(t_lexer **lexer);
 
 int ft_isquote(char quote);
 int ft_ismeta(char meta);
 int ft_isspecial(char c);
 int double_meta(int index, char *line);
+
+void	expanding(t_lexer **lexer, t_infos *infos);
+bool	quote_status(bool quotes);
+int		skip_single_quote(char *line, int index);
 
 void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
 

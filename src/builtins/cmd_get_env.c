@@ -39,3 +39,19 @@ void	cmd_get_env_pwd(t_infos *infos, char *env)
     }
     infos->pwd = getcwd(NULL, 0);
 }
+
+char    *cmd_get_env_char(t_infos *infos, char *env)
+{
+    t_node *current;
+
+    current = infos->head;
+    while (current != NULL) 
+    {
+        if (!ft_strncmp(env, current->name, ft_strlen(env) + 1))
+        {
+            return (current->data);
+        }
+        current = current->next;
+    }
+    return (NULL);
+}
