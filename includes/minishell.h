@@ -110,4 +110,7 @@ int	append_parse(t_lexer *lexer, t_command *command, t_token token);
 
 int	here_doc(char *end_of_file);
 int	open_here_doc(char *end_of_file, char **path);
+
+//EXECUTION BELOW
+void	start_exec(t_command *commands, t_infos *infos);
 #endif

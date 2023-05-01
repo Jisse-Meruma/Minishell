@@ -36,6 +36,8 @@ typedef struct s_redirects
 typedef struct s_command
 {
 	char				**cmd_argv;
+	int					is_built;
+	int					is_built_parent;
 	t_redirects 		redirects;
 	struct s_command	*next;
 }	t_command;

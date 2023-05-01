@@ -93,6 +93,5 @@ t_command	*parser(char *line, t_infos *infos)
 	}
 	lexer_free(&lexer);
 	printing(command);
-	system("leaks -q minishell");
 	return (command);
 }

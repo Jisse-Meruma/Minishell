@@ -46,11 +46,8 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		command = parser(line, &infos);
-		// if (argument && argument[0] != '\0')
-		// {
-		// 	ifcmd(argument, envp, &infos);
-		// 	ft_2dfree(argument);		
-		// }
+		if (command && command->cmd_argv)
+			start_exec(command, &infos);
 		free(line);
 		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}

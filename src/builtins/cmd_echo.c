@@ -12,8 +12,8 @@ void    is_endline(char *str, bool *n)
         ++i;
     while (str[i] && str[i] == 'n')
         ++i;
-    if (!str[i])
-        *n = false;
+    if (i)
+        *n = true;
 }
 
 void    echoprint(t_infos *infos, char *str)
@@ -41,7 +41,7 @@ void	cmd_echo(t_infos *infos, char **str)
     bool n;
     int i;
 
-    n = true;
+    n = false;
     i = 1;
     is_endline(str[i], &n);
     if (n == false)

@@ -45,6 +45,7 @@ SRC 	:=	main.c			\
 			parser/expander/exp_utils.c	\
 			redirects/here_doc.c		\
 			redirects/open.c			\
+			execution/execution.c 		\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
