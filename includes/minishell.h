@@ -38,6 +38,7 @@ void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
+char	*cmd_getstr_env(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
 void	cmd_echo(t_infos *infos, char **str);

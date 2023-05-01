@@ -10,7 +10,7 @@ char    *wave(t_infos *infos, char *str)
 	char *sub;
 	char *path;
 
-	if (ft_strlen(str) > 2 && str[0] == '~' && str[1] == '/')
+	if ((ft_strlen(str) >= 2 && str[0] == '~' && str[1] == '/') || !ft_strncmp(str, "~", 2))
 	{
 		i = 0;
 		slash = 0;
@@ -33,6 +33,17 @@ void	cmd_cd(t_infos *infos, char *input)
 	char s[1024];
 	char *str;
 
+	if (!input)
+	{
+		//here below in case there's an error, the erronumber should be kept
+		if (!cmd_getstr_env(infos, "HOME"))
+		{
+			printf("minishell: cd: HOME not set\n");
+			return;
+		}
+		else
+			input = "~";
+	}
 	str = ft_strdup(input);
 	if (!str)
 		return ;
