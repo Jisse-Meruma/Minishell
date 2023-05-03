@@ -59,5 +59,6 @@ void	start_exec(t_command *commands, t_infos *infos)
 		exec_built(infos, commands);
 		return ;
 	}
+	get_envp(infos);
 	return ;
 }

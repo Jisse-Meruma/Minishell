@@ -46,7 +46,10 @@ SRC 	:=	main.c			\
 			redirects/here_doc.c		\
 			redirects/open.c			\
 			execution/execution.c 		\
+			execution/get_envp.c		\
 			ft_isnumber.c				\
+			ft_2d_print.c				\
+			ft_our_lst_size.c			\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
