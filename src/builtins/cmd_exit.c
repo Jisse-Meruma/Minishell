@@ -7,7 +7,7 @@ void	cmd_exit(t_infos *infos, char **args)
 		free(infos->pwd);
 		ft_free_lst(infos->head);
 		g_glo.error = 0;
-		exit(0);	
+		exit(0);
 	}
 	else if (ft_2d_arrlen(args) == 2)
 	{
@@ -15,7 +15,7 @@ void	cmd_exit(t_infos *infos, char **args)
 			ft_putstr_fd("minishell: exit: numeric argument required\n", 1);
 		free(infos->pwd);
 		ft_free_lst(infos->head);
-		exit(args[1]);	
+		exit(args[1]);
 		g_glo.error = 0;
 	}
 	else
