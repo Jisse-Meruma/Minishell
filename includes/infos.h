@@ -12,6 +12,13 @@ typedef struct s_node
 	struct s_node* next;
 } t_node;
 
+typedef struct s_glo
+{
+	int error;
+} t_glo;
+
+t_glo g_glo;
+
 typedef struct s_infos
 {
 	pid_t               pid;

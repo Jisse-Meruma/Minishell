@@ -36,9 +36,9 @@ void	cmd_cd(t_infos *infos, char *input)
 	if (!input)
 	{
 		//here below in case there's an error, the erronumber should be kept
-		if (!cmd_get_env_char(infos, "HOME"))
+		if (!cmd_get_env_char(infos, input))
 		{
-			printf("minishell: cd: HOME not set\n");
+			perror("Error");
 			return;
 		}
 		else

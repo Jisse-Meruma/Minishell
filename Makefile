@@ -46,6 +46,7 @@ SRC 	:=	main.c			\
 			redirects/here_doc.c		\
 			redirects/open.c			\
 			execution/execution.c 		\
+			ft_isnumber.c				\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

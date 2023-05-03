@@ -2,5 +2,7 @@
 
 void	cmd_pwd(t_infos *infos)
 {
-	printf("%s\n", infos->pwd);
+	ft_putstr_fd(infos->pwd, 1);
+	write(1, "\n", 1);
+	g_glo.error = 0;
 }

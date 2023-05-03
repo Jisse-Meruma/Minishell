@@ -42,7 +42,7 @@ char    *cmd_get_env_char(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
 void	cmd_echo(t_infos *infos, char **str);
-int	    cmd_exit(t_infos *infos, char **args);
+void	cmd_exit(t_infos *infos, char **args);
 void    ft_free_lst(t_node* head);
 
 void    mainsignal(t_infos *infos);
@@ -113,4 +113,5 @@ int	open_here_doc(char *end_of_file, char **path);
 
 //EXECUTION BELOW
 void	start_exec(t_command *commands, t_infos *infos);
+int		ft_isnumber(char *str);
 #endif

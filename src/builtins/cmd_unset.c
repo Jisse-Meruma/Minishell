@@ -26,4 +26,5 @@ void	cmd_unset(t_infos *infos, char *node)
         next = next->next;
         current = current->next;
     }
+    g_glo.error = 0;
 }

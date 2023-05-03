@@ -1,6 +1,7 @@
 #include "minishell.h"
 
 // print the add var such as var=value as input
+//execution is export A=VALUE
 void	cmd_export(t_infos *infos, char *str)
 {
     t_node *current;
@@ -21,4 +22,5 @@ void	cmd_export(t_infos *infos, char *str)
     while (current->next != NULL) 
         current = current->next;
     current->next = new_node;
+    g_glo.error = 0;
 }
