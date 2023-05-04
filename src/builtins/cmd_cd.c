@@ -39,6 +39,7 @@ void	cmd_cd(t_infos *infos, char *input)
 		if (!cmd_get_env_char(infos, input))
 		{
 			perror("Error");
+			g_glo.error = 1;
 			return ;
 		}
 		else
@@ -48,11 +49,11 @@ void	cmd_cd(t_infos *infos, char *input)
 	if (!str)
 		return ;
 	str = wave(infos, str);
-	infos->error = chdir(str);
-	if (infos->error)
+	g_glo.error = chdir(str);
+	if (g_glo.error)
 	{
-		printf("cd: %s : %s\n", strerror(errno), str);
-		infos->error = 1;
+		printf("cd: %s : %s\n", str, strerror(errno));
+		g_glo.error = 1;
 		return ;
 	}
 	free(infos->pwd);

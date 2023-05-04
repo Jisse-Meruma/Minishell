@@ -55,13 +55,6 @@ void	cmd_echo(t_infos *infos, char **str)
 	}
 	if (n == true)
 		write(1, "\n", 1);
-	infos->error = 0;
+	g_glo.error = 0;
 	return ;
 }
-
-// int main(int argc, char **argv)
-// {
-//     if (argc > 1)
-//         cmd_echo(argv);
-//     return 0;
-// }

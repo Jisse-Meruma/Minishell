@@ -34,26 +34,20 @@ void	if_builtins(t_command *commands)
 	!ft_strncmp("exit", commands->cmd_argv[0], 5) || \
 	!ft_strncmp("export", commands->cmd_argv[0], 7) || \
 	!ft_strncmp("unset", commands->cmd_argv[0], 6))
-	{
-		commands->is_built = 1;
-		commands->is_built_parent = 1;
-	}
+		commands->cmd_is_blt = BUILT_PARENT;
 	else if (!ft_strncmp("echo", commands->cmd_argv[0], 5) || \
 	!ft_strncmp("env", commands->cmd_argv[0], 4) || \
 	!ft_strncmp("getenv", commands->cmd_argv[0], 7) || \
 	!ft_strncmp("pwd", commands->cmd_argv[0], 4))
-	{
-		commands->is_built = 1;
-		commands->is_built_parent = 0;
-	}
+		commands->cmd_is_blt = BUILT;
 	else
-		commands->is_built = 0;
+		commands->cmd_is_blt = NOT_BUILT;
 }
 
 void	start_exec(t_command *commands, t_infos *infos)
 {
 	if_builtins(commands);
-	if (commands->is_built && !commands->next)
+	if (commands->cmd_is_blt && !commands->next)
 	{
 		printf("Execution.c : Builtins\n");
 		exec_built(infos, commands);

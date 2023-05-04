@@ -5,11 +5,20 @@
 #include <sys/types.h>
 #include <errno.h>
 
+typedef enum s_env_data
+{
+	EMPTY,
+	NO_VALUE,
+	FULL,
+	SIZE,
+} t_env_data;
+
 typedef struct s_node 
 {
-	char *name;
-	char *data;
-	struct s_node* next;
+	char			*name;
+	char			*data;
+	t_env_data		type;
+	struct s_node	*next;
 } t_node;
 
 typedef struct s_glo

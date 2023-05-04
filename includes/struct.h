@@ -33,11 +33,17 @@ typedef struct s_redirects
 	t_lst_redirects	*lst_redirect_read;
 }	t_redirects;
 
+typedef enum s_builtins
+{
+	NOT_BUILT,
+	BUILT,
+	BUILT_PARENT,
+} t_builtins;
+
 typedef struct s_command
 {
 	char				**cmd_argv;
-	int					is_built;
-	int					is_built_parent;
+	t_builtins			cmd_is_blt;
 	t_redirects 		redirects;
 	struct s_command	*next;
 }	t_command;

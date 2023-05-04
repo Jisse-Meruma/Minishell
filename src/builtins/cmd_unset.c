@@ -12,6 +12,7 @@ void	cmd_unset(t_infos *infos, char *node)
 	t_node	*current;
 	t_node	*next;
 
+	g_glo.error = 0;
 	current = infos->head;
 	next = current->next;
 	while (next != NULL)
@@ -26,5 +27,4 @@ void	cmd_unset(t_infos *infos, char *node)
 		next = next->next;
 		current = current->next;
 	}
-	g_glo.error = 0;
 }

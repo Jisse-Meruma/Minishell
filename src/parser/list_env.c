@@ -31,6 +31,7 @@ t_node	*create_node(char *str)
 		return (free(new_node), NULL);
 	new_node->name = ft_strdup(env[0]);
 	new_node->data = ft_strdup(env[1]);
+	new_node->type = 2;
 	ft_2dfree(env);
 	if (!new_node->data)
 		return (NULL);

@@ -26,11 +26,11 @@
  * @return path of the given command. if path does not exist return NULL
  */
 char	*path_creation(char *command);
-int     init(t_infos *infos, char **envp);
+int		init(t_infos *infos, char **envp);
 
 
 void	ifcmd(char *argv[], char *envp[], t_infos *infos);
-int     compare(char *s1, char *s2);
+int		compare(char *s1, char *s2);
 
 void	execute_cmd(char *argv[], char *envp[], t_infos *infos);
 void	cmd_cd(t_infos *infos, char *input);
@@ -38,17 +38,18 @@ void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
-char    *cmd_get_env_char(t_infos *infos, char *env);
+char	*cmd_get_env_char(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
 void	cmd_echo(t_infos *infos, char **str);
 void	cmd_exit(t_infos *infos, char **args);
-void    ft_free_lst(t_node* head);
+void	ft_free_lst(t_node* head);
 
-void    mainsignal(t_infos *infos);
-void    signal_cmd(t_infos *infos);
-int     list_env(char **env, t_infos *infos);
-int     ret_error(char *str, int fd, int ret);
+void	mainsignal(t_infos *infos);
+void	signal_cmd(t_infos *infos);
+int		list_env(char **env, t_infos *infos);
+int		ret_error(char *str, int fd, int ret);
+void	void_ret_error(char *str, int fd);
 
 //----------------------------------//
 //			parser/parser			//
@@ -84,15 +85,15 @@ char	**ft_command_split(char *line);
 int	remove_quotes(t_lexer **lexer);
 
 
-int	lexer_node(t_lexer **lst, char *line, int start, int len);
-int	ft_lexer(t_lexer **lexer, char *line);
+int		lexer_node(t_lexer **lst, char *line, int start, int len);
+int		ft_lexer(t_lexer **lexer, char *line);
 void	lexer_free(t_lexer **lexer);
 void	tokenizer(t_lexer **lexer);
 
-int ft_isquote(char quote);
-int ft_ismeta(char meta);
-int ft_isspecial(char c);
-int double_meta(int index, char *line);
+int		ft_isquote(char quote);
+int		ft_ismeta(char meta);
+int		ft_isspecial(char c);
+int		double_meta(int index, char *line);
 
 void	expanding(t_lexer **lexer, t_infos *infos);
 bool	quote_status(bool quotes);
@@ -101,16 +102,16 @@ int		env_name_lenght(char *line, int index, int i);
 
 void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
 
-int	parse_struct_command(t_lexer **lexer, t_command *command);
+int		parse_struct_command(t_lexer **lexer, t_command *command);
 
-int	pipe_parse(t_lexer *lexer, t_command *command, t_token token);
-int	here_parse(t_lexer *lexer, t_command *command, t_token token);
-int	stdinn_parse(t_lexer *lexer, t_command *command, t_token token);
-int	stdout_parse(t_lexer *lexer, t_command *command, t_token token);
-int	append_parse(t_lexer *lexer, t_command *command, t_token token);
+int		pipe_parse(t_lexer *lexer, t_command *command, t_token token);
+int		here_parse(t_lexer *lexer, t_command *command, t_token token);
+int		stdinn_parse(t_lexer *lexer, t_command *command, t_token token);
+int		stdout_parse(t_lexer *lexer, t_command *command, t_token token);
+int		append_parse(t_lexer *lexer, t_command *command, t_token token);
 
-int	here_doc(char *end_of_file);
-int	open_here_doc(char *end_of_file, char **path);
+int		here_doc(char *end_of_file);
+int		open_here_doc(char *end_of_file, char **path);
 
 //EXECUTION BELOW
 void	start_exec(t_command *commands, t_infos *infos);
