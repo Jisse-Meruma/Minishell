@@ -1,7 +1,23 @@
 #include "minishell.h"
 #include <string.h>
 
-char *get_envp(t_infos *infos)
+char *env_str(t_node *current)
+{
+	char *str;
+
+	str = ft_strdup(current->name);
+	if (!str)
+		return (NULL);
+	str = ft_strjoin(str, "=");
+	if (!str)
+		return (NULL);
+	if (current->data)
+		str = ft_strjoin(str, current->data);
+	return (str);
+}
+
+//warning : ret_error returns an int
+char **get_envp(t_infos *infos)
 {
 	t_node	*current;
 	char	**envp;
@@ -10,16 +26,18 @@ char *get_envp(t_infos *infos)
 
 	current = infos->head;
 	i = 0;
-	envp = (char **) malloc((ft_our_lst_size(current) + 1));
+	envp = (char **) malloc((ft_our_lst_size(current) + 1) * sizeof(char *));
+	if (!envp)
+		return (ret_error("Malloc error", 2, NULL), NULL);
 	while (current)
 	{
-		temp = ft_strjoin(current->name, "=");
-		if (current->data)
-			temp = ft_strjoin_free(temp, current->data);
+		temp = env_str(current);
 		envp[i] = temp;
 		free(temp);
 		current = current->next;
 		++i;
 	}
+	envp[i] = NULL;
 	ft_2d_print(envp);
+	return (envp);
 }

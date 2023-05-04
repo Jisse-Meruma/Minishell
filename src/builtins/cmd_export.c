@@ -2,6 +2,12 @@
 
 // print the add var such as var=value as input
 //execution is export A=VALUE
+
+void	export_declare(void)
+{
+	return;
+}
+
 void	cmd_export(t_infos *infos, char *str)
 {
 	t_node	*current;
