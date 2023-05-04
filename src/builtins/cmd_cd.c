@@ -35,17 +35,10 @@ void	cmd_cd(t_infos *infos, char *input)
 	char	*str;
 
 	if (!input)
-	{
-		if (!cmd_get_env_char(infos, input))
-		{
-			perror("Error");
-			g_glo.error = 1;
-			return ;
-		}
-		else
-			input = "~";
-	}
+		input = ft_strdup("~");
 	str = ft_strdup(input);
+	if (!ft_strncmp(input, "~", 2))
+		free(input);
 	if (!str)
 		return ;
 	str = wave(infos, str);

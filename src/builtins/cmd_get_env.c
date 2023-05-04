@@ -23,6 +23,8 @@ char	*cmd_get_env_char(t_infos *infos, char *env)
 	t_node	*current;
 
 	current = infos->head;
+	if (!env)
+		return (NULL);
 	while (current != NULL)
 	{
 		if (!ft_strncmp(env, current->name, ft_strlen(env) + 1))
