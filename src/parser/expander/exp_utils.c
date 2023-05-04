@@ -15,3 +15,15 @@ int	skip_single_quote(char *line, int index)
 		index++;
 	return (index);
 }
+
+int env_name_lenght(char *line, int index, int i)
+{
+	while (line[index + i])
+	{
+		if (line[index + i] == '\"' || line[index + i] == '$'\
+				|| line[index + i] == '\'' || ft_isspace(line[index + i]))
+			break ;
+		i++;
+	}
+	return (i);
+}

@@ -97,6 +97,7 @@ int double_meta(int index, char *line);
 void	expanding(t_lexer **lexer, t_infos *infos);
 bool	quote_status(bool quotes);
 int		skip_single_quote(char *line, int index);
+int		env_name_lenght(char *line, int index, int i);
 
 void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
 

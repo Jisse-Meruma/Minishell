@@ -22,20 +22,16 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	char	*env_expand;
 	int		i;
 
-	i = *len;
 	begin = ft_substr(line, 0, index);
 	index++;
-	while (line[index + i])
-	{
-		if (line[index + i] == '\"' || line[index + i] == '$'\
-				|| line[index + i] == '\'' || ft_isspace(line[index + i]))
-			break ;
-		i++;
-	}
+	i = env_name_lenght(line, index, *len);
 	env = ft_substr(line, index, i);
 	if (!env || !begin)
 		return (free(line), free(env),  NULL);
-	env_expand = cmd_get_env_char(infos, env);
+	if (!ft_strncmp(env, "?", 2))
+		env_expand = ft_itoa(g_glo.error);
+	else
+		env_expand = cmd_get_env_char(infos, env);
 	new_line = env_strjoin(line, env_expand, begin, index + i);
 	if (env_expand)
 		*len = ft_strlen(env_expand);
