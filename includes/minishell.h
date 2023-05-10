@@ -84,7 +84,7 @@ char	**ft_command_split(char *line);
  */
 int	remove_quotes(t_lexer **lexer);
 
-
+// LEXER
 int		lexer_node(t_lexer **lst, char *line, int start, int len);
 int		ft_lexer(t_lexer **lexer, char *line);
 void	lexer_free(t_lexer **lexer);
@@ -95,21 +95,26 @@ int		ft_ismeta(char meta);
 int		ft_isspecial(char c);
 int		double_meta(int index, char *line);
 
+// Remove/Expand the text_cmds
 void	expanding(t_lexer **lexer, t_infos *infos);
 bool	quote_status(bool quotes);
 int		skip_single_quote(char *line, int index);
 int		env_name_lenght(char *line, int index, int i);
 
+// parse list util
 void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
 
+// main parse function
 int		parse_struct_command(t_lexer **lexer, t_command *command);
 
+// all special parse
 int		pipe_parse(t_lexer *lexer, t_command *command, t_token token);
 int		here_parse(t_lexer *lexer, t_command *command, t_token token);
 int		stdinn_parse(t_lexer *lexer, t_command *command, t_token token);
 int		stdout_parse(t_lexer *lexer, t_command *command, t_token token);
 int		append_parse(t_lexer *lexer, t_command *command, t_token token);
 
+//Redirect file opening
 int		here_doc(char *end_of_file);
 int		open_here_doc(char *end_of_file, char **path);
 
@@ -119,4 +124,7 @@ char	**get_envp(t_infos *infos);
 int		ft_isnumber(char *str);
 void	ft_2d_print(char **str);
 int		ft_our_lst_size(t_node *lst);
+
+// Cleanup
+void	free_cmd_struct(t_command *commands);
 #endif

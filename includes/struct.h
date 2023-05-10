@@ -29,8 +29,7 @@ typedef struct s_lst_redirects
 
 typedef struct s_redirects
 {
-	t_lst_redirects	*lst_redirect_write;
-	t_lst_redirects	*lst_redirect_read;
+	t_lst_redirects	*lst_redirects;
 }	t_redirects;
 
 typedef enum s_builtins

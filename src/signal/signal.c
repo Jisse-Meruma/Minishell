@@ -16,9 +16,12 @@ void	f_sig(int sig)
 void	f_sigmain(int sig)
 {
     if (sig == SIGINT)
-        ;
-    if (sig == SIGQUIT)
-        ;
+    {
+        printf("\n");
+        rl_replace_line("", 0);
+        rl_on_new_line();
+        rl_redisplay();
+    }
 }
 
 void    signal_cmd(t_infos *infos)
@@ -33,6 +36,9 @@ void    signal_cmd(t_infos *infos)
 
 void    mainsignal(t_infos *infos)
 {
+    extern int rl_catch_signals;
+
     signal(SIGINT, f_sigmain);
     signal(SIGQUIT, f_sigmain);
+    rl_catch_signals = 0;
 }

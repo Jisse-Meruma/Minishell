@@ -41,7 +41,7 @@ int	main(int argc, char *argv[], char *envp[])
 	if (init(&infos, envp))
 		ret_error("Error init\n", 1, 1);
 	execute_img(&infos);
-	//mainsignal(&infos);
+	mainsignal(&infos);
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	while (line)
 	{
@@ -49,6 +49,7 @@ int	main(int argc, char *argv[], char *envp[])
 		command = parser(line, &infos);
 		if (command && command->cmd_argv)
 			start_exec(command, &infos);
+		free_cmd_struct(command);
 		free(line);
 		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}

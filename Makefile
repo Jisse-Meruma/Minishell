@@ -3,9 +3,9 @@ NAME		:=	minishell
 
 DEBUGGING	?=
 
-LIBS		:=	./libft/libft.a -lreadline
+LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/include -L/Users/$(USER)/.homebrew/opt/readline/lib
 
-HEADER		:=	-I libft -I includes 
+HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include 
 HEADERS		:=	libft/libft.h includes/minishell.h includes/struct.h
 OBJ_DIR		:=	./obj
 SRC_DIR 	:=	./src
@@ -43,6 +43,7 @@ SRC 	:=	main.c			\
 			parser/lexer/lexer_cleanup.c\
 			parser/expander/expander.c 	\
 			parser/expander/exp_utils.c	\
+			cleanup/free_cmd_struct.c	\
 			redirects/here_doc.c		\
 			redirects/open.c			\
 			execution/execution.c 		\

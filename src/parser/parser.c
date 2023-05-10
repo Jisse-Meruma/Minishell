@@ -18,7 +18,7 @@ void	printing(t_command *command)
 		}
 		printf("\n");
 		printf("stdin redirect = ");
-		redirect = command->redirects.lst_redirect_read;
+		redirect = command->redirects.lst_redirects;
 		while (redirect)
 		{
 			if (redirect->token == STDINN_FILE)
@@ -27,7 +27,7 @@ void	printing(t_command *command)
 		}
 		printf("\n");
 		printf("stdout redirect = ");
-		redirect = command->redirects.lst_redirect_write;
+		redirect = command->redirects.lst_redirects;
 		while (redirect)
 		{
 			if (redirect->token == STDOUT_FILE)
@@ -36,7 +36,7 @@ void	printing(t_command *command)
 		}
 		printf("\n");
 		printf("append redirect = ");
-		redirect = command->redirects.lst_redirect_write;
+		redirect = command->redirects.lst_redirects;
 		while (redirect)
 		{
 			if (redirect->token == APPEND_FILE)
@@ -45,7 +45,7 @@ void	printing(t_command *command)
 		}
 		printf("\n");
 		printf("here_doc redirect = ");
-		redirect = command->redirects.lst_redirect_read;
+		redirect = command->redirects.lst_redirects;
 		while (redirect)
 		{
 			if (redirect->token == HERE_DOC)
