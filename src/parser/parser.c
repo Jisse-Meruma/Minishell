@@ -64,11 +64,9 @@ void	printing(t_command *command)
 
 t_command	*parser(char *line, t_infos *infos)
 {
-	int			i;
 	t_lexer		*lexer;
 	t_command	*command;
 
-	i = 0;
 	lexer = NULL;
 	if (*line == '\0')
 		return (NULL);

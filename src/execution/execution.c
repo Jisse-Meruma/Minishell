@@ -46,6 +46,11 @@ void	if_builtins(t_command *commands)
 
 void	start_exec(t_command *commands, t_infos *infos)
 {
+	if (commands->cmd_argv[0] == NULL)
+	{
+		printf("Maybe do something :D/ft_strncmp segfaults when argv[0] = NULL\n");
+		return ;
+	}
 	if_builtins(commands);
 	if (commands->cmd_is_blt && !commands->next)
 	{

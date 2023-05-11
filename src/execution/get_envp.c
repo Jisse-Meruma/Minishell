@@ -28,7 +28,7 @@ char **get_envp(t_infos *infos)
 	i = 0;
 	envp = (char **) malloc((ft_our_lst_size(current) + 1) * sizeof(char *));
 	if (!envp)
-		return (ret_error("Malloc error", 2, NULL), NULL);
+		return (ret_error("Malloc error", 2, 0), NULL);
 	while (current)
 	{
 		temp = env_str(current);

@@ -15,7 +15,7 @@ void	cmd_exit(t_infos *infos, char **args)
 			ft_putstr_fd("minishell: exit: numeric argument required\n", 1);
 		free(infos->pwd);
 		ft_free_lst(infos->head);
-		exit(args[1]);
+		exit(ft_atoi(args[1]));
 		g_glo.error = 0;
 	}
 	else

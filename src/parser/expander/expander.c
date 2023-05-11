@@ -97,6 +97,7 @@ void	expanding(t_lexer **lexer, t_infos *infos)
 		}
 		string_free = node->argument;
 		node->argument = search_env_var(node->argument, infos);
+		free(string_free);
 		node = node->next;
 	}
 }

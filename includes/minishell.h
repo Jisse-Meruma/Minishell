@@ -45,7 +45,7 @@ void	cmd_echo(t_infos *infos, char **str);
 void	cmd_exit(t_infos *infos, char **args);
 void	ft_free_lst(t_node* head);
 
-void	mainsignal(t_infos *infos);
+void	mainsignal(void);
 void	signal_cmd(t_infos *infos);
 int		list_env(char **env, t_infos *infos);
 int		ret_error(char *str, int fd, int ret);

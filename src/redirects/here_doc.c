@@ -25,5 +25,6 @@ int	here_doc(char *end_of_file)
 	}
 	if (unlink(path) == -1)
 	 return (INVALID);
+	free(path);
 	return (fd);
 }

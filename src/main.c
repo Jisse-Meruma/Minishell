@@ -1,4 +1,6 @@
 #include "minishell.h"
+#include <sys/time.h>
+#include <sys/wait.h>
 #define CHILD 0
 
 void	execute_img(t_infos *infos)
@@ -31,17 +33,21 @@ void	execute_img(t_infos *infos)
 // 	system("leaks -q minishell");
 // }
 
+t_glo g_glo;
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char		*line;
 	t_infos		infos;
 	t_command	*command;
 
+	(void)argc;
+	(void)argv;
 	g_glo.error = 0;
 	if (init(&infos, envp))
 		ret_error("Error init\n", 1, 1);
 	execute_img(&infos);
-	mainsignal(&infos);
+	mainsignal();
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	while (line)
 	{

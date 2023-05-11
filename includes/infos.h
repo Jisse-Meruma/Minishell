@@ -26,7 +26,7 @@ typedef struct s_glo
 	int error;
 } t_glo;
 
-t_glo g_glo;
+extern t_glo g_glo;
 
 typedef struct s_infos
 {

@@ -8,10 +8,10 @@ int	open_here_doc(char *end_of_file, char **path)
 
 	hex = ft_basetoa("0123456789abcdef", 16, (unsigned long)end_of_file);
 	if (!hex)
-		return (NULL);
+		return (-1);
 	*path = ft_strjoin("/tmp/here_doc", hex);
-	if (path[0] != NULL)
-		return (free(hex), NULL);
+	if (*path == NULL)
+		return (free(hex), -1);
 	free(hex);
 	fd = open(*path, O_RDONLY | O_CREAT | O_WRONLY, 0644);
 	return (fd);

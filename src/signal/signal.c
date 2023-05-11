@@ -9,8 +9,6 @@ void	f_sig(int sig)
 {
     if (sig == SIGINT)
         kill(g_pidchild, SIGKILL);
-    if (sig == SIGQUIT)
-        ;
 }
 
 void	f_sigmain(int sig)
@@ -34,7 +32,7 @@ void    signal_cmd(t_infos *infos)
     }
 }
 
-void    mainsignal(t_infos *infos)
+void    mainsignal(void)
 {
     extern int rl_catch_signals;
 
