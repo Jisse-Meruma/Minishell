@@ -27,11 +27,6 @@ typedef struct s_lst_redirects
 	struct s_lst_redirects	*next;
 }	t_lst_redirects;
 
-typedef struct s_redirects
-{
-	t_lst_redirects	*lst_redirects;
-}	t_redirects;
-
 typedef enum s_builtins
 {
 	NOT_BUILT,
@@ -43,7 +38,7 @@ typedef struct s_command
 {
 	char				**cmd_argv;
 	t_builtins			cmd_is_blt;
-	t_redirects 		redirects;
+	t_lst_redirects		*lst_redirects;
 	struct s_command	*next;
 }	t_command;
 

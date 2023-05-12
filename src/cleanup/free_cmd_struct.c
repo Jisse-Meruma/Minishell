@@ -21,7 +21,7 @@ void	free_cmd_struct(t_command *commands)
 	{
 		nfree = commands;
 		ft_2dfree(commands->cmd_argv);
-		free_redirect_lst(commands->redirects.lst_redirects);
+		free_redirect_lst(commands->lst_redirects);
 		commands = commands->next;
 		free(nfree);
 	}

@@ -8,7 +8,8 @@ int	fill_struct(t_lexer *node, t_command *command, const t_parse_meta *meta)
 	{
 		if (node->token != TEXT_TOKEN)
 		{
-			if (node->next == NULL || node->next->token != TEXT_TOKEN)
+			if (node->next == NULL || \
+			(node->next->token != TEXT_TOKEN && node->token != PIPE))
 				return (ERROR);
 			if (meta[node->token](node->next, command, node->token))
 				return (ERROR);

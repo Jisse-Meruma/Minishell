@@ -23,7 +23,7 @@ int	here_parse(t_lexer *lexer, t_command *command, t_token token)
 	if (!here_doc->filename)
 		return (ERROR);
 	here_doc->next = NULL;
-	parse_lstadd_back(&(command->redirects.lst_redirects), here_doc);
+	parse_lstadd_back(&(command->lst_redirects), here_doc);
 	return (SUCCES);
 }
 
@@ -39,7 +39,7 @@ int	stdinn_parse(t_lexer *lexer, t_command *command, t_token token)
 	if (!stdinn_file->filename)
 		return (ERROR);
 	stdinn_file->next = NULL;
-	parse_lstadd_back(&(command->redirects.lst_redirects), stdinn_file);
+	parse_lstadd_back(&(command->lst_redirects), stdinn_file);
 	return (SUCCES);
 }
 
@@ -55,7 +55,7 @@ int	stdout_parse(t_lexer *lexer, t_command *command, t_token token)
 	if (!stdout_file->filename)
 		return (ERROR);
 	stdout_file->next = NULL;
-	parse_lstadd_back(&(command->redirects.lst_redirects), stdout_file);
+	parse_lstadd_back(&(command->lst_redirects), stdout_file);
 	return (SUCCES);
 }
 
@@ -71,6 +71,6 @@ int	append_parse(t_lexer *lexer, t_command *command, t_token token)
 	if (!append->filename)
 		return (ERROR);
 	append->next = NULL;
-	parse_lstadd_back(&(command->redirects.lst_redirects), append);
+	parse_lstadd_back(&(command->lst_redirects), append);
 	return (SUCCES);
 }

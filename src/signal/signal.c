@@ -38,5 +38,5 @@ void    mainsignal(void)
 
     signal(SIGINT, f_sigmain);
     signal(SIGQUIT, f_sigmain);
-    rl_catch_signals = 0;
+    rl_catch_signals = 1;
 }
