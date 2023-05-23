@@ -44,20 +44,77 @@ void	if_builtins(t_command *commands)
 		commands->cmd_is_blt = NOT_BUILT;
 }
 
+int	get_cmd_nb(t_command *commands)
+{
+	int i;
+
+	i = 0;
+	while (commands != NULL)
+	{
+		++i;
+		commands = commands->next;
+	}
+	return (i);
+}
+
+int	child_birth(t_command *commands, t_infos *infos, int id)
+{
+	int read_fd;
+	// int cmd_nb_max;
+	// int	cmd_nb;
+
+	// cmd_nb = 0;
+	// cmd_nb_max = get_cmd_nb(commands);
+	read_fd = 0;
+	while (commands && id != 0)
+	{
+		read_fd = commands->pipes[0];
+		if (pipe(commands->pipes) == -1)
+			ret_error("Pipe Error", 2, 1);
+		id = fork();
+		if (id == -1)
+			ret_error("Fork Error", 2, 1);
+		if (id == 0)
+		{
+			if_builtins(commands);
+			printf("IF CMD BUILT %u\n", commands->cmd_is_blt);
+		}
+		//++cmd_nb;
+		commands = commands->next;
+	}
+	if (id == 0)
+	{
+		printf("child\n");
+		exit(0);
+	}
+	return (id);
+}
+
 void	start_exec(t_command *commands, t_infos *infos)
 {
-	if (commands->cmd_argv[0] == NULL)
-	{
-		printf("Maybe do something :D/ft_strncmp segfaults when argv[0] = NULL\n");
-		return ;
-	}
+	int id;
+	int32_t	status;
+
 	if_builtins(commands);
-	if (commands->cmd_is_blt && !commands->next)
-	{
-		printf("Execution.c : Builtins\n");
-		exec_built(infos, commands);
-		return ;
-	}
-	//get_envp(infos);
+	if ((commands->next == NULL) && (commands->cmd_is_blt != NOT_BUILT))
+		return(exec_built(infos, commands));
+	id = child_birth(commands, infos, id);
+	waitpid(id, &status, 0);
+	printf("parent\n");
+	// is it necesarry to use cmd_argv ?
+	// if (commands->cmd_argv[0] == NULL)
+	// {
+	// 	printf("Maybe do something :D/ft_strncmp segfaults when argv[0] = NULL\n");
+	// 	return ;
+	// }
+
+	//add the ifbuiltins in each cmds
+	//if_builtins(commands);
+	// if (commands->cmd_is_blt && !commands->next)
+	// {
+	// 	printf("Execution.c : Builtins\n");
+	// 	exec_built(infos, commands);
+	// 	return ;
+	// }
 	return ;
 }

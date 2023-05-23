@@ -1,5 +1,38 @@
 #include "minishell.h"
 
+//find the env with the same name and update the datas
+void	change_env_data(t_infos *infos, char *env, char *data)
+{
+	t_node	*current;
+
+	current = infos->head;
+	while (current != NULL)
+	{
+		if (!ft_strncmp(env, current->name, ft_strlen(env)))
+		{
+			free(current->data);
+			current->data = ft_strdup(data);
+			return ;
+		}
+		current = current->next;
+	}
+}
+
+//return 1 if env already exist else 0
+int		cmd_check_env_exist(t_infos *infos, char *env)
+{
+	t_node	*current;
+
+	current = infos->head;
+	while (current != NULL)
+	{
+		if (!ft_strncmp(env, current->name, ft_strlen(env)))
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}
+
 //PRINT the data of a certain env var name
 void	cmd_get_env(t_infos *infos, char *env)
 {

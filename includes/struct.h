@@ -40,6 +40,9 @@ typedef struct s_command
 	t_builtins			cmd_is_blt;
 	t_lst_redirects		*lst_redirects;
 	struct s_command	*next;
+	int					pipes[2];
+	int					fd[2];
+	int					read_fd;
 }	t_command;
 
 typedef int (* t_parse_meta)(t_lexer *, t_command *, t_token);
