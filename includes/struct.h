@@ -32,6 +32,14 @@ typedef enum s_builtins
 	BUILT_PARENT,
 } t_builtins;
 
+typedef enum s_cmdnb
+{
+	ONE_CMD,
+	FIRST_CMD,
+	CMD,
+	LAST_CMD,
+} t_cmdnb;
+
 typedef struct s_command
 {
 	char				**cmd_argv;
@@ -40,6 +48,7 @@ typedef struct s_command
 	struct s_command	*next;
 	int					pipes[2];
 	int					read_fd;
+	t_cmdnb				order;
 }	t_command;
 
 typedef int (* t_parse_meta)(t_lexer *, t_command *, t_token);

@@ -1,4 +1,5 @@
 #include "minishell.h"
+# include <fcntl.h>
 // < redirect input
 // > redirect output
 // << heredoc
@@ -56,14 +57,57 @@ int	get_cmd_nb(t_command *commands)
 	return (i);
 }
 
-void	exec_cmd_child(t_command *commands, t_infos *infos, int cmd_nb)
+// void	get_read_fd(t_command *commands, t_infos *infos)
+// {
+// 	int read_fd;
+
+// 	if (commands->lst_redirects->token == STDINN_FILE)
+// 	{
+// 		read_fd = open(commands->lst_redirects->filename, O_RDONLY);
+// 		if (read_fd == -1)
+// 			ret_error("Error read", 2, 1);
+// 		if (dup2(read_fd, STDIN_FILENO) == -1)
+// 			ret_error("Error dup2", 2, 1);
+// 		return ;
+// 	}
+// 	if (commands->order >= 2)
+// 	{
+// 		if (dup2(commands->read_fd, STDIN_FILENO) == -1)
+// 			ret_error("Error dup2", 2, 1);
+// 		return ;
+// 	}
+// }
+
+// void	get_write_fd(t_command *commands, t_infos *infos)
+// {
+// 	int write_fd;
+
+// 	if (commands->lst_redirects->token == STDOUT_FILE)
+// 	{
+// 		write_fd = open(commands->lst_redirects->filename, O_WRONLY | O_TRUNC | O_CREAT);
+// 		if (write_fd == -1)
+// 			ret_error("Error opening the write file", 2, 1);
+// 		if (dup2(write_fd, STDOUT_FILENO) == -1)
+// 			ret_error("Error dup2", 2, 1);
+// 		return ;
+// 	}
+// 	if 
+// 	if (commands->order >= 2)
+// 	{
+// 		if (dup2(commands->read_fd, STDIN_FILENO) == -1)
+// 			ret_error("Error dup2", 2, 1);
+// 		return ;
+// 	}
+// }
+
+void	exec_cmd_child(t_command *commands, t_infos *infos)
 {
 	char *path;
 
-	//readfd = getreadfd();
-	if (cmd_nb)
+	//get_read_fd(commands, infos);
+	if (commands->order >= 2)
 		close(commands->read_fd);
-	//writefd = getwritefd();
+	//get_write_fd(commands, infos);
 	path = path_creation(infos, commands->cmd_argv[0]);
 	if (path)
 		execve(path, commands->cmd_argv, get_envp(infos));
@@ -71,18 +115,34 @@ void	exec_cmd_child(t_command *commands, t_infos *infos, int cmd_nb)
 	exit(0);
 }
 
+void	fill_cmd_nb(t_command *commands)
+{
+	if (commands->next == NULL)
+	{
+		commands->order = ONE_CMD;
+		return;
+	}
+	commands->order = FIRST_CMD;
+	commands = commands->next;
+	while (commands)
+	{
+		if (commands->next == NULL)
+			commands->order = LAST_CMD;
+		else
+			commands->order = CMD;
+		commands = commands->next;
+	}
+}
+
 int	child_birth(t_command *commands, t_infos *infos, int id)
 {
-	int	cmd_nb;
 	// int cmd_nb_max;
 	// cmd_nb_max = get_cmd_nb(commands);
-
-	cmd_nb = 0;
+	fill_cmd_nb(commands);
 	while (commands && id != 0)
 	{
-		if (cmd_nb != 0)
+		if (commands->order <= 1)
 			commands->read_fd = commands->pipes[0];
-		++cmd_nb;
 		if (pipe(commands->pipes) == -1)
 			ret_error("Pipe Error", 2, 1);
 		id = fork();
@@ -94,7 +154,7 @@ int	child_birth(t_command *commands, t_infos *infos, int id)
 			commands = commands->next;
 	}
 	if (id == 0)
-		exec_cmd_child(commands, infos, cmd_nb);
+		exec_cmd_child(commands, infos);
 	close(commands->pipes[1]);
 	return (id);
 }
