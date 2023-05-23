@@ -19,12 +19,8 @@ SRC 	:=	main.c			\
 			init.c			\
 			path_creation.c \
 			execution.c		\
-			ifcmd.c			\
-			compare.c		\
-			ret_error.c		\
 			builtins/cmd_pwd.c 	\
 			builtins/cmd_env.c 	\
-			compare.c			\
 			parser/parser.c			\
 			parser/remove_quotes.c	\
 			parser/parse_command.c	\
@@ -49,9 +45,11 @@ SRC 	:=	main.c			\
 			redirects/open.c			\
 			execution/execution.c 		\
 			execution/get_envp.c		\
-			ft_isnumber.c				\
-			ft_2d_print.c				\
-			ft_our_lst_size.c			\
+			utils/ret_error.c			\
+			utils/compare.c				\
+			utils/ft_isnumber.c			\
+			utils/ft_2d_print.c			\
+			utils/ft_our_lst_size.c		\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

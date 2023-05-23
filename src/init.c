@@ -1,12 +1,5 @@
 #include "minishell.h"
 
-/**
- * @brief init will fill the linkedlist of env variables and also get the current pwd directory to keep it in case we move
- * 
- * @param infos 
- * @param envp 
- * @return int 
- */
 int init(t_infos *infos, char **envp)
 {
 	infos->head = NULL;
@@ -16,10 +9,4 @@ int init(t_infos *infos, char **envp)
 	infos->error = 0;
 	g_glo.error = 0;
 	return (0);
-}
-
-void	init_builtins(void)
-{
-	return;
-	//jumptable for the builtins checking with a bool if it needs to be executed in parent or child
 }

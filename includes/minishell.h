@@ -3,8 +3,11 @@
 # define MINISHELL_H
 
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <stdio.h>
-#include "infos.h"
+#include <sys/types.h>
+#include <errno.h>
 #include "libft.h"
 #include "struct.h"
 #include <stdbool.h>
@@ -25,7 +28,7 @@
  * @param command command to check.
  * @return path of the given command. if path does not exist return NULL
  */
-char	*path_creation(char *command);
+char	*path_creation(t_infos *infos, char *command);
 int		init(t_infos *infos, char **envp);
 
 

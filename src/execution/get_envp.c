@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <string.h>
 
 char *env_str(t_node *current)
 {
@@ -38,6 +37,6 @@ char **get_envp(t_infos *infos)
 		++i;
 	}
 	envp[i] = NULL;
-	ft_2d_print(envp);
+	// ft_2d_print(envp);
 	return (envp);
 }

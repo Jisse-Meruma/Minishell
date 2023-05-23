@@ -45,7 +45,7 @@ static char	*path_finder(char *path_var, char *command)
 	return (NULL);
 }
 
-char	*path_creation(char *command)
+char	*path_creation(t_infos *infos, char *command)
 {
 	char	*path_var;
 	char	*path_command;
@@ -54,7 +54,7 @@ char	*path_creation(char *command)
 		return (NULL);
 	if (access(command, F_OK | X_OK) == FOUND)
 		return (command);
-	path_var = getenv("PATH");
+	path_var = cmd_get_env_char(infos, "PATH");
 	if (!path_var)
 		printf("command not found\n");
 	path_command = path_finder(path_var, command);

@@ -27,7 +27,7 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	i = env_name_lenght(line, index, *len);
 	env = ft_substr(line, index, i);
 	if (!env || !begin)
-		return (free(line), free(env),  NULL);
+		return (free(env),  NULL);
 	if (!ft_strncmp(env, "?", 2))
 		env_expand = ft_itoa(g_glo.error);
 	else
@@ -36,7 +36,7 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	if (env_expand)
 		*len = ft_strlen(env_expand);
 	free(env);
-	return (free(line), new_line);
+	return (new_line);
 }
 
 char	*search_env_var(char *line, t_infos *infos)
