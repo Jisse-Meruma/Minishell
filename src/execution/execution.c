@@ -57,54 +57,12 @@ int	get_cmd_nb(t_command *commands)
 	return (i);
 }
 
-// void	get_read_fd(t_command *commands, t_infos *infos)
-// {
-// 	int read_fd;
-
-// 	if (commands->lst_redirects->token == STDINN_FILE)
-// 	{
-// 		read_fd = open(commands->lst_redirects->filename, O_RDONLY);
-// 		if (read_fd == -1)
-// 			ret_error("Error read", 2, 1);
-// 		if (dup2(read_fd, STDIN_FILENO) == -1)
-// 			ret_error("Error dup2", 2, 1);
-// 		return ;
-// 	}
-// 	if (commands->order >= 2)
-// 	{
-// 		if (dup2(commands->read_fd, STDIN_FILENO) == -1)
-// 			ret_error("Error dup2", 2, 1);
-// 		return ;
-// 	}
-// }
-
-// void	get_write_fd(t_command *commands, t_infos *infos)
-// {
-// 	int write_fd;
-
-// 	if (commands->lst_redirects->token == STDOUT_FILE)
-// 	{
-// 		write_fd = open(commands->lst_redirects->filename, O_WRONLY | O_TRUNC | O_CREAT);
-// 		if (write_fd == -1)
-// 			ret_error("Error opening the write file", 2, 1);
-// 		if (dup2(write_fd, STDOUT_FILENO) == -1)
-// 			ret_error("Error dup2", 2, 1);
-// 		return ;
-// 	}
-// 	if 
-// 	if (commands->order >= 2)
-// 	{
-// 		if (dup2(commands->read_fd, STDIN_FILENO) == -1)
-// 			ret_error("Error dup2", 2, 1);
-// 		return ;
-// 	}
-// }
-
 void	exec_cmd_child(t_command *commands, t_infos *infos)
 {
 	char *path;
 
-	//get_read_fd(commands, infos);
+	if (commands->lst_redirects)
+		dup_in_out(commands, infos);
 	if (commands->order >= 2)
 		close(commands->read_fd);
 	//get_write_fd(commands, infos);
@@ -155,7 +113,7 @@ int	child_birth(t_command *commands, t_infos *infos, int id)
 	}
 	if (id == 0)
 		exec_cmd_child(commands, infos);
-	close(commands->pipes[1]);
+	// close(commands->pipes[1]);
 	return (id);
 }
 
@@ -164,25 +122,14 @@ void	start_exec(t_command *commands, t_infos *infos)
 	int id;
 	int32_t	status;
 
+	id = 1;
 	if_builtins(commands);
 	if ((commands->next == NULL) && (commands->cmd_is_blt != NOT_BUILT))
 		return (exec_built(infos, commands));
 	id = child_birth(commands, infos, id);
 	waitpid(id, &status, 0);
-	// is it necesarry to use cmd_argv ?
-	// if (commands->cmd_argv[0] == NULL)
-	// {
-	// 	printf("Maybe do something :D/ft_strncmp segfaults when argv[0] = NULL\n");
-	// 	return ;
-	// }
-
-	//add the ifbuiltins in each cmds
-	//if_builtins(commands);
-	// if (commands->cmd_is_blt && !commands->next)
-	// {
-	// 	printf("Execution.c : Builtins\n");
-	// 	exec_built(infos, commands);
-	// 	return ;
-	// }
+	// need explanation on the wait below
+	while (wait(NULL) != -1)
+		;
 	return ;
 }

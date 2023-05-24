@@ -31,11 +31,8 @@
 char	*path_creation(t_infos *infos, char *command);
 int		init(t_infos *infos, char **envp);
 
-
-void	ifcmd(char *argv[], char *envp[], t_infos *infos);
 int		compare(char *s1, char *s2);
 
-void	execute_cmd(char *argv[], char *envp[], t_infos *infos);
 void	cmd_cd(t_infos *infos, char *input);
 void	cmd_pwd(t_infos *infos);
 void	cmd_env(t_infos *infos);
@@ -53,8 +50,10 @@ void	ft_free_lst(t_node* head);
 void	mainsignal(void);
 void	signal_cmd(t_infos *infos);
 int		list_env(char **env, t_infos *infos);
+
 int		ret_error(char *str, int fd, int ret);
 void	void_ret_error(char *str, int fd);
+void	exit_error(char *str, int fd);
 
 //----------------------------------//
 //			parser/parser			//
@@ -125,6 +124,7 @@ int		open_here_doc(char *end_of_file, char **path);
 
 //EXECUTION BELOW
 void	start_exec(t_command *commands, t_infos *infos);
+void	dup_in_out(t_command *commands, t_infos *infos);
 char	**get_envp(t_infos *infos);
 int		ft_isnumber(char *str);
 void	ft_2d_print(char **str);

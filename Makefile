@@ -45,6 +45,7 @@ SRC 	:=	main.c			\
 			redirects/open.c			\
 			execution/execution.c 		\
 			execution/get_envp.c		\
+			execution/in_out_redir.c	\
 			utils/ret_error.c			\
 			utils/compare.c				\
 			utils/ft_isnumber.c			\
