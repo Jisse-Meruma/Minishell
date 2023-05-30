@@ -43,11 +43,9 @@ typedef enum s_cmdnb
 typedef struct s_command
 {
 	char				**cmd_argv;
-	t_builtins			cmd_is_blt;
 	t_lst_redirects		*lst_redirects;
 	struct s_command	*next;
-	int					pipes[2];
-	int					read_fd;
+	t_builtins			cmd_is_blt;
 	t_cmdnb				order;
 }	t_command;
 
@@ -78,6 +76,8 @@ extern t_glo g_glo;
 
 typedef struct s_infos
 {
+	int					read_fd;
+	int 				pipes[2];
 	pid_t               pid;
 	char                *pwd;
 	int                 error;

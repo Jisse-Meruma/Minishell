@@ -132,4 +132,8 @@ int		ft_our_lst_size(t_node *lst);
 
 // Cleanup
 void	free_cmd_struct(t_command *commands);
+
+// Debug the write and read pipes remove afte
+void	print_fd_contents(int fd);
+
 #endif

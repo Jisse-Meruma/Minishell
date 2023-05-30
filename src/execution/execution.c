@@ -5,6 +5,10 @@
 // << heredoc
 // >> append mode
 
+void printValueToStdErr(int value) {
+    dprintf(2, "The value is: %d\n", value);
+}
+
 // would be nice calling the commands formated
 void	exec_built(t_infos *infos, t_command *commands)
 {
@@ -44,12 +48,16 @@ void	if_builtins(t_command *commands)
 		commands->cmd_is_blt = NOT_BUILT;
 }
 
-
 void	exec_cmd_child(t_command *commands, t_infos *infos)
 {
 	char *path;
 
-	//dup_in_out(commands, infos);
+	// close(commands->pipes[0]);
+	// if (commands->order > 1)
+	// 	print_fd_contents(infos->read_fd);
+	if (commands->order == LAST_CMD)
+		close(infos->pipes[1]);
+	dup_in_out(commands, infos);
 	path = path_creation(infos, commands->cmd_argv[0]);
 	if (path)
 		execve(path, commands->cmd_argv, get_envp(infos));
@@ -57,24 +65,35 @@ void	exec_cmd_child(t_command *commands, t_infos *infos)
 	exit(0);
 }
 
-
 int	child_birth(t_command *commands, t_infos *infos, int id)
 {
 	while (commands && id != 0)
 	{
 		if (commands->order <= 1)
-			commands->read_fd = commands->pipes[0];
-		if (pipe(commands->pipes) == -1)
-			ret_error("Pipe Error", 2, 1);
+			infos->read_fd = -2;
+		else
+			infos->read_fd = infos->pipes[0];
+		if (commands->order != LAST_CMD)
+		{
+			if (pipe(infos->pipes) == -1)
+				ret_error("Pipe Error", 2, 1);
+		}
 		id = fork();
 		if (id == -1)
 			ret_error("Fork Error", 2, 1);
 		if (id != 0)
+		{
+			// if (commands->order > 1)
+			// 	close(infos->read_fd);
+			close(infos->pipes[1]);
 			commands = commands->next;
+		}
 	}
 	if (id == 0)
+	{
+		// close(infos->pipes[1]);
 		exec_cmd_child(commands, infos);
-	// close(commands->pipes[1]);
+	}
 	return (id);
 }
 
@@ -113,18 +132,7 @@ void	start_exec(t_command *commands, t_infos *infos)
 	// need explanation on the wait below
 	while (wait(NULL) != -1)
 		;
+	dup2(0, STDIN_FILENO);
+	dup2(1, STDOUT_FILENO);
 	return ;
 }
-
-// int	get_cmd_nb(t_command *commands)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (commands != NULL)
-// 	{
-// 		++i;
-// 		commands = commands->next;
-// 	}
-// 	return (i);
-// }
