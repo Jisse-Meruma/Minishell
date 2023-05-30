@@ -44,28 +44,12 @@ void	if_builtins(t_command *commands)
 		commands->cmd_is_blt = NOT_BUILT;
 }
 
-int	get_cmd_nb(t_command *commands)
-{
-	int i;
-
-	i = 0;
-	while (commands != NULL)
-	{
-		++i;
-		commands = commands->next;
-	}
-	return (i);
-}
 
 void	exec_cmd_child(t_command *commands, t_infos *infos)
 {
 	char *path;
 
-	if (commands->lst_redirects)
-		dup_in_out(commands, infos);
-	if (commands->order >= 2)
-		close(commands->read_fd);
-	//get_write_fd(commands, infos);
+	//dup_in_out(commands, infos);
 	path = path_creation(infos, commands->cmd_argv[0]);
 	if (path)
 		execve(path, commands->cmd_argv, get_envp(infos));
@@ -73,30 +57,9 @@ void	exec_cmd_child(t_command *commands, t_infos *infos)
 	exit(0);
 }
 
-void	fill_cmd_nb(t_command *commands)
-{
-	if (commands->next == NULL)
-	{
-		commands->order = ONE_CMD;
-		return;
-	}
-	commands->order = FIRST_CMD;
-	commands = commands->next;
-	while (commands)
-	{
-		if (commands->next == NULL)
-			commands->order = LAST_CMD;
-		else
-			commands->order = CMD;
-		commands = commands->next;
-	}
-}
 
 int	child_birth(t_command *commands, t_infos *infos, int id)
 {
-	// int cmd_nb_max;
-	// cmd_nb_max = get_cmd_nb(commands);
-	fill_cmd_nb(commands);
 	while (commands && id != 0)
 	{
 		if (commands->order <= 1)
@@ -106,8 +69,6 @@ int	child_birth(t_command *commands, t_infos *infos, int id)
 		id = fork();
 		if (id == -1)
 			ret_error("Fork Error", 2, 1);
-		if (id == 0)
-			if_builtins(commands);
 		if (id != 0)
 			commands = commands->next;
 	}
@@ -117,13 +78,34 @@ int	child_birth(t_command *commands, t_infos *infos, int id)
 	return (id);
 }
 
+void	fill_blt_cmdnb(t_command *commands)
+{
+	if_builtins(commands);
+	if (commands->next == NULL)
+	{
+		commands->order = ONE_CMD;
+		return;
+	}
+	commands->order = FIRST_CMD;
+	commands = commands->next;
+	while (commands)
+	{
+		if_builtins(commands);
+		if (commands->next == NULL)
+			commands->order = LAST_CMD;
+		else
+			commands->order = CMD;
+		commands = commands->next;
+	}
+}
+
 void	start_exec(t_command *commands, t_infos *infos)
 {
 	int id;
 	int32_t	status;
 
 	id = 1;
-	if_builtins(commands);
+	fill_blt_cmdnb(commands);
 	if ((commands->next == NULL) && (commands->cmd_is_blt != NOT_BUILT))
 		return (exec_built(infos, commands));
 	id = child_birth(commands, infos, id);
@@ -133,3 +115,16 @@ void	start_exec(t_command *commands, t_infos *infos)
 		;
 	return ;
 }
+
+// int	get_cmd_nb(t_command *commands)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (commands != NULL)
+// 	{
+// 		++i;
+// 		commands = commands->next;
+// 	}
+// 	return (i);
+// }
