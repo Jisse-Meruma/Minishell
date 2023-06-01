@@ -135,5 +135,6 @@ void	free_cmd_struct(t_command *commands);
 
 // Debug the write and read pipes remove afte
 void	print_fd_contents(int fd);
+int		redirect_is_out(t_command *commands);
 
 #endif

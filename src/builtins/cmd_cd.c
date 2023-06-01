@@ -34,6 +34,7 @@ void	cmd_cd(t_infos *infos, char *input)
 	char	s[1024];
 	char	*str;
 
+	// printValueToStdErr(123);
 	if (!input)
 		input = ft_strdup("~");
 	str = ft_strdup(input);

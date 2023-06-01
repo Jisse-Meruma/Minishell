@@ -58,11 +58,16 @@ void	exec_cmd_child(t_command *commands, t_infos *infos)
 	if (commands->order == LAST_CMD)
 		close(infos->pipes[1]);
 	dup_in_out(commands, infos);
-	path = path_creation(infos, commands->cmd_argv[0]);
-	if (path)
-		execve(path, commands->cmd_argv, get_envp(infos));
-	printf("%s\n", strerror(errno));
-	exit(0);
+	if (commands->cmd_is_blt != NOT_BUILT)
+		exec_built(infos, commands);
+	else
+	{
+		path = path_creation(infos, commands->cmd_argv[0]);
+		if (path)
+			execve(path, commands->cmd_argv, get_envp(infos));
+		printf("%s\n", strerror(errno));
+	}
+	exit(g_glo.error);
 }
 
 int	child_birth(t_command *commands, t_infos *infos, int id)
