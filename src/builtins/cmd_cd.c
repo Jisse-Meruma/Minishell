@@ -29,9 +29,20 @@
 // 	return (str);
 // }
 
-void	cmd_cd(t_infos *infos, char *input)
+void	update_old_and_pwd(t_infos *infos)
 {
 	char	s[1024];
+
+	if (cmd_check_env_exist(infos, "OLDPWD"))
+		change_env_data(infos, "OLDPWD", infos->pwd);
+	free(infos->pwd);
+	infos->pwd = ft_strdup(getcwd(s, sizeof(s)));
+	if (cmd_check_env_exist(infos, "PWD"))
+		change_env_data(infos, "PWD", infos->pwd);
+}
+
+void	cmd_cd(t_infos *infos, char *input)
+{
 	char	*str;
 
 	if (!input)
@@ -41,13 +52,11 @@ void	cmd_cd(t_infos *infos, char *input)
 	if (!str)
 		void_ret_error("Malloc Error", 2);
 	//str = wave(infos, str);
-	g_glo.error = chdir(str);
-	if (g_glo.error)
+	if (chdir(str))
 	{
 		printf("cd: %s : %s\n", str, strerror(errno));
 		g_glo.error = 1;
 		return ;
 	}
-	free(infos->pwd);
-	infos->pwd = ft_strdup(getcwd(s, sizeof(s)));
+	update_old_and_pwd(infos);
 }

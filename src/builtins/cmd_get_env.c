@@ -10,8 +10,12 @@ void	change_env_data(t_infos *infos, char *env, char *data)
 	{
 		if (!ft_strncmp(env, current->name, ft_strlen(env)))
 		{
-			free(current->data);
-			current->data = ft_strdup(data);
+			if (data)
+			{
+				if (current->data)
+					free(current->data);
+				current->data = ft_strdup(data);
+			}
 			return ;
 		}
 		current = current->next;
