@@ -33,14 +33,14 @@ void	read_redirect(t_command *commands, t_infos *infos)
 void	write_redirect(t_command *commands, t_infos *infos)
 {
 	int write_fd;
-	t_lst_redirects *redirect;
+	t_lst_redirects *redi;
 
-	redirect = commands->lst_redirects;
-	while (redirect->token != STDOUT_FILE || redirect->token != APPEND_FILE)
-		redirect = redirect->next;
-	if (redirect->token == STDOUT_FILE)
+	redi = commands->lst_redirects;
+	while (redi->token != STDOUT_FILE && redi->token != APPEND_FILE)
+		redi = redi->next;
+	if (redi->token == STDOUT_FILE)
 	{
-		write_fd = open(redirect->filename, O_WRONLY | O_CREAT, 0000644);
+		write_fd = open(redi->filename, O_WRONLY | O_CREAT, 0000644);
 		if (write_fd == -1)
 			ret_error("Error read", 2, 1);
 		if (dup2(write_fd, STDOUT_FILENO) == -1)
@@ -48,7 +48,7 @@ void	write_redirect(t_command *commands, t_infos *infos)
 	}
 	else
 	{
-		write_fd = open(redirect->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
+		write_fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
 		if (write_fd == -1)
 			ret_error("Error read", 2, 1);
 		if (dup2(write_fd, STDOUT_FILENO) == -1)

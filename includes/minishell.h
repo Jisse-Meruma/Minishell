@@ -43,7 +43,7 @@ void	change_env_data(t_infos *infos, char *env, char *data);
 int		cmd_check_env_exist(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, char *node);
 void	cmd_export(t_infos *infos, char *str);
-void	cmd_echo(t_infos *infos, char **str);
+void	cmd_echo(t_infos *infos, t_command *cmd);
 void	cmd_exit(t_infos *infos, char **args);
 void	ft_free_lst(t_node* head);
 
@@ -135,6 +135,7 @@ void	free_cmd_struct(t_command *commands);
 
 // Debug the write and read pipes remove afte
 void	print_fd_contents(int fd);
+void	printValueToStdErr(int value);
 int		redirect_is_out(t_command *commands);
 
 #endif
