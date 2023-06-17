@@ -53,6 +53,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		command = parser(line, &infos);
+		// change in case there's just a redirection to create the file
 		if (command && command->cmd_argv)
 			start_exec(command, &infos);
 		free_cmd_struct(command);

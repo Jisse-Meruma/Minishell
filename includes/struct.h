@@ -1,6 +1,7 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include <signal.h>
 typedef enum s_token
 {
 	PIPE,

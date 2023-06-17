@@ -56,9 +56,9 @@ char	*path_creation(t_infos *infos, char *command)
 		return (command);
 	path_var = cmd_get_env_char(infos, "PATH");
 	if (!path_var)
-		printf("command not found\n");
+		printf("%s: command not found\n", command);
 	path_command = path_finder(path_var, command);
 	if (!path_command)
-		printf("command not found\n");
+		printf("%s: command not found\n", command);
 	return (path_command);
 }

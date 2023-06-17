@@ -52,9 +52,6 @@ void	exec_cmd_child(t_command *commands, t_infos *infos)
 {
 	char *path;
 
-	// close(commands->pipes[0]);
-	// if (commands->order > 1)
-	// 	print_fd_contents(infos->read_fd);
 	if (commands->order == LAST_CMD)
 		close(infos->pipes[1]);
 	dup_in_out(commands, infos);
@@ -65,7 +62,8 @@ void	exec_cmd_child(t_command *commands, t_infos *infos)
 		path = path_creation(infos, commands->cmd_argv[0]);
 		if (path)
 			execve(path, commands->cmd_argv, get_envp(infos));
-		printf("%s\n", strerror(errno));
+		// printf("%s: %s\n",commands->cmd_argv[0], strerror(errno));
+		g_glo.error = 127;
 	}
 	exit(g_glo.error);
 }
@@ -88,17 +86,12 @@ int	child_birth(t_command *commands, t_infos *infos, int id)
 			ret_error("Fork Error", 2, 1);
 		if (id != 0)
 		{
-			// if (commands->order > 1)
-			// 	close(infos->read_fd);
 			close(infos->pipes[1]);
 			commands = commands->next;
 		}
 	}
 	if (id == 0)
-	{
-		// close(infos->pipes[1]);
 		exec_cmd_child(commands, infos);
-	}
 	return (id);
 }
 
@@ -134,6 +127,8 @@ void	start_exec(t_command *commands, t_infos *infos)
 		return (exec_built(infos, commands));
 	id = child_birth(commands, infos, id);
 	waitpid(id, &status, 0);
+	if (WIFEXITED(status))
+		g_glo.error = WEXITSTATUS(status);
 	// need explanation on the wait below
 	while (wait(NULL) != -1)
 		;

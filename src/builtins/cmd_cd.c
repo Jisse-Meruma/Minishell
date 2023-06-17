@@ -46,15 +46,18 @@ void	cmd_cd(t_infos *infos, char *input)
 	char	*str;
 
 	if (!input)
+	{
+		if (!cmd_check_env_exist(infos, "HOME"))
+			return (void_ret_error("bash: cd: HOME not set\n", 2));
 		str = ft_strdup("/");
+	}
 	else
 		str = ft_strdup(input);
 	if (!str)
 		void_ret_error("Malloc Error", 2);
-	//str = wave(infos, str);
 	if (chdir(str))
 	{
-		printf("cd: %s : %s\n", str, strerror(errno));
+		printf("bash: cd: %s : %s\n", str, strerror(errno));
 		g_glo.error = 1;
 		return ;
 	}

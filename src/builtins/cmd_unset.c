@@ -13,6 +13,8 @@ void	cmd_unset(t_infos *infos, char *node)
 	t_node	*next;
 
 	g_glo.error = 0;
+	if (!node)
+		return;
 	current = infos->head;
 	next = current->next;
 	while (next != NULL)
