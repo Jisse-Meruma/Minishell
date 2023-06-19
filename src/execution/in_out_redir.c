@@ -26,7 +26,7 @@ void	read_redirect(t_command *commands, t_infos *infos)
 	if (redirect->token == STDINN_FILE)
 		read_fd = open(redirect->filename, O_RDONLY);
 	else
-		read_fd = here_doc(redirect->filename);
+		read_fd = here_doc(redirect->filename, infos);
 	if (read_fd == -1)
 		ret_error("Error read", 2, 1);
 	if (dup2(read_fd, STDIN_FILENO) == -1)

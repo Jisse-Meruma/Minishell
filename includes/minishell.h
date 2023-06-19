@@ -101,6 +101,8 @@ int		double_meta(int index, char *line);
 
 // Remove/Expand the text_cmds
 void	expanding(t_lexer **lexer, t_infos *infos);
+char	*search_env_var(char *line, t_infos *infos);
+bool	find_env_var(char *line);
 bool	quote_status(bool quotes);
 int		skip_single_quote(char *line, int index);
 int		env_name_lenght(char *line, int index, int i);
@@ -119,7 +121,7 @@ int		stdout_parse(t_lexer *lexer, t_command *command, t_token token);
 int		append_parse(t_lexer *lexer, t_command *command, t_token token);
 
 //Redirect file opening
-int		here_doc(char *end_of_file);
+int		here_doc(char *end_of_file, t_infos *infos);
 int		here_doc_unlink_and_close(char *path, int old_fd);
 int		open_here_doc(char *end_of_file, char **path);
 

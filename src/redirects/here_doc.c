@@ -3,7 +3,7 @@
 
 #define INVALID -1
 
-int	here_doc(char *end_of_file)
+int	here_doc(char *end_of_file, t_infos *infos)
 {
 	int		fd;
 	char	*path;
@@ -20,6 +20,8 @@ int	here_doc(char *end_of_file)
 			free(line);
 			break ;
 		}
+		if (!find_env_var(line))
+			line = search_env_var(line, infos);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
