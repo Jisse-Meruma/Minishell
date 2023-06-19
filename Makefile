@@ -43,6 +43,7 @@ SRC 	:=	main.c			\
 			cleanup/free_cmd_struct.c	\
 			redirects/here_doc.c		\
 			redirects/open.c			\
+			redirects/here_doc_utils.c	\
 			execution/execution.c 		\
 			execution/get_envp.c		\
 			execution/in_out_redir.c	\

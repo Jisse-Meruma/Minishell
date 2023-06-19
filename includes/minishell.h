@@ -120,6 +120,7 @@ int		append_parse(t_lexer *lexer, t_command *command, t_token token);
 
 //Redirect file opening
 int		here_doc(char *end_of_file);
+int		here_doc_unlink_and_close(char *path, int old_fd);
 int		open_here_doc(char *end_of_file, char **path);
 
 //EXECUTION BELOW

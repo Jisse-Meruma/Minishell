@@ -51,7 +51,7 @@ void	printing(t_command *command)
 			if (redirect->token == HERE_DOC)
 			{
 				printf("%s, ", redirect->filename);
-				here_doc(redirect->filename);
+				//here_doc(redirect->filename);
 			}
 			redirect = redirect->next;
 		}

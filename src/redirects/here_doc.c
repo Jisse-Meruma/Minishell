@@ -1,5 +1,6 @@
 #include "minishell.h"
 #include "h_color.h"
+
 #define INVALID -1
 
 int	here_doc(char *end_of_file)
@@ -20,11 +21,9 @@ int	here_doc(char *end_of_file)
 			break ;
 		}
 		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
 		free(line);
 		line = readline("\x1b[1m\x1b[38;2;128;0;128mBadeline> \x1b[0m");
 	}
-	if (unlink(path) == -1)
-	 return (INVALID);
-	free(path);
-	return (fd);
+	return (here_doc_unlink_and_close(path, fd));
 }

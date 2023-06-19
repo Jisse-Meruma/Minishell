@@ -21,13 +21,17 @@ void	read_redirect(t_command *commands, t_infos *infos)
 	t_lst_redirects *redirect;
 
 	redirect = commands->lst_redirects;
-	while (redirect->token != STDINN_FILE)
+	while (redirect->token != STDINN_FILE && redirect->token != HERE_DOC)
 		redirect = redirect->next;
-	read_fd = open(redirect->filename, O_RDONLY);
+	if (redirect->token == STDINN_FILE)
+		read_fd = open(redirect->filename, O_RDONLY);
+	else
+		read_fd = here_doc(redirect->filename);
 	if (read_fd == -1)
 		ret_error("Error read", 2, 1);
 	if (dup2(read_fd, STDIN_FILENO) == -1)
 		ret_error("Error dup2", 2, 1);
+	close(read_fd);
 }
 
 void	write_redirect(t_command *commands, t_infos *infos)
@@ -65,7 +69,7 @@ int redirect_is_in(t_command *commands)
 	redirect = commands->lst_redirects;
 	while (redirect)
 	{
-		if (redirect->token == STDINN_FILE)
+		if (redirect->token == STDINN_FILE || redirect->token == HERE_DOC)
 			return (1);
 		redirect = redirect->next;
 	}
