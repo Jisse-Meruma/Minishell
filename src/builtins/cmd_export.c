@@ -112,26 +112,15 @@ void change_env_type(t_infos *infos, t_env_data type, char *env_name)
 	}
 }
 
-void	not_valid_id(char *str)
-{
-	g_glo.error = 1;
-	ft_putstr_fd("minishell: export: `", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("': not a valid identifier\n", 2);
-}
-
 //theres leaks in this functions 
-void	cmd_export(t_infos *infos, char *str)
+void	exec_export(t_infos *infos, char *str)
 {
 	t_node	*current;
 	t_node	*new_node;
 	char	**function;
 
-	g_glo.error = 0;
-	if (!str)
-		return (show_declare(infos, 1));
 	if (!str[0])
-		return (not_valid_id(str));
+		return (not_valid_id(str, "export"));
 	new_node = (t_node *) malloc(sizeof(t_node));
 	if (!new_node)
 		return (void_ret_error("Malloc fail", 2));
@@ -147,4 +136,21 @@ void	cmd_export(t_infos *infos, char *str)
 	}
 	else
 		create_node_export(new_node, function, infos, current);
+}
+
+void	cmd_export(t_infos *infos, t_command *cmd)
+{
+	int arg;
+
+	arg = 1;
+	g_glo.error = 0;
+	if (!cmd->cmd_argv[arg])
+		return (show_declare(infos, 1));
+	if (!cmd->cmd_argv[arg])
+		return;
+	while (cmd->cmd_argv[arg])
+	{
+		exec_export(infos, cmd->cmd_argv[arg]);
+		++arg;
+	}
 }

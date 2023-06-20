@@ -7,26 +7,40 @@ void	freenode(t_node *node)
 	free(node);
 }
 
-void	cmd_unset(t_infos *infos, char *node)
+void	exec_unset(t_infos *infos, char *arg)
 {
 	t_node	*current;
 	t_node	*next;
 
-	g_glo.error = 0;
-	if (!node)
+	if (!arg)
 		return;
+	if (!arg[0])
+		return (not_valid_id(arg, "unset"));
 	current = infos->head;
 	next = current->next;
 	while (next != NULL)
 	{
-		if (!compare(next->name, node))
+		if (!compare(next->name, arg))
 		{
 			current->next = next->next;
-			printf("Unset cmd %s\n", node);
 			freenode(next);
 			return ;
 		}
 		next = next->next;
 		current = current->next;
+	}
+}
+void	cmd_unset(t_infos *infos, t_command *cmd)
+{
+	int arg;
+
+	arg = 1;
+	g_glo.error = 0;
+	if (!cmd->cmd_argv[arg])
+		return;
+	while (cmd->cmd_argv[arg])
+	{
+		exec_unset(infos, cmd->cmd_argv[arg]);
+		++arg;
 	}
 }

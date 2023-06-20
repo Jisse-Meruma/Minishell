@@ -18,13 +18,13 @@ RM		:=	rm -rf
 SRC 	:=	main.c			\
 			init.c			\
 			path_creation.c \
-			execution.c		\
 			builtins/cmd_pwd.c 	\
 			builtins/cmd_env.c 	\
 			parser/parser.c			\
 			parser/remove_quotes.c	\
 			parser/parse_command.c	\
 			parser/parse_redirect.c	\
+			builtins/arg_error_blt.c\
 			builtins/cmd_cd.c 		\
 			builtins/cmd_unset.c	\
 			builtins/cmd_export.c	\
