@@ -8,7 +8,12 @@ void	update_old_and_pwd(t_infos *infos)
 	if (cmd_check_env_exist(infos, "OLDPWD"))
 		change_env_data(infos, "OLDPWD", infos->pwd);
 	free(infos->pwd);
-	infos->pwd = ft_strdup(getcwd(s, sizeof(s)));
+	if (!getcwd(s, sizeof(s)))
+	{
+		printf("bash: cd: error retrieving current directory: getcwd: cannot access parent directories: %s\n", strerror(errno));
+		g_glo.error = 0;
+	}
+	infos->pwd = ft_strdup(s);
 	if (cmd_check_env_exist(infos, "PWD"))
 		change_env_data(infos, "PWD", infos->pwd);
 }
@@ -27,7 +32,7 @@ void	cmd_cd(t_infos *infos, char *input)
 		str = ft_strdup(input);
 	if (!str)
 		void_ret_error("Malloc Error", 2);
-	if (chdir(str))
+	if (chdir(str) < 0)
 	{
 		printf("bash: cd: %s : %s\n", str, strerror(errno));
 		g_glo.error = 1;
