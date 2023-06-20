@@ -24,7 +24,7 @@
 //----------------------------------//
 /**
  * @brief This function checks if the command given is a command that exist.
- * 
+ *
  * @param command command to check.
  * @return path of the given command. if path does not exist return NULL
  */
@@ -35,7 +35,7 @@ int		compare(char *s1, char *s2);
 
 void	cmd_cd(t_infos *infos, char *input);
 void	cmd_pwd(t_infos *infos);
-void	cmd_env(t_infos *infos);
+void	cmd_env(t_infos *infos, t_command *cmd);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
 char	*cmd_get_env_char(t_infos *infos, char *env);
@@ -62,7 +62,7 @@ void	exit_error(char *str, int fd);
 //----------------------------------//
 /**
  * @brief This function transforms the input into a parsed linked_list.
- * 
+ *
  * @param line line to check.
  * @return Linked_list. if Return == NULL execute an ERROR
  */
@@ -73,7 +73,7 @@ t_command	*parser(char *line, t_infos *infos);
 //----------------------------------//
 /**
  * @brief This function splits as strings the input into a splitted 2d_array.
- * 
+ *
  * @param line line to split.
  * @return 2d_array. if Return == NULL execute an ERROR
  */

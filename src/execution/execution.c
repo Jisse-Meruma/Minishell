@@ -13,7 +13,7 @@ void	exec_built(t_infos *infos, t_command *cmd)
 	else if (!compare(cmd->cmd_argv[0], "echo"))
 		cmd_echo(infos, cmd);
 	else if (!compare(cmd->cmd_argv[0], "env"))
-		cmd_env(infos);
+		cmd_env(infos, cmd);
 	else if (!compare(cmd->cmd_argv[0], "getenv"))
 		cmd_get_env(infos, cmd->cmd_argv[1]);
 	else if (!compare(cmd->cmd_argv[0], "exit"))
