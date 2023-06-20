@@ -2,7 +2,7 @@
 
 void	free_redirect_lst(t_lst_redirects *redirect)
 {
-	t_lst_redirects *nfree;
+	t_lst_redirects	*nfree;
 
 	while (redirect)
 	{

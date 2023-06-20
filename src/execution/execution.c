@@ -97,7 +97,7 @@ void	fill_blt_cmdnb(t_command *cmd)
 	if (cmd->next == NULL)
 	{
 		cmd->order = ONE_CMD;
-		return;
+		return ;
 	}
 	cmd->order = FIRST_CMD;
 	cmd = cmd->next;

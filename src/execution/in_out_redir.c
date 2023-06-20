@@ -1,24 +1,10 @@
 #include <minishell.h>
 #include <fcntl.h>
 
-void print_fd_contents(int fd) {
-    char buffer[1024];
-    ssize_t bytesRead;
-
-    while ((bytesRead = read(fd, buffer, sizeof(buffer))) > 0) {
-        write(STDOUT_FILENO, buffer, bytesRead);
-    }
-
-    if (bytesRead < 0) {
-        perror("Error reading from file descriptor");
-        exit(EXIT_FAILURE);
-    }
-}
-
 void	read_redirect(t_command *commands, t_infos *infos)
 {
-	int read_fd;
-	t_lst_redirects *redirect;
+	int				read_fd;
+	t_lst_redirects	*redirect;
 
 	redirect = commands->lst_redirects;
 	while (redirect->token != STDINN_FILE && redirect->token != HERE_DOC)
@@ -36,8 +22,8 @@ void	read_redirect(t_command *commands, t_infos *infos)
 
 void	write_redirect(t_command *commands, t_infos *infos)
 {
-	int write_fd;
-	t_lst_redirects *redi;
+	int				write_fd;
+	t_lst_redirects	*redi;
 
 	redi = commands->lst_redirects;
 	while (redi->token != STDOUT_FILE && redi->token != APPEND_FILE)
@@ -60,9 +46,9 @@ void	write_redirect(t_command *commands, t_infos *infos)
 	}
 }
 
-int redirect_is_in(t_command *commands)
+int	redirect_is_in(t_command *commands)
 {
-	t_lst_redirects *redirect;
+	t_lst_redirects	*redirect;
 
 	if (!commands->lst_redirects)
 		return (0);
@@ -76,9 +62,9 @@ int redirect_is_in(t_command *commands)
 	return (0);
 }
 
-int redirect_is_out(t_command *commands)
+int	redirect_is_out(t_command *commands)
 {
-	t_lst_redirects *redirect;
+	t_lst_redirects	*redirect;
 
 	if (!commands->lst_redirects)
 		return (0);
@@ -106,7 +92,7 @@ void	get_read_fd(t_command *commands, t_infos *infos)
 
 void	get_write_fd(t_command *commands, t_infos *infos)
 {
-	int write_fd;
+	int	write_fd;
 
 	if (redirect_is_out(commands))
 		return (write_redirect(commands, infos));

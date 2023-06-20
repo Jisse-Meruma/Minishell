@@ -16,7 +16,7 @@ char *env_str(t_node *current)
 }
 
 //warning : ret_error returns an int
-char **get_envp(t_infos *infos)
+char	**get_envp(t_infos *infos)
 {
 	t_node	*current;
 	char	**envp;
@@ -37,6 +37,5 @@ char **get_envp(t_infos *infos)
 		++i;
 	}
 	envp[i] = NULL;
-	// ft_2d_print(envp);
 	return (envp);
 }
