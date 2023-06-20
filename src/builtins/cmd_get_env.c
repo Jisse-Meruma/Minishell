@@ -23,7 +23,7 @@ void	change_env_data(t_infos *infos, char *env, char *data)
 }
 
 //return 1 if env already exist else 0
-int		cmd_check_env_exist(t_infos *infos, char *env)
+int	cmd_check_env_exist(t_infos *infos, char *env)
 {
 	t_node	*current;
 

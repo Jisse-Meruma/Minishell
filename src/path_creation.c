@@ -3,7 +3,7 @@
 
 static char *path_command_join(char **bin_dir, char *command, int index)
 {
-	char *path_command;
+	char	*path_command;
 
 	path_command = ft_strjoin(bin_dir[index], "/");
 	if (!path_command)

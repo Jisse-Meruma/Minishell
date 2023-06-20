@@ -16,7 +16,7 @@ int	skip_single_quote(char *line, int index)
 	return (index);
 }
 
-int env_name_lenght(char *line, int index, int i)
+int	env_name_lenght(char *line, int index, int i)
 {
 	while (line[index + i])
 	{

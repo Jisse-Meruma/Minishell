@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 // print the linked list where value != 0
-void	cmd_env(t_infos *infos)
+void	cmd_env(t_infos *infos, t_command *cmd)
 {
 	t_node	*current;
 

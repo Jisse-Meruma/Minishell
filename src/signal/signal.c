@@ -3,40 +3,40 @@
 #include <sys/wait.h>
 #define CHILD 0
 
-int g_pidchild;
+int	g_pidchild;
 
 void	f_sig(int sig)
 {
-    if (sig == SIGINT)
-        kill(g_pidchild, SIGKILL);
+	if (sig == SIGINT)
+		kill(g_pidchild, SIGKILL);
 }
 
 void	f_sigmain(int sig)
 {
-    if (sig == SIGINT)
-    {
-        printf("\n");
-        rl_replace_line("", 0);
-        rl_on_new_line();
-        rl_redisplay();
-    }
+	if (sig == SIGINT)
+	{
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
-void    signal_cmd(t_infos *infos)
+void	signal_cmd(t_infos *infos)
 {
-    if (infos->pid)
-    {
-        g_pidchild = infos->pid;
-        signal(SIGINT, f_sig);
-        signal(SIGQUIT, f_sig);
-    }
+	if (infos->pid)
+	{
+		g_pidchild = infos->pid;
+		signal(SIGINT, f_sig);
+		signal(SIGQUIT, f_sig);
+	}
 }
 
-void    mainsignal(void)
+void	mainsignal(void)
 {
-    extern int rl_catch_signals;
+	extern int	rl_catch_signals;
 
-    signal(SIGINT, f_sigmain);
-    signal(SIGQUIT, f_sigmain);
-    rl_catch_signals = 1;
+	signal(SIGINT, f_sigmain);
+	signal(SIGQUIT, f_sigmain);
+	rl_catch_signals = 1;
 }

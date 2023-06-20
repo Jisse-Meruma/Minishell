@@ -13,7 +13,7 @@ void	exec_unset(t_infos *infos, char *arg)
 	t_node	*next;
 
 	if (!arg)
-		return;
+		return ;
 	if (!arg[0])
 		return (not_valid_id(arg, "unset"));
 	current = infos->head;
@@ -30,14 +30,15 @@ void	exec_unset(t_infos *infos, char *arg)
 		current = current->next;
 	}
 }
+
 void	cmd_unset(t_infos *infos, t_command *cmd)
 {
-	int arg;
+	int	arg;
 
 	arg = 1;
 	g_glo.error = 0;
 	if (!cmd->cmd_argv[arg])
-		return;
+		return ;
 	while (cmd->cmd_argv[arg])
 	{
 		exec_unset(infos, cmd->cmd_argv[arg]);

@@ -22,7 +22,7 @@ int	is_endline(char *str, bool *n)
 
 int	skip_endlines(t_command *cmd, bool *n)
 {
-	int n_nb;
+	int	n_nb;
 
 	n_nb = 0;
 	while (cmd->cmd_argv[n_nb + 1])

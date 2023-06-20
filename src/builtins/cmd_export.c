@@ -3,10 +3,10 @@
 // print the add var such as var=value as input
 //execution is export A=VALUE
 
-int get_end(char *str, char c)
+int	get_end(char *str, char c)
 {
-	int i;
-	int end;
+	int	i;
+	int	end;
 
 	i = 0;
 	while (str[i] && str[i] != c)
@@ -18,11 +18,11 @@ int get_end(char *str, char c)
 	return (end);
 }
 
-char **ft_split_first(char *str, char c)
+char	**ft_split_first(char *str, char c)
 {
-	int i;
-	char **str2d;
-	int end;
+	int		i;
+	char	**str2d;
+	int		end;
 
 	end = get_end(str, c);
 	str2d = (char **)calloc(end + 1, sizeof(char *));
@@ -39,7 +39,7 @@ char **ft_split_first(char *str, char c)
 		{
 			str2d[0] = ft_substr(str, 0, i);
 			++i;
-			break;
+			break ;
 		}
 		++i;
 	}
@@ -82,21 +82,21 @@ void	node_type(char **function, t_node *new_node, char *str)
 		new_node->type = FULL;
 }
 
-void	create_node_export(t_node *new_node, char **function, t_infos *infos, t_node *current)
+void	create_node_export(t_node *new, char **function, t_infos *infos, t_node *current)
 {
-	new_node->name = function[0];
+	new->name = function[0];
 	if ((ft_2d_arrlen(function) > 1))
-		new_node->data = function[1];
+		new->data = function[1];
 	else
-		new_node->data = NULL;
-	new_node->next = NULL;
+		new->data = NULL;
+	new->next = NULL;
 	current = infos->head;
 	while (current->next != NULL)
 		current = current->next;
-	current->next = new_node;
+	current->next = new;
 }
 
-void change_env_type(t_infos *infos, t_env_data type, char *env_name)
+void	change_env_type(t_infos *infos, t_env_data type, char *env_name)
 {
 	t_node	*current;
 
@@ -112,7 +112,7 @@ void change_env_type(t_infos *infos, t_env_data type, char *env_name)
 	}
 }
 
-//theres leaks in this functions 
+//theres leaks in this functions
 void	exec_export(t_infos *infos, char *str)
 {
 	t_node	*current;
@@ -147,7 +147,7 @@ void	cmd_export(t_infos *infos, t_command *cmd)
 	if (!cmd->cmd_argv[arg])
 		return (show_declare(infos, 1));
 	if (!cmd->cmd_argv[arg])
-		return;
+		return ;
 	while (cmd->cmd_argv[arg])
 	{
 		exec_export(infos, cmd->cmd_argv[arg]);

@@ -22,7 +22,7 @@ void	execute_img(t_infos *infos)
 			execve(path, args, NULL);
 			printf("execve error\n");
 		}
-		else 
+		else
 			printf("ft_strdup error\n");
 		return ;
 	}

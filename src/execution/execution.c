@@ -5,10 +5,6 @@
 // << heredoc
 // >> append mode
 
-void printValueToStdErr(int value) {
-    dprintf(2, "The value is: %d\n", value);
-}
-
 // would be nice calling the cmd formated
 void	exec_built(t_infos *infos, t_command *cmd)
 {
@@ -50,7 +46,7 @@ void	if_builtins(t_command *cmd)
 
 void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
-	char *path;
+	char	*path;
 
 	if (cmd->order == LAST_CMD)
 		close(infos->pipes[1]);
@@ -118,7 +114,7 @@ void	fill_blt_cmdnb(t_command *cmd)
 
 void	start_exec(t_command *cmd, t_infos *infos)
 {
-	int id;
+	int		id;
 	int32_t	status;
 
 	id = 1;
@@ -129,7 +125,6 @@ void	start_exec(t_command *cmd, t_infos *infos)
 	waitpid(id, &status, 0);
 	if (WIFEXITED(status))
 		g_glo.error = WEXITSTATUS(status);
-	// need explanation on the wait below
 	while (wait(NULL) != -1)
 		;
 	dup2(0, STDIN_FILENO);

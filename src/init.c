@@ -30,7 +30,7 @@ void	updateshlvl(t_infos *infos)
 	if (!ft_isnumber(shlvl))
 	{
 		exec_export(infos, "SHLVL=1");
-		return;
+		return ;
 	}
 	shlvlnb = ft_atoi(shlvl);
 	if (shlvlnb <= -1)
@@ -57,11 +57,11 @@ void	add_shlvl(t_infos *infos)
 		exec_export(infos, "SHLVL=1");
 }
 
-int init(t_infos *infos, char **envp)
+int	init(t_infos *infos, char **envp)
 {
 	infos->head = NULL;
 	if (list_env(envp, infos))
-			ret_error("Error in list_env", 2, 1);
+		ret_error("Error in list_env", 2, 1);
 	cmd_get_env_pwd(infos, "PWD");
 	add_shlvl(infos);
 	g_glo.error = 0;
