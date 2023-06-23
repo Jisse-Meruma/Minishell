@@ -16,10 +16,13 @@ void	f_sigmain(int sig)
 	if (sig == SIGINT)
 	{
 		printf("\n");
+		g_glo.error = 130;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
+	else
+		g_glo.error = 131;
 }
 
 void	signal_cmd(t_infos *infos)
