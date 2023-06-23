@@ -51,14 +51,23 @@ char	*path_creation(t_infos *infos, char *command)
 	char	*path_command;
 
 	if (*command == '\0')
+	{
+		printf("bash: $: command not found\n");
 		return (NULL);
+	}
 	if (access(command, F_OK | X_OK) == FOUND)
 		return (command);
 	path_var = cmd_get_env_char(infos, "PATH");
 	if (!path_var)
-		printf("%s: command not found\n", command);
+	{
+		printf("bash: %s: No such file or directory.\n", command);
+		return (NULL);
+	}
 	path_command = path_finder(path_var, command);
 	if (!path_command)
-		printf("%s: command not found\n", command);
+	{
+		free(path_var);
+		printf("bash: $: command not found\n");
+	}
 	return (path_command);
 }
