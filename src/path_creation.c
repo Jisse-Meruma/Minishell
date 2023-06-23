@@ -67,7 +67,7 @@ char	*path_creation(t_infos *infos, char *command)
 	if (!path_command)
 	{
 		free(path_var);
-		printf("bash: $: command not found\n");
+		printf("bash: %s: command not found\n", command);
 	}
 	return (path_command);
 }

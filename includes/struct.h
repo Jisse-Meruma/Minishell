@@ -28,6 +28,7 @@ typedef struct s_lst_redirects
 
 typedef enum s_builtins
 {
+	NOCMD,
 	NOT_BUILT,
 	BUILT,
 	BUILT_PARENT,
@@ -60,7 +61,7 @@ typedef enum s_env_data
 	SIZE,
 } t_env_data;
 
-typedef struct s_node 
+typedef struct s_node
 {
 	char			*name;
 	char			*data;

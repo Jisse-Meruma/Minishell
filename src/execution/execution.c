@@ -8,6 +8,8 @@
 // would be nice calling the cmd formated
 void	exec_built(t_infos *infos, t_command *cmd)
 {
+	if (!cmd->cmd_argv[0])
+		return;
 	if (!compare(cmd->cmd_argv[0], "pwd"))
 		cmd_pwd(infos);
 	else if (!compare(cmd->cmd_argv[0], "echo"))
@@ -30,7 +32,9 @@ void	exec_built(t_infos *infos, t_command *cmd)
 
 void	if_builtins(t_command *cmd)
 {
-	if (!ft_strncmp("cd", cmd->cmd_argv[0], 3) || \
+	if (!cmd->cmd_argv[0])
+		cmd->cmd_is_blt = NOCMD;
+	else if (!ft_strncmp("cd", cmd->cmd_argv[0], 3) || \
 	!ft_strncmp("exit", cmd->cmd_argv[0], 5) || \
 	!ft_strncmp("export", cmd->cmd_argv[0], 7) || \
 	!ft_strncmp("unset", cmd->cmd_argv[0], 6))
@@ -127,8 +131,14 @@ void	start_exec(t_command *cmd, t_infos *infos)
 
 	id = 1;
 	fill_blt_cmdnb(cmd);
-	if ((cmd->next == NULL) && (cmd->cmd_is_blt != NOT_BUILT))
-		return (exec_built(infos, cmd));
+	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
+	{
+		dup_in_out(cmd, infos);
+		exec_built(infos, cmd);
+		dup2(0, STDIN_FILENO);
+		dup2(1, STDOUT_FILENO);
+		return ;
+	}
 	id = child_birth(cmd, infos, id);
 	waitpid(id, &status, 0);
 	if (WIFEXITED(status))
