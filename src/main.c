@@ -3,6 +3,12 @@
 #include <sys/wait.h>
 #define CHILD 0
 
+int	struct_error(void)
+{
+	write(2, "syntax error\n", 13);
+	return (2);
+}
+
 void	execute_img(t_infos *infos)
 {
 	char	*path;
@@ -53,6 +59,8 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		command = parser(line, &infos);
+		if (!command)
+			g_glo.error = struct_error();
 		// change in case there's just a redirection to create the file
 		if (command && command->cmd_argv)
 			start_exec(command, &infos);

@@ -16,6 +16,30 @@ int	skip_single_quote(char *line, int index)
 	return (index);
 }
 
+bool	is_redirect(t_token token)
+{
+	if (token == STDINN_FILE || token == STDOUT_FILE \
+		|| token == APPEND_FILE)
+		return (true);
+	return (false);
+}
+
+bool	ambiguous_redir(t_lexer	** lexer, t_lexer *node, char *str)
+{
+	t_lexer	*prev_node;
+
+	prev_node = *lexer;
+	while (prev_node->next && prev_node->next != node)
+		prev_node = prev_node->next;
+	if	(!is_redirect(prev_node->token))
+		return (false);
+	write(2, "bash: ", 6);
+	write(2, str, ft_strlen(str));
+	write(2, ": ambiguous redirect\n", 21);
+	return (true);
+	
+}
+
 int	env_name_lenght(char *line, int index, int i)
 {
 	while (line[index + i])
