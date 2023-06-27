@@ -14,9 +14,15 @@ void	read_redirect(t_command *commands, t_infos *infos)
 	else
 		read_fd = here_doc(redirect->filename, infos);
 	if (read_fd == -1)
-		ret_error("Error read", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redirect->filename, strerror(errno));
+		exit(1);
+	}
 	if (dup2(read_fd, STDIN_FILENO) == -1)
-		ret_error("Error dup2", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redirect->filename, strerror(errno));
+		exit(1);
+	}
 	close(read_fd);
 }
 
@@ -32,17 +38,29 @@ void	write_redirect(t_command *commands, t_infos *infos)
 	{
 		write_fd = open(redi->filename, O_WRONLY | O_CREAT, 0000644);
 		if (write_fd == -1)
-			ret_error("Error read", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redi->filename, strerror(errno));
+		exit(1);
+	}
 		if (dup2(write_fd, STDOUT_FILENO) == -1)
-			ret_error("Error dup2", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redi->filename, strerror(errno));
+		exit(1);
+	}
 	}
 	else
 	{
 		write_fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
 		if (write_fd == -1)
-			ret_error("Error read", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redi->filename, strerror(errno));
+		exit(1);
+	}
 		if (dup2(write_fd, STDOUT_FILENO) == -1)
-			ret_error("Error dup2", 2, 1);
+	{
+		printf("minishell: %s : %s\n", redi->filename, strerror(errno));
+		exit(1);
+	}
 	}
 }
 

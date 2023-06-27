@@ -8,6 +8,8 @@ int	is_endline(char *str, bool *n)
 	int	i;
 
 	i = 0;
+	if (!str[i])
+		return (0);
 	if (str && str[i] == '-')
 		++i;
 	while (str && str[i] == 'n')
@@ -47,7 +49,6 @@ void	echoprint(t_infos *infos, char *str)
 	}
 }
 
-//void	cmd_echo(char **str)
 // echo is working now with str as argv skipping the first argument
 void	cmd_echo(t_infos *infos, t_command *cmd)
 {
@@ -56,13 +57,13 @@ void	cmd_echo(t_infos *infos, t_command *cmd)
 
 	n = false;
 	i = 1;
-	if (!cmd->cmd_argv[i] || !cmd->cmd_argv[i][0])
+	if (!cmd->cmd_argv[i])
 	{
 		write(1, "\n", 1);
 		return ;
 	}
 	i += skip_endlines(cmd, &n);
-	while (cmd->cmd_argv[i])
+	while (cmd->cmd_argv[i] != NULL)
 	{
 		echoprint(infos, cmd->cmd_argv[i]);
 		++i;

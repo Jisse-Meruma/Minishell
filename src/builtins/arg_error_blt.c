@@ -9,3 +9,12 @@ void	not_valid_id(char *str, char *cmd)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("': not a valid identifier\n", 2);
 }
+
+void	print_error(char *str, char *error)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+}

@@ -66,7 +66,7 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 		if (path)
 		{
 			execve(path, cmd->cmd_argv, get_envp(infos));
-			printf("bash: %s: %s\n",cmd->cmd_argv[0], strerror(errno));
+			print_error(cmd->cmd_argv[0], strerror(errno));
 		}
 		if (errno == 13)
 			g_glo.error = 126;
