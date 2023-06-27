@@ -53,6 +53,8 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		command = parser(line, &infos);
+		// if (!command && ft_strlen(line) != 0)
+		// 	g_glo.error = struct_error();
 		// change in case there's just a redirection to create the file
 		if (command && command->cmd_argv)
 			start_exec(command, &infos);

@@ -82,7 +82,7 @@ bool	find_env_var(char *line)
 	return (check);
 }
 
-void	expanding(t_lexer **lexer, t_infos *infos)
+bool	expanding(t_lexer **lexer, t_infos *infos)
 {
 	t_lexer	*node;
 	char	*string_free;
@@ -97,7 +97,16 @@ void	expanding(t_lexer **lexer, t_infos *infos)
 		}
 		string_free = node->argument;
 		node->argument = search_env_var(node->argument, infos);
-		free(string_free);
+		if(node->argument == NULL)
+			return (ERROR);
+		if(ft_strlen(node->argument) == 0)
+		{
+			if (ambiguous_redir(lexer, node, string_free))
+				return (ERROR);
+		}
+		if (node->argument != string_free)
+			free(string_free);
 		node = node->next;
 	}
+	return (SUCCES);
 }

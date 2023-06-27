@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+
+
 void	printing(t_command *command)
 {
 	int				i;
@@ -71,25 +73,16 @@ t_command	*parser(char *line, t_infos *infos)
 	if (*line == '\0')
 		return (NULL);
 	if (ft_lexer(&lexer, line))
-	{
-		printf("PARSING ERROR\n");
 		return (NULL);
-	}
 	tokenizer(&lexer);
-	expanding(&lexer, infos);
+	if (expanding(&lexer, infos))
+		return (lexer_free(&lexer), NULL);
 	remove_quotes(&lexer);
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
-	{
-		printf("Malloc Allocation\n");
-		return (NULL);
-	}
+		return (lexer_free(&lexer), NULL);
 	if (parse_struct_command(&lexer, command))
-	{
-		printf("struct parsing ERROR\n");
-		return (NULL);
-	}
+		return (lexer_free(&lexer), NULL);
 	lexer_free(&lexer);
-	printing(command);
 	return (command);
 }
