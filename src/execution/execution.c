@@ -133,10 +133,10 @@ void	start_exec(t_command *cmd, t_infos *infos)
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
 	{
-		dup_in_out(cmd, infos);
+		//dup_in_out(cmd, infos);
 		exec_built(infos, cmd);
-		dup2(0, STDIN_FILENO);
-		dup2(1, STDOUT_FILENO);
+		// dup2(0, STDIN_FILENO);
+		// dup2(1, STDOUT_FILENO);
 		return ;
 	}
 	id = child_birth(cmd, infos, id);
