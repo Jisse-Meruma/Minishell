@@ -82,8 +82,6 @@ typedef struct s_infos
 	int 				pipes[2];
 	pid_t               pid;
 	char                *pwd;
-	struct sigaction	sa;
-	pid_t               **pids;
 	t_node              *head;
 }	t_infos;
 

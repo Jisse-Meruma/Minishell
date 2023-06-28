@@ -13,9 +13,9 @@ void	exec_built(t_infos *infos, t_command *cmd)
 	if (!compare(cmd->cmd_argv[0], "pwd"))
 		cmd_pwd(infos);
 	else if (!compare(cmd->cmd_argv[0], "echo"))
-		cmd_echo(infos, cmd);
+		cmd_echo(cmd);
 	else if (!compare(cmd->cmd_argv[0], "env"))
-		cmd_env(infos, cmd);
+		cmd_env(infos);
 	else if (!compare(cmd->cmd_argv[0], "getenv"))
 		cmd_get_env(infos, cmd->cmd_argv[1]);
 	else if (!compare(cmd->cmd_argv[0], "exit"))

@@ -91,9 +91,14 @@ void	create_node_export(t_node *new, char **function, t_infos *infos, t_node *cu
 		new->data = NULL;
 	new->next = NULL;
 	current = infos->head;
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
+	if (current == NULL)
+		infos->head = new;
+	else
+	{
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new;
+	}
 }
 
 void	change_env_type(t_infos *infos, t_env_data type, char *env_name)
@@ -115,7 +120,6 @@ void	change_env_type(t_infos *infos, t_env_data type, char *env_name)
 //theres leaks in this functions
 void	exec_export(t_infos *infos, char *str)
 {
-	t_node	*current;
 	t_node	*new_node;
 	char	**function;
 
@@ -135,7 +139,7 @@ void	exec_export(t_infos *infos, char *str)
 		return (change_env_data(infos, function[0], function[1]));
 	}
 	else
-		create_node_export(new_node, function, infos, current);
+		create_node_export(new_node, function, infos, NULL);
 }
 
 void	cmd_export(t_infos *infos, t_command *cmd)
@@ -146,8 +150,6 @@ void	cmd_export(t_infos *infos, t_command *cmd)
 	g_glo.error = 0;
 	if (!cmd->cmd_argv[arg])
 		return (show_declare(infos, 1));
-	if (!cmd->cmd_argv[arg])
-		return ;
 	while (cmd->cmd_argv[arg])
 	{
 		exec_export(infos, cmd->cmd_argv[arg]);

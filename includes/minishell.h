@@ -35,7 +35,7 @@ int		compare(char *s1, char *s2);
 
 void	cmd_cd(t_infos *infos, char *input);
 void	cmd_pwd(t_infos *infos);
-void	cmd_env(t_infos *infos, t_command *cmd);
+void	cmd_env(t_infos *infos);
 void	cmd_get_env(t_infos *infos, char *env);
 void	cmd_get_env_pwd(t_infos *infos, char *env);
 char	*cmd_get_env_char(t_infos *infos, char *env);
@@ -44,7 +44,7 @@ int		cmd_check_env_exist(t_infos *infos, char *env);
 void	cmd_unset(t_infos *infos, t_command *cmd);
 void	exec_export(t_infos *infos, char *str);
 void	cmd_export(t_infos *infos, t_command *cmd);
-void	cmd_echo(t_infos *infos, t_command *cmd);
+void	cmd_echo(t_command *cmd);
 void	cmd_exit(t_infos *infos, char **args);
 void	ft_free_lst(t_node* head);
 void	not_valid_id(char *str, char *cmd);
@@ -140,9 +140,8 @@ int		ft_our_lst_size(t_node *lst);
 void	free_cmd_struct(t_command *commands);
 
 // Debug the write and read pipes remove afte
-void	print_fd_contents(int fd);
-void	printValueToStdErr(int value);
 int		redirect_is_out(t_command *commands);
+void	print_error(char *str, char *error);
 
 
 #endif

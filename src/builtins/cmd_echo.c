@@ -37,7 +37,7 @@ int	skip_endlines(t_command *cmd, bool *n)
 	return (n_nb);
 }
 
-void	echoprint(t_infos *infos, char *str)
+void	echoprint(char *str)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ void	echoprint(t_infos *infos, char *str)
 }
 
 // echo is working now with str as argv skipping the first argument
-void	cmd_echo(t_infos *infos, t_command *cmd)
+void	cmd_echo(t_command *cmd)
 {
 	bool	n;
 	int		i;
@@ -65,7 +65,7 @@ void	cmd_echo(t_infos *infos, t_command *cmd)
 	i += skip_endlines(cmd, &n);
 	while (cmd->cmd_argv[i] != NULL)
 	{
-		echoprint(infos, cmd->cmd_argv[i]);
+		echoprint(cmd->cmd_argv[i]);
 		++i;
 		if (cmd->cmd_argv[i])
 			write(1, " ", 1);

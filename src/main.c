@@ -45,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	g_glo.error = 0;
 	if (init(&infos, envp))
-		ret_error("Error init\n", 1, 1);
+		ret_error("Error init\n", 2, 1);
 	execute_img(&infos);
 	mainsignal();
 	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
@@ -63,6 +63,6 @@ int	main(int argc, char *argv[], char *envp[])
 		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
 	}
 	if (!line)
-		printf("exit\n");
+		ft_printf("exit\n");
 	return (0);
 }

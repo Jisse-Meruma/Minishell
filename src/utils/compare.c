@@ -5,7 +5,7 @@ int	compare(char *s1, char *s2)
 	int i;
 
 	i = 0;
-	while (s1[i])
+	while (s1[i] && s2[i])
 	{
 		if (ft_toupper(s1[i]) == ft_toupper(s2[i]))
 			++i;

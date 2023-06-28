@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-//cmd_export(infos, "SHLVL=1");
-
 void	add_one_shlvl(t_infos *infos, int shlvlnb)
 {
 	char *strshlvl;

@@ -18,6 +18,12 @@ void	exec_unset(t_infos *infos, char *arg)
 		return (not_valid_id(arg, "unset"));
 	current = infos->head;
 	next = current->next;
+	if (!compare(current->name, arg))
+	{
+		infos->head = current->next;
+		freenode(current);
+		return ;
+	}
 	while (next != NULL)
 	{
 		if (!compare(next->name, arg))

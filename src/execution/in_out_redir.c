@@ -26,7 +26,7 @@ void	read_redirect(t_command *commands, t_infos *infos)
 	close(read_fd);
 }
 
-void	write_redirect(t_command *commands, t_infos *infos)
+void	write_redirect(t_command *commands)
 {
 	int				write_fd;
 	t_lst_redirects	*redi;
@@ -110,10 +110,8 @@ void	get_read_fd(t_command *commands, t_infos *infos)
 
 void	get_write_fd(t_command *commands, t_infos *infos)
 {
-	int	write_fd;
-
 	if (redirect_is_out(commands))
-		return (write_redirect(commands, infos));
+		return (write_redirect(commands));
 	if (commands->next != NULL)
 	{
 		if (dup2(infos->pipes[1], STDOUT_FILENO) == -1)
