@@ -131,6 +131,7 @@ int		open_here_doc(char *end_of_file, char **path);
 //EXECUTION BELOW
 void	start_exec(t_command *commands, t_infos *infos);
 void	dup_in_out(t_command *commands, t_infos *infos);
+void	dup_all(t_command *cmd, t_infos *infos, int orexit);
 char	**get_envp(t_infos *infos);
 int		ft_isnumber(char *str);
 void	ft_2d_print(char **str);
@@ -142,6 +143,6 @@ void	free_cmd_struct(t_command *commands);
 // Debug the write and read pipes remove afte
 int		redirect_is_out(t_command *commands);
 void	print_error(char *str, char *error);
-
+void	ex_print_error(char *str, char *error, int exitnb);
 
 #endif

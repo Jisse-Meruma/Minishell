@@ -79,6 +79,7 @@ extern t_glo g_glo;
 typedef struct s_infos
 {
 	int					read_fd;
+	int					write_fd;
 	int 				pipes[2];
 	pid_t               pid;
 	char                *pwd;

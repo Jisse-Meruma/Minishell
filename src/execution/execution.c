@@ -27,7 +27,7 @@ void	exec_built(t_infos *infos, t_command *cmd)
 	else if (!compare(cmd->cmd_argv[0], "export"))
 		cmd_export(infos, cmd);
 	else
-		printf("not a builtins , why am I printing ????\n");
+		return;
 }
 
 void	if_builtins(t_command *cmd)
@@ -54,7 +54,8 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 
 	if (cmd->order == LAST_CMD || cmd->order == ONE_CMD)
 		close(infos->pipes[1]);
-	dup_in_out(cmd, infos);
+	//dup_in_out(cmd, infos);
+	dup_all(cmd, infos, 1);
 	if (cmd->cmd_is_blt != NOT_BUILT)
 		exec_built(infos, cmd);
 	else
@@ -128,15 +129,21 @@ void	start_exec(t_command *cmd, t_infos *infos)
 {
 	int		id;
 	int32_t	status;
+	int origin;
 
 	id = 1;
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
 	{
-		//dup_in_out(cmd, infos);
+		origin = dup(STDOUT_FILENO);
+		dup_all(cmd, infos, 0);
 		exec_built(infos, cmd);
-		// dup2(0, STDIN_FILENO);
-		// dup2(1, STDOUT_FILENO);
+		if (infos->write_fd)
+		{
+			close(infos->write_fd);
+			dup2(origin, STDOUT_FILENO);
+			close(origin);
+		}
 		return ;
 	}
 	id = child_birth(cmd, infos, id);
