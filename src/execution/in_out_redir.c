@@ -222,7 +222,7 @@ int	exec_out(t_command *cmd, t_infos *infos, t_lst_redirects *redi)
 	return (1);
 }
 
-void	dup_all(t_command *cmd, t_infos *infos, int orexit)
+int	dup_all(t_command *cmd, t_infos *infos, int orexit)
 {
 	t_lst_redirects *redi;
 	int in;
@@ -245,4 +245,7 @@ void	dup_all(t_command *cmd, t_infos *infos, int orexit)
 		write_no_redi(cmd, infos);
 	if (orexit && (in < 0 || out < 0))
 		exit(1);
+	if (!orexit && (in < 0 || out < 0))
+		return (-1);
+	return (0);
 }

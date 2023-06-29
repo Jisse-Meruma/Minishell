@@ -131,7 +131,7 @@ int		open_here_doc(char *end_of_file, char **path);
 //EXECUTION BELOW
 void	start_exec(t_command *commands, t_infos *infos);
 void	dup_in_out(t_command *commands, t_infos *infos);
-void	dup_all(t_command *cmd, t_infos *infos, int orexit);
+int		dup_all(t_command *cmd, t_infos *infos, int orexit);
 char	**get_envp(t_infos *infos);
 int		ft_isnumber(char *str);
 void	ft_2d_print(char **str);

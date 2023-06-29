@@ -17,6 +17,7 @@ void	print_error(char *str, char *error)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd("\n", 2);
+	g_glo.error = 1;
 }
 
 void	ex_print_error(char *str, char *error, int exitnb)
