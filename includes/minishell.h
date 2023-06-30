@@ -104,7 +104,7 @@ int		double_meta(int index, char *line);
 // Remove/Expand the text_cmds
 bool	expanding(t_lexer **lexer, t_infos *infos);
 char	*search_env_var(char *line, t_infos *infos);
-bool	ambiguous_redir(t_lexer	** lexer, t_lexer *node, char *str);
+bool	ambiguous_redir(t_lexer	**lexer, t_lexer *node, char *str);
 bool	find_env_var(char *line);
 bool	quote_status(bool quotes);
 int		skip_single_quote(char *line, int index);
@@ -136,7 +136,9 @@ char	**get_envp(t_infos *infos);
 int		ft_isnumber(char *str);
 void	ft_2d_print(char **str);
 int		ft_our_lst_size(t_node *lst);
-
+void	exec_built(t_infos *infos, t_command *cmd);
+void	if_builtins(t_command *cmd);
+void	add_shlvl(t_infos *infos);
 // Cleanup
 void	free_cmd_struct(t_command *commands);
 

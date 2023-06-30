@@ -136,7 +136,8 @@ void	exec_export(t_infos *infos, char *str)
 	{
 		if (new_node->type > 0)
 			change_env_type(infos, new_node->type, function[0]);
-		return (change_env_data(infos, function[0], function[1]));
+		change_env_data(infos, function[0], function[1]);
+		ft_2dfree(function);
 	}
 	else
 		create_node_export(new_node, function, infos, NULL);

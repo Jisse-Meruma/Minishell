@@ -17,6 +17,7 @@ RM		:=	rm -rf
 
 SRC 	:=	main.c			\
 			init.c			\
+			shlvl.c			\
 			path_creation.c \
 			builtins/cmd_pwd.c 	\
 			builtins/cmd_env.c 	\
@@ -47,6 +48,7 @@ SRC 	:=	main.c			\
 			execution/execution.c 		\
 			execution/get_envp.c		\
 			execution/in_out_redir.c	\
+			execution/fill_blt.c		\
 			utils/ret_error.c			\
 			utils/compare.c				\
 			utils/ft_isnumber.c			\
@@ -82,7 +84,7 @@ $(NAME): $(OBJ)
 	@echo $(Yellow) Building.. 🏠$(Color_Off)
 	@echo -----------------------
 	@$(MAKE) -C libft bonus
-	@$(CC) $^ $(LIBS) $(DEBUGGING) -o $(NAME) 
+	@$(CC) $^ $(LIBS) $(DEBUGGING) -o $(NAME)
 	@echo $(Green) Complete ✅ $(Color_Off)
 	@echo -----------------------
 
