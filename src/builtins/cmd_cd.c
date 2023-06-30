@@ -36,7 +36,9 @@ void	cmd_cd(t_infos *infos, char *input)
 	{
 		printf("minishell: cd: %s : %s\n", str, strerror(errno));
 		g_glo.error = 1;
+		free(str);
 		return ;
 	}
+	free(str);
 	update_old_and_pwd(infos);
 }
