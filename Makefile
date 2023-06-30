@@ -112,4 +112,7 @@ fclean:
 
 re: fclean all
 
+mem:
+	memdetect $(SRC) $(LIBS) $(HEADER)
+
 .PHONY: clean all fclean re libmlx
