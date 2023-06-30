@@ -7,11 +7,11 @@ char *env_str(t_node *current)
 	str = ft_strdup(current->name);
 	if (!str)
 		return (NULL);
-	str = ft_strjoin(str, "=");
+	str = ft_strjoin_free(str, "=");
 	if (!str)
 		return (NULL);
 	if (current->data)
-		str = ft_strjoin(str, current->data);
+		str = ft_strjoin_free(str, current->data);
 	return (str);
 }
 
@@ -32,7 +32,6 @@ char	**get_envp(t_infos *infos)
 	{
 		temp = env_str(current);
 		envp[i] = temp;
-		free(temp);
 		current = current->next;
 		++i;
 	}

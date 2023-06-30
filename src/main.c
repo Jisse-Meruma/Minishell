@@ -29,9 +29,9 @@ void	execute_img(t_infos *infos)
 	waitpid(infos->pid, NULL, 0);
 }
 
-// void	f() {
-// 	system("leaks -q minishell");
-// }
+void	f() {
+	system("leaks -q minishell");
+}
 
 t_glo g_glo;
 
@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
+	atexit(f);
 	g_glo.error = 0;
 	if (init(&infos, envp))
 		ret_error("Error init\n", 2, 1);
