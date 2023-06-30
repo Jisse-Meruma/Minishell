@@ -62,5 +62,6 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	if (!line)
 		ft_printf("exit\n");
+	free_infos(&infos);
 	return (0);
 }

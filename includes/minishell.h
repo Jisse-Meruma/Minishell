@@ -146,5 +146,6 @@ void	free_cmd_struct(t_command *commands);
 int		redirect_is_out(t_command *commands);
 void	print_error(char *str, char *error);
 void	ex_print_error(char *str, char *error, int exitnb);
+void	free_infos(t_infos *infos);
 
 #endif

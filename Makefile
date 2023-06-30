@@ -54,6 +54,7 @@ SRC 	:=	main.c			\
 			utils/ft_isnumber.c			\
 			utils/ft_2d_print.c			\
 			utils/ft_our_lst_size.c		\
+			utils/free_struc.c			\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
