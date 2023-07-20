@@ -42,7 +42,7 @@ t_node	*create_node(char *str)
 	return (new_node);
 }
 
-int	insert_node(t_node **head, char *str)
+int insert_node(t_node **head, char *str)
 {
 	t_node	*new_node;
 	t_node	*current;

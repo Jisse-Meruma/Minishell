@@ -13,5 +13,6 @@ void	free_infos(t_infos *infos)
 		node = node->next;
 		free(previous->name);
 		free(previous->data);
+		free(previous);
 	}
 }
