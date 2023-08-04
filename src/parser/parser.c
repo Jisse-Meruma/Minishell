@@ -80,9 +80,15 @@ t_command	*parser(char *line, t_infos *infos)
 	remove_quotes(&lexer);
 	command = ft_calloc(1, sizeof(t_command));
 	if (!command)
+	{
+		g_glo.error = 1;
 		return (lexer_free(&lexer), NULL);
+	}
 	if (parse_struct_command(&lexer, command))
+	{
+		g_glo.error = 2;
 		return (lexer_free(&lexer), NULL);
+	}
 	lexer_free(&lexer);
 	return (command);
 }

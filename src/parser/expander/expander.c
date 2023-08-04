@@ -5,11 +5,15 @@ char	*env_strjoin(char *line, char *env_expand, char *begin, int total)
 	char	*new_line;
 	char	*end_of_line;
 
+	printf("%s-%s\n", begin, env_expand);
 	new_line = ft_strjoin_free(begin, env_expand);
+	printf("%s\n", new_line);
 	if (!new_line)
 		return (NULL);
 	end_of_line = ft_substr(line, total, ft_strlen(line) - total);
+	printf("%s\n", new_line);
 	new_line = ft_strjoin_free(new_line, end_of_line);
+	printf("%s\n", new_line);
 	free(end_of_line);
 	return (new_line);
 }
@@ -36,6 +40,7 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	if (env_expand)
 		*len = ft_strlen(env_expand);
 	free(env);
+	printf("%s\n", new_line);
 	return (new_line);
 }
 
@@ -58,7 +63,10 @@ char	*search_env_var(char *line, t_infos *infos)
 		{
 			line = env_creation(line, infos, index, &position);
 			if (!line)
+			{	
+				g_glo.error = 1;
 				return (NULL);
+			}
 			index += position - 1;
 		}
 		index++;

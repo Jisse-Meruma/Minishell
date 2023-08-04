@@ -13,6 +13,7 @@ void	not_valid_id(char *str, char *cmd)
 void	print_error(char *str, char *error)
 {
 	ft_putstr_fd("minishell: ", 2);
+	printf("%s\n",str);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(error, 2);

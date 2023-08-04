@@ -33,9 +33,10 @@ bool	ambiguous_redir(t_lexer	** lexer, t_lexer *node, char *str)
 		prev_node = prev_node->next;
 	if	(!is_redirect(prev_node->token))
 		return (false);
-	write(2, "minishell: ", 6);
+	write(2, "minishell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": ambiguous redirect\n", 21);
+	g_glo.error = 1;
 	return (true);
 
 }

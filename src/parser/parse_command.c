@@ -7,7 +7,6 @@ int	unexpected_token(t_lexer *node)
 	write(2, "syntax error near unexpected token `", 36);
 	write(2, node->argument, ft_strlen(node->argument));
 	write(2, "'\n", 2);
-	g_glo.error = 258;
 	return (ERROR);
 }
 
