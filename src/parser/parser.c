@@ -1,7 +1,5 @@
 #include "minishell.h"
 
-
-
 void	printing(t_command *command)
 {
 	int				i;
@@ -51,10 +49,7 @@ void	printing(t_command *command)
 		while (redirect)
 		{
 			if (redirect->token == HERE_DOC)
-			{
 				printf("%s, ", redirect->filename);
-				//here_doc(redirect->filename);
-			}
 			redirect = redirect->next;
 		}
 		printf("\n");

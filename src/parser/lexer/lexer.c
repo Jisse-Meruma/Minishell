@@ -32,7 +32,7 @@ int	quotes(char *line, int index, int len, int *check)
 }
 
 int	line_creation(t_lexer **lexer, char *line, int *index, int *len)
-{		
+{
 	int	check;
 
 	while (!ft_isspace(line[*index + *len]) && line[*index + *len])

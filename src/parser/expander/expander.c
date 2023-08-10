@@ -31,7 +31,7 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	i = env_name_lenght(line, index, *len);
 	env = ft_substr(line, index, i);
 	if (!env || !begin)
-		return (free(env),  NULL);
+		return (free(env), NULL);
 	if (!ft_strncmp(env, "?", 2))
 		env_expand = ft_itoa(g_glo.error);
 	else
@@ -44,13 +44,11 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	return (new_line);
 }
 
-char	*search_env_var(char *line, t_infos *infos)
+char	*search_env_var(char *line, t_infos *infos, int index)
 {
-	int		index;
 	bool	quotes;
 	int		position;
 
-	index = 0;
 	quotes = false;
 	while (line[index])
 	{
@@ -63,7 +61,7 @@ char	*search_env_var(char *line, t_infos *infos)
 		{
 			line = env_creation(line, infos, index, &position);
 			if (!line)
-			{	
+			{
 				g_glo.error = 1;
 				return (NULL);
 			}
@@ -104,10 +102,10 @@ bool	expanding(t_lexer **lexer, t_infos *infos)
 			continue ;
 		}
 		string_free = node->argument;
-		node->argument = search_env_var(node->argument, infos);
-		if(node->argument == NULL)
+		node->argument = search_env_var(node->argument, infos, 0);
+		if (node->argument == NULL)
 			return (ERROR);
-		if(ft_strlen(node->argument) == 0)
+		if (ft_strlen(node->argument) == 0)
 		{
 			if (ambiguous_redir(lexer, node, string_free))
 				return (ERROR);
