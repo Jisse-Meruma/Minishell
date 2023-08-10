@@ -103,7 +103,7 @@ int		double_meta(int index, char *line);
 
 // Remove/Expand the text_cmds
 bool	expanding(t_lexer **lexer, t_infos *infos);
-char	*search_env_var(char *line, t_infos *infos);
+char	*search_env_var(char *line, t_infos *infos, int index);
 bool	ambiguous_redir(t_lexer	**lexer, t_lexer *node, char *str);
 bool	find_env_var(char *line);
 bool	quote_status(bool quotes);

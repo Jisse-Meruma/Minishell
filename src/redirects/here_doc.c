@@ -21,7 +21,7 @@ int	here_doc(char *end_of_file, t_infos *infos)
 			break ;
 		}
 		if (!find_env_var(line))
-			line = search_env_var(line, infos);
+			line = search_env_var(line, infos, 0);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
