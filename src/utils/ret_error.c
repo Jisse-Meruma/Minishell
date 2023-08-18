@@ -18,3 +18,4 @@ void	exit_error(char *str, int fd)
 	ft_putstr_fd(str, fd);
 	exit(1);
 }
+

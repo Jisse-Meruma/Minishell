@@ -7,7 +7,7 @@ void	print_sh_err(int shlvlnb)
 	ft_putstr_fd(") too high, resetting to 1\n", 2);
 }
 
-void	add_one_shlvl(t_infos *infos, int shlvlnb)
+bool	add_one_shlvl(t_infos *infos, int shlvlnb)
 {
 	char *strshlvl;
 	char *export_str;
@@ -15,28 +15,29 @@ void	add_one_shlvl(t_infos *infos, int shlvlnb)
 	++shlvlnb;
 	strshlvl = ft_itoa(shlvlnb);
 	if (!strshlvl)
-		return (void_ret_error("Error in SHLVL\n", 2));
+		return (void_ret_error("Error in SHLVL\n", 2), false);
 	export_str = ft_strjoin("SHLVL=", strshlvl);
 	if (!export_str)
 	{
 		free(strshlvl);
-		return (void_ret_error("Error in SHLVL\n", 2));
+		return (void_ret_error("Error in SHLVL\n", 2), false);
 	}
 	exec_export(infos, export_str);
 	free(export_str);
 	free(strshlvl);
+	return (true);
 }
 
-void	updateshlvl(t_infos *infos)
+bool	updateshlvl(t_infos *infos)
 {
 	char *shlvl;
 	int shlvlnb;
 
 	shlvl = cmd_get_env_char(infos, "SHLVL");
 	if (!shlvl)
-		return (void_ret_error("Error in SHLVL\n", 2));
+		return (void_ret_error("Error in SHLVL\n", 2), false);
 	if (!ft_isnumber(shlvl))
-		return (exec_export(infos, "SHLVL=1"));
+		return (exec_export(infos, "SHLVL=1"), false);
 	shlvlnb = ft_atoi(shlvl);
 	if (shlvlnb <= -1)
 		exec_export(infos, "SHLVL=0");
@@ -49,13 +50,22 @@ void	updateshlvl(t_infos *infos)
 		exec_export(infos, "SHLVL=1");
 	}
 	else
-		add_one_shlvl(infos, shlvlnb);
+	{
+		if (!add_one_shlvl(infos, shlvlnb))
+			return (false);
+	}
+	return (true);
 }
 
-void	add_shlvl(t_infos *infos)
+bool	add_shlvl(t_infos *infos)
 {
 	if (cmd_check_env_exist(infos, "SHLVL"))
-		updateshlvl(infos);
+	{
+		if (!updateshlvl(infos))
+			return (false);
+	}
 	else
 		exec_export(infos, "SHLVL=1");
+	
+	return (true);
 }

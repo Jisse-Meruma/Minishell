@@ -77,7 +77,6 @@ t_command	*parser(char *line, t_infos *infos);
  * @param line line to split.
  * @return 2d_array. if Return == NULL execute an ERROR
  */
-char	**ft_command_split(char *line);
 
 //----------------------------------//
 //			parser/quotes_split		//
@@ -138,7 +137,7 @@ void	ft_2d_print(char **str);
 int		ft_our_lst_size(t_node *lst);
 void	exec_built(t_infos *infos, t_command *cmd);
 void	if_builtins(t_command *cmd);
-void	add_shlvl(t_infos *infos);
+bool	add_shlvl(t_infos *infos);
 // Cleanup
 void	free_cmd_struct(t_command *commands);
 

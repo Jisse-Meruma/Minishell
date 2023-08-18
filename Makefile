@@ -113,6 +113,6 @@ fclean:
 re: fclean all
 
 mem:
-	memdetect $(SRC) $(LIBS) $(HEADER) -fail loop -fl -fsanitize=address
+	memdetect $(SRC) $(LIBS) $(HEADER) -fail loop 290 -fl -fsanitize=address
 
 .PHONY: clean all fclean re libmlx

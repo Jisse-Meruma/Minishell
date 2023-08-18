@@ -25,11 +25,14 @@ char	**ft_split_first(char *str, char c)
 	int		end;
 
 	end = get_end(str, c);
-	str2d = (char **)calloc(end + 1, sizeof(char *));
-	str2d[end] = NULL;
+	str2d = (char **)ft_calloc(end + 1, sizeof(char *));
+	if (!str2d)
+		return (NULL);
 	if (end == 1)
 	{
 		str2d[0] = ft_strdup(str);
+		if (!str2d[0])
+			return (free(str2d), NULL);
 		return (str2d);
 	}
 	i = 0;
@@ -38,6 +41,8 @@ char	**ft_split_first(char *str, char c)
 		if (str[i] == c)
 		{
 			str2d[0] = ft_substr(str, 0, i);
+			if (!str2d[0])
+				return (free(str2d), NULL);
 			++i;
 			break ;
 		}
@@ -47,6 +52,8 @@ char	**ft_split_first(char *str, char c)
 		++i;
 	if (ft_strlen(str) != i)
 		str2d[1] = ft_substr(str, i, (ft_strlen(str) - i));
+	if (!str2d[1])
+		return (ft_2dfree(str2d), NULL);
 	return (str2d);
 }
 
@@ -127,10 +134,13 @@ void	exec_export(t_infos *infos, char *str)
 		return (not_valid_id(str, "export"));
 	new_node = (t_node *) malloc(sizeof(t_node));
 	if (!new_node)
-		return (void_ret_error("Malloc fail", 2));
+		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2));
 	function = ft_split_first(str, '=');
 	if (!function)
-		return (free(new_node));
+	{
+		free(new_node);
+		return (ft_free_lst(infos->head), exit_error("Malloc fial", 2));
+	}
 	node_type(function, new_node, str);
 	if (cmd_check_env_exist(infos, function[0]))
 	{
