@@ -1,6 +1,12 @@
 #include "minishell.h"
 #include <fcntl.h>
 
+void	parent_closing(t_infos *infos, int write_fd)
+{
+	close(infos->read_fd);
+	close(write_fd);
+}
+
 void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
 	char	*path;
@@ -40,14 +46,16 @@ int	child_birth(t_command *cmd, t_infos *infos, int id)
 		if (cmd->order != LAST_CMD)
 		{
 			if (pipe(infos->pipes) == -1)
-				ret_error("Pipe Error", 2, 1);
+				return (ret_error("Pipe Error", 2, 1));
 		}
 		id = fork();
 		if (id == -1)
-			ret_error("Fork Error", 2, 1);
+			return (ret_error("Fork Error", 2, 1));
 		if (id != 0)
 		{
 			close(infos->pipes[1]);
+			if (infos->read_fd != -2)
+				close(infos->read_fd);
 			cmd = cmd->next;
 		}
 	}
@@ -77,8 +85,10 @@ void	fill_blt_cmdnb(t_command *cmd)
 	}
 }
 
-void	wait_exec(int id, int32_t status)
+void	wait_exec(int id)
 {
+	int32_t status;
+
 	waitpid(id, &status, 0);
 	if (WIFEXITED(status))
 		g_glo.error = WEXITSTATUS(status);
@@ -92,7 +102,6 @@ void	wait_exec(int id, int32_t status)
 void	start_exec(t_command *cmd, t_infos *infos)
 {
 	int		id;
-	int32_t	status;
 	int		origin;
 	int		dup_err;
 
@@ -113,5 +122,5 @@ void	start_exec(t_command *cmd, t_infos *infos)
 		return ;
 	}
 	id = child_birth(cmd, infos, id);
-	wait_exec(id, status);
+	wait_exec(id);
 }

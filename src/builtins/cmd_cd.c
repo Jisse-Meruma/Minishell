@@ -34,7 +34,9 @@ void	cmd_cd(t_infos *infos, char *input)
 		void_ret_error("Malloc Error", 2);
 	if (chdir(str) < 0)
 	{
-		printf("minishell: cd: %s : %s\n", str, strerror(errno));
+		write(2, "minishell: ", 11);
+		write(2, "cd: ", 4);
+		perror(str);
 		g_glo.error = 1;
 		free(str);
 		return ;

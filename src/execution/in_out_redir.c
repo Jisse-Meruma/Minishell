@@ -2,7 +2,7 @@
 #include <fcntl.h>
 
 // check if theres a next redirect of the same type later to only dup the last one
-int		next_redir(t_command *cmd, t_lst_redirects *redi, int type)
+int		next_redir(t_lst_redirects *redi, int type)
 {
 	t_lst_redirects *other;
 
@@ -38,7 +38,7 @@ void	read_redirect(t_command *commands, t_infos *infos)
 		read_fd = here_doc(redirect->filename, infos);
 	if (read_fd == -1)
 		ex_print_error(redirect->filename, strerror(errno), 1);
-	if (!next_redir(commands, redirect, 1))
+	if (!next_redir(redirect, 1))
 	{
 		if (dup2(read_fd, STDIN_FILENO) == -1)
 			ex_print_error(redirect->filename, strerror(errno), 1);
@@ -126,12 +126,12 @@ void	get_write_fd(t_command *commands, t_infos *infos)
 			ret_error("Error dup2", 2, 1);
 		return ;
 	}
-	if (commands->next == NULL)
-	{
-		if (dup2(STDOUT_FILENO, infos->pipes[1]) == -1)
-			ret_error("Error dup2", 2, 1);
-		return ;
-	}
+	// if (commands->next == NULL)
+	// {
+	// 	if (dup2(STDOUT_FILENO, infos->pipes[1]) == -1)
+	// 		ret_error("Error dup2", 2, 1);
+	// 	return ;
+	// }
 }
 
 void	dup_in_out(t_command *commands, t_infos *infos)
@@ -140,27 +140,25 @@ void	dup_in_out(t_command *commands, t_infos *infos)
 	get_write_fd(commands, infos);
 }
 
-
-
-
-
-
-
-
 void	write_no_redi(t_command *cmd, t_infos *infos)
 {
 	if (cmd->next != NULL)
 	{
 		if (dup2(infos->pipes[1], STDOUT_FILENO) == -1)
+		{
+			close(infos->read_fd);
 			ret_error("Error dup2", 2, 1);
+			return ;
+		}
+		close(infos->read_fd);
 		return ;
 	}
-	if (cmd->next == NULL)
-	{
-		if (dup2(STDOUT_FILENO, infos->pipes[1]) == -1)
-			ret_error("Error dup2", 2, 1);
-		return ;
-	}
+	// if (cmd->next == NULL)
+	// {
+	// 	if (dup2(STDOUT_FILENO, infos->pipes[1]) == -1)
+	// 		ret_error("Error dup2", 2, 1);
+	// 	return ;
+	// }
 }
 
 void	read_no_redi(t_command *cmd, t_infos *infos)
@@ -168,12 +166,17 @@ void	read_no_redi(t_command *cmd, t_infos *infos)
 	if (cmd->order > 1)
 	{
 		if (dup2(infos->read_fd, STDIN_FILENO) == -1)
+		{
+			close(infos->read_fd);
 			ret_error("Error dup2", 2, 1);
+			return ;
+		}
+		close(infos->read_fd);
 		return ;
 	}
 }
 
-int	exec_in(t_command *cmd, t_infos *infos, t_lst_redirects *redi)
+int	exec_in(t_infos *infos, t_lst_redirects *redi)
 {
 	int	read_fd;
 
@@ -186,24 +189,22 @@ int	exec_in(t_command *cmd, t_infos *infos, t_lst_redirects *redi)
 		print_error(redi->filename, strerror(errno));
 		return (-1);
 	}
-	if (!next_redir(cmd, redi, 1))
+	if (!next_redir(redi, 1))
 	{
 		if (dup2(read_fd, STDIN_FILENO) == -1)
 		{
 			print_error(redi->filename, strerror(errno));
-			return (-1);
+			return (close(read_fd), -1);
 		}
 	}
 	close(read_fd);
 	return (1);
 }
 
-int	exec_out(t_command *cmd, t_infos *infos, t_lst_redirects *redi)
+int	exec_out(t_infos *infos, t_lst_redirects *redi)
 {
-	int	write_fd;
-
 	if (redi->token == STDOUT_FILE)
-		infos->write_fd = open(redi->filename, O_WRONLY | O_CREAT, 0000644);
+		infos->write_fd = open(redi->filename, O_WRONLY | O_CREAT | O_TRUNC, 0000644);
 	else
 		infos->write_fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
 	if (infos->write_fd == -1)
@@ -211,14 +212,15 @@ int	exec_out(t_command *cmd, t_infos *infos, t_lst_redirects *redi)
 		print_error(redi->filename, strerror(errno));
 		return (-1);
 	}
-	if (!next_redir(cmd, redi, 0))
+	if (!next_redir(redi, 0))
 	{
 		if (dup2(infos->write_fd, STDOUT_FILENO) == -1)
 		{
 			print_error(redi->filename, strerror(errno));
-			return (-1);
+			return (close(infos->write_fd), -1);
 		}
 	}
+	close(infos->write_fd);
 	return (1);
 }
 
@@ -234,9 +236,9 @@ int	dup_all(t_command *cmd, t_infos *infos, int orexit)
 	while (redi)
 	{
 		if (redi->token == STDINN_FILE || redi->token == HERE_DOC)
-			in = exec_in(cmd, infos, redi);
+			in = exec_in(infos, redi);
 		else
-			out = exec_out(cmd, infos, redi);
+			out = exec_out(infos, redi);
 		redi = redi->next;
 	}
 	if (!in)

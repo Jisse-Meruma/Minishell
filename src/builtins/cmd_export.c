@@ -51,9 +51,11 @@ char	**ft_split_first(char *str, char c)
 	if (str[i] && str[i] == c)
 		++i;
 	if (ft_strlen(str) != i)
+	{
 		str2d[1] = ft_substr(str, i, (ft_strlen(str) - i));
-	if (!str2d[1])
-		return (ft_2dfree(str2d), NULL);
+		if (!str2d[1])
+			return (ft_2dfree(str2d), NULL);
+	}
 	return (str2d);
 }
 
@@ -139,7 +141,7 @@ void	exec_export(t_infos *infos, char *str)
 	if (!function)
 	{
 		free(new_node);
-		return (ft_free_lst(infos->head), exit_error("Malloc fial", 2));
+		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2));
 	}
 	node_type(function, new_node, str);
 	if (cmd_check_env_exist(infos, function[0]))

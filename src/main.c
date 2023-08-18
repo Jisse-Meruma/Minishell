@@ -31,6 +31,8 @@ void	execute_img(t_infos *infos)
 
 t_glo g_glo;
 
+// "\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m"
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char		*line;
@@ -42,9 +44,9 @@ int	main(int argc, char *argv[], char *envp[])
 	g_glo.error = 0;
 	if (init(&infos, envp))
 		return (EXIT_FAILURE);
-	execute_img(&infos);
+	//execute_img(&infos);
 	mainsignal();
-	line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
+	line = readline("Celeste-shell$ ");
 	while (line)
 	{
 		add_history(line);
@@ -53,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 			start_exec(command, &infos);
 		free_cmd_struct(command);
 		free(line);
-		line = readline("\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m");
+		line = readline("Celeste-shell$ ");
 	}
 	if (!line)
 		ft_printf("exit\n");
