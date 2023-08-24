@@ -138,6 +138,7 @@ int		ft_our_lst_size(t_node *lst);
 void	exec_built(t_infos *infos, t_command *cmd);
 void	if_builtins(t_command *cmd);
 bool	add_shlvl(t_infos *infos);
+void	fill_blt_cmdnb(t_command *cmd);
 // Cleanup
 void	free_cmd_struct(t_command *commands);
 

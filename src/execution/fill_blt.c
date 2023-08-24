@@ -1,6 +1,8 @@
 #include "minishell.h"
 #include <fcntl.h>
 
+//just filling everything before the exec, good nothing to change
+
 void	exec_built(t_infos *infos, t_command *cmd)
 {
 	if (!cmd->cmd_argv[0])
@@ -41,4 +43,25 @@ void	if_builtins(t_command *cmd)
 		cmd->cmd_is_blt = BUILT;
 	else
 		cmd->cmd_is_blt = NOT_BUILT;
+}
+
+void	fill_blt_cmdnb(t_command *cmd)
+{
+	if_builtins(cmd);
+	if (cmd->next == NULL)
+	{
+		cmd->order = ONE_CMD;
+		return ;
+	}
+	cmd->order = FIRST_CMD;
+	cmd = cmd->next;
+	while (cmd)
+	{
+		if_builtins(cmd);
+		if (cmd->next == NULL)
+			cmd->order = LAST_CMD;
+		else
+			cmd->order = CMD;
+		cmd = cmd->next;
+	}
 }

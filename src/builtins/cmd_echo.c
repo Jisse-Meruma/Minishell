@@ -1,7 +1,4 @@
 #include "minishell.h"
-// #include <stdio.h>
-// #include <stdbool.h>
-// #include <unistd.h>
 
 int	is_endline(char *str, bool *n)
 {

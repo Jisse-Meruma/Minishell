@@ -1,8 +1,5 @@
 #include "minishell.h"
 
-// print the add var such as var=value as input
-//execution is export A=VALUE
-
 int	get_end(char *str, char c)
 {
 	int	i;

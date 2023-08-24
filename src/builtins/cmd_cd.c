@@ -1,5 +1,4 @@
 #include "minishell.h"
-#include <string.h>
 
 void	update_old_and_pwd(t_infos *infos)
 {
@@ -34,8 +33,7 @@ void	cmd_cd(t_infos *infos, char *input)
 		void_ret_error("Malloc Error", 2);
 	if (chdir(str) < 0)
 	{
-		write(2, "minishell: ", 11);
-		write(2, "cd: ", 4);
+		write(2, "minishell: cd: ", 15);
 		perror(str);
 		g_glo.error = 1;
 		free(str);

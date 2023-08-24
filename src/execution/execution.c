@@ -64,30 +64,9 @@ int	child_birth(t_command *cmd, t_infos *infos, int id)
 	return (id);
 }
 
-void	fill_blt_cmdnb(t_command *cmd)
-{
-	if_builtins(cmd);
-	if (cmd->next == NULL)
-	{
-		cmd->order = ONE_CMD;
-		return ;
-	}
-	cmd->order = FIRST_CMD;
-	cmd = cmd->next;
-	while (cmd)
-	{
-		if_builtins(cmd);
-		if (cmd->next == NULL)
-			cmd->order = LAST_CMD;
-		else
-			cmd->order = CMD;
-		cmd = cmd->next;
-	}
-}
-
 void	wait_exec(int id)
 {
-	int32_t status;
+	int32_t	status;
 
 	waitpid(id, &status, 0);
 	if (WIFEXITED(status))

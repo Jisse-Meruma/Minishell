@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-char *env_str(t_node *current)
+char	*env_str(t_node *current)
 {
-	char *str;
+	char	*str;
 
 	str = ft_strdup(current->name);
 	if (!str)
@@ -15,7 +15,7 @@ char *env_str(t_node *current)
 	return (str);
 }
 
-//warning : ret_error returns an int
+//return the current linked list as a char **arr for exec, good
 char	**get_envp(t_infos *infos)
 {
 	t_node	*current;

@@ -3,9 +3,14 @@ NAME		:=	minishell
 
 DEBUGGING	?=
 
-LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/include -L/Users/$(USER)/.homebrew/opt/readline/lib
 
-HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include
+LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/include -L/Users/$(USER)/.homebrew/opt/readline/lib -I /opt/homebrew/opt/readline/include -L/opt/homebrew/opt/readline/lib
+
+HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include -I /opt/homebrew/opt/readline/include
+
+# LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/include -L/Users/$(USER)/.homebrew/opt/readline/lib
+
+# HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include
 
 HEADERS		:=	libft/libft.h includes/minishell.h includes/struct.h
 OBJ_DIR		:=	./obj
