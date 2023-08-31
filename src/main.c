@@ -44,7 +44,6 @@ int	main(int argc, char *argv[], char *envp[])
 	g_glo.error = 0;
 	if (init(&infos, envp))
 		return (EXIT_FAILURE);
-	//execute_img(&infos);
 	mainsignal();
 	line = readline("Celeste-shell$ ");
 	while (line)

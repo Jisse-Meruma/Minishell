@@ -8,7 +8,7 @@ char	*env_strjoin(char *line, char *env_expand, char *begin, int total)
 	new_line = ft_strjoin_free(begin, env_expand);
 	if (!new_line)
 		return (NULL);
-	end_of_line = ft_substr(line, total, ft_strlen(line) - total);	
+	end_of_line = ft_substr(line, total, ft_strlen(line) - total);
 	new_line = ft_strjoin_free(new_line, end_of_line);
 	free(end_of_line);
 	return (new_line);

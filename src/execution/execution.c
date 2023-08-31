@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   execution.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:21:49 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <fcntl.h>
 
@@ -73,8 +85,6 @@ void	wait_exec(int id)
 		g_glo.error = WEXITSTATUS(status);
 	while (wait(NULL) != -1)
 		;
-	dup2(0, STDIN_FILENO);
-	dup2(1, STDOUT_FILENO);
 	return ;
 }
 

@@ -1,33 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:20:54 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <errno.h>
-#include "libft.h"
-#include "struct.h"
-#include <stdbool.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <errno.h>
+# include "libft.h"
+# include "struct.h"
+# include <stdbool.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-#define ERROR 1
-#define SUCCES 0
+# define ERROR 1
+# define SUCCES 0
 
-
-//----------------------------------//
-//			Path_creation			//
-//----------------------------------//
-/**
- * @brief This function checks if the command given is a command that exist.
- *
- * @param command command to check.
- * @return path of the given command. if path does not exist return NULL
- */
 char	*path_creation(t_infos *infos, char *command);
 int		init(t_infos *infos, char **envp);
 
@@ -57,36 +58,8 @@ int		ret_error(char *str, int fd, int ret);
 void	void_ret_error(char *str, int fd);
 void	exit_error(char *str, int fd);
 
-//----------------------------------//
-//			parser/parser			//
-//----------------------------------//
-/**
- * @brief This function transforms the input into a parsed linked_list.
- *
- * @param line line to check.
- * @return Linked_list. if Return == NULL execute an ERROR
- */
 t_command	*parser(char *line, t_infos *infos);
 
-//----------------------------------//
-//			parser/quotes_split		//
-//----------------------------------//
-/**
- * @brief This function splits as strings the input into a splitted 2d_array.
- *
- * @param line line to split.
- * @return 2d_array. if Return == NULL execute an ERROR
- */
-
-//----------------------------------//
-//			parser/quotes_split		//
-//----------------------------------//
-/**
- * @brief This function removes the quotes from a 2d_array. Unclosed quotes will just be printed as characters.
- * no need to free the input after use it is done in the fucntion.
- * @param argv 2d_array to remove quotes from.
- * @return new_2d_array with removed quotes . if Return == NULL execute an ERROR
- */
 int	remove_quotes(t_lexer **lexer);
 
 // LEXER
