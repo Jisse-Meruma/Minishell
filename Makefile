@@ -34,6 +34,7 @@ SRC 	:=	main.c			\
 			builtins/cmd_cd.c 		\
 			builtins/cmd_unset.c	\
 			builtins/cmd_export.c	\
+			builtins/cmd_export_d.c	\
 			builtins/cmd_get_env.c 	\
 			builtins/cmd_exit.c 	\
 			builtins/cmd_echo.c		\
@@ -60,6 +61,7 @@ SRC 	:=	main.c			\
 			utils/ft_2d_print.c			\
 			utils/ft_our_lst_size.c		\
 			utils/free_struc.c			\
+			utils/ft_split_first.c		\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

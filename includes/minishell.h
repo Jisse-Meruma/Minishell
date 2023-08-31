@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:20:54 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/08/31 13:56:18 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	exec_export(t_infos *infos, char *str);
 void	cmd_export(t_infos *infos, t_command *cmd);
 void	cmd_echo(t_command *cmd);
 void	cmd_exit(t_infos *infos, char **args);
-void	ft_free_lst(t_node* head);
+void	ft_free_lst(t_node *head);
 void	not_valid_id(char *str, char *cmd);
 
 void	mainsignal(void);
@@ -60,7 +60,7 @@ void	exit_error(char *str, int fd);
 
 t_command	*parser(char *line, t_infos *infos);
 
-int	remove_quotes(t_lexer **lexer);
+int		remove_quotes(t_lexer **lexer);
 
 // LEXER
 int		lexer_node(t_lexer **lst, char *line, int start, int len);
@@ -83,7 +83,7 @@ int		skip_single_quote(char *line, int index);
 int		env_name_lenght(char *line, int index, int i);
 
 // parse list util
-void	parse_lstadd_back(t_lst_redirects **lst,  t_lst_redirects *new);
+void	parse_lstadd_back(t_lst_redirects **lst, t_lst_redirects *new);
 
 // main parse function
 int		parse_struct_command(t_lexer **lexer, t_command *command);
@@ -112,6 +112,8 @@ void	exec_built(t_infos *infos, t_command *cmd);
 void	if_builtins(t_command *cmd);
 bool	add_shlvl(t_infos *infos);
 void	fill_blt_cmdnb(t_command *cmd);
+void	show_declare(t_infos *infos, int fd);
+
 // Cleanup
 void	free_cmd_struct(t_command *commands);
 
@@ -120,5 +122,6 @@ int		redirect_is_out(t_command *commands);
 void	print_error(char *str, char *error);
 void	ex_print_error(char *str, char *error, int exitnb);
 void	free_infos(t_infos *infos);
+char	**ft_split_first(char *str, char c);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   cmd_get_env.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:45:07 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:45:08 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //find the env with the same name and update the datas

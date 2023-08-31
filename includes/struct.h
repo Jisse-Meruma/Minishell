@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   struct.h                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 14:02:41 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 14:13:01 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCT_H
 # define STRUCT_H
 
 # include <signal.h>
+
+
 typedef enum s_token
 {
 	PIPE,
@@ -14,7 +28,7 @@ typedef enum s_token
 
 typedef struct s_lexer
 {
-	char 			*argument;
+	char			*argument;
 	t_token			token;
 	struct s_lexer	*next;
 }	t_lexer;
@@ -74,16 +88,16 @@ typedef struct s_glo
 	int error;
 } t_glo;
 
-extern t_glo g_glo;
+extern t_glo	g_glo;
 
 typedef struct s_infos
 {
-	int					read_fd;
-	int					write_fd;
-	int 				pipes[2];
-	pid_t               pid;
-	char                *pwd;
-	t_node              *head;
+	int		read_fd;
+	int		write_fd;
+	int 	pipes[2];
+	pid_t	pid;
+	char	*pwd;
+	t_node	*head;
 }	t_infos;
 
 #endif

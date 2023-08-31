@@ -1,82 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   cmd_export.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:45:09 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:53:01 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-int	get_end(char *str, char c)
-{
-	int	i;
-	int	end;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		++i;
-	if (i != ft_strlen(str))
-		end = 2;
-	else
-		end = 1;
-	return (end);
-}
-
-char	**ft_split_first(char *str, char c)
-{
-	int		i;
-	char	**str2d;
-	int		end;
-
-	end = get_end(str, c);
-	str2d = (char **)ft_calloc(end + 1, sizeof(char *));
-	if (!str2d)
-		return (NULL);
-	if (end == 1)
-	{
-		str2d[0] = ft_strdup(str);
-		if (!str2d[0])
-			return (free(str2d), NULL);
-		return (str2d);
-	}
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-		{
-			str2d[0] = ft_substr(str, 0, i);
-			if (!str2d[0])
-				return (free(str2d), NULL);
-			++i;
-			break ;
-		}
-		++i;
-	}
-	if (str[i] && str[i] == c)
-		++i;
-	if (ft_strlen(str) != i)
-	{
-		str2d[1] = ft_substr(str, i, (ft_strlen(str) - i));
-		if (!str2d[1])
-			return (ft_2dfree(str2d), NULL);
-	}
-	return (str2d);
-}
-
-void	show_declare(t_infos *infos, int fd)
-{
-	t_node	*current;
-
-	current = infos->head;
-	while (current != NULL)
-	{
-		ft_putstr_fd("declare -x ", fd);
-		ft_putstr_fd(current->name, fd);
-		if (current->type != EMPTY)
-		{
-			ft_putstr_fd("=", fd);
-			ft_putstr_fd("\"", fd);
-			if (current->type == FULL)
-				ft_putstr_fd(current->data, fd);
-			ft_putstr_fd("\"", fd);
-		}
-		write(fd, "\n", 1);
-		current = current->next;
-	}
-}
 
 void	node_type(char **function, t_node *new_node, char *str)
 {
@@ -88,7 +22,8 @@ void	node_type(char **function, t_node *new_node, char *str)
 		new_node->type = FULL;
 }
 
-void	create_node_export(t_node *new, char **function, t_infos *infos, t_node *current)
+void	create_node_export(t_node *new, char **function, \
+t_infos *infos, t_node *current)
 {
 	new->name = function[0];
 	if ((ft_2d_arrlen(function) > 1))
@@ -155,7 +90,7 @@ void	exec_export(t_infos *infos, char *str)
 
 void	cmd_export(t_infos *infos, t_command *cmd)
 {
-	int arg;
+	int	arg;
 
 	arg = 1;
 	g_glo.error = 0;

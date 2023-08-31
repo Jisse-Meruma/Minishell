@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   cmd_exit.c                                         :+:    :+:            */
+/*   cmd_export_d.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:45:12 by mbernede      ########   odam.nl         */
+/*   Created: 2023/08/31 13:52:50 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:52:55 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_exit(t_infos *infos, char **args)
+void	show_declare(t_infos *infos, int fd)
 {
-	if (ft_2d_arrlen(args) == 1)
+	t_node	*current;
+
+	current = infos->head;
+	while (current != NULL)
 	{
-		free(infos->pwd);
-		ft_free_lst(infos->head);
-		g_glo.error = 0;
-		exit(0);
-	}
-	else if (ft_2d_arrlen(args) == 2)
-	{
-		if (!ft_isnumber(args[1]))
-			ft_putstr_fd("minishell: exit: numeric argument required\n", 1);
-		free(infos->pwd);
-		ft_free_lst(infos->head);
-		exit(ft_atoi(args[1]));
-		g_glo.error = 0;
-	}
-	else
-	{
-		g_glo.error = 1;
-		perror("Error");
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(current->name, fd);
+		if (current->type != EMPTY)
+		{
+			ft_putstr_fd("=", fd);
+			ft_putstr_fd("\"", fd);
+			if (current->type == FULL)
+				ft_putstr_fd(current->data, fd);
+			ft_putstr_fd("\"", fd);
+		}
+		write(fd, "\n", 1);
+		current = current->next;
 	}
 }

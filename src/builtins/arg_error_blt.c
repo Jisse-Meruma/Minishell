@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   arg_error_blt.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:45:20 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:48:22 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	not_valid_id(char *str, char *cmd)
@@ -13,7 +25,7 @@ void	not_valid_id(char *str, char *cmd)
 void	print_error(char *str, char *error)
 {
 	ft_putstr_fd("minishell: ", 2);
-	printf("%s\n",str);
+	printf("%s\n", str);
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(error, 2);

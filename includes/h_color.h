@@ -3,15 +3,15 @@
 /*                                                        ::::::::            */
 /*   h_color.h                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: ohengelm <ohengelm@student.42.fr>            +#+                     */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/04/16 18:14:34 by ohengelm      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:16:56 by mbernede      ########   odam.nl         */
+/*   Created: 2023/08/31 13:56:54 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/08/31 13:57:11 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef H_COLORS_H
-# define H_COLORS_H
+#ifndef H_COLOR_H
+# define H_COLOR_H
 /* ====================================||==================================== *\
 ||																			  ||
 ||							   Colors and Styles							  ||
