@@ -52,6 +52,7 @@ SRC 	:=	main.c			\
 			redirects/open.c			\
 			redirects/here_doc_utils.c	\
 			execution/execution.c 		\
+			execution/execution_cmd.c	\
 			execution/get_envp.c		\
 			execution/in_out_redir.c	\
 			execution/fill_blt.c		\
