@@ -1,37 +1,33 @@
 #include "minishell.h"
-#include <sys/time.h>
-#include <sys/wait.h>
-#define CHILD 0
+// #include <sys/time.h>
+// #include <sys/wait.h>
+t_glo	g_glo;
 
-void	execute_img(t_infos *infos)
-{
-	char	*path;
+// void	execute_img(t_infos *infos)
+// {
+// 	char	*path;
 
-	infos->pid = fork();
-	if (infos->pid == -1)
-	{
-		printf("fork Error\n");
-		return ;
-	}
-	if (infos->pid == CHILD)
-	{
-		path = ft_strdup("./imgcat");
-		if (path)
-		{
-			char	*args[] = {"imgcat", "download.png", NULL};
-			execve(path, args, NULL);
-			printf("execve error\n");
-		}
-		else
-			printf("ft_strdup error\n");
-		return ;
-	}
-	waitpid(infos->pid, NULL, 0);
-}
-
-t_glo g_glo;
-
-// "\x1b[1m\x1b[38;2;0;255;255mCeleste-shell$ \x1b[0m"
+// 	infos->pid = fork();
+// 	if (infos->pid == -1)
+// 	{
+// 		printf("fork Error\n");
+// 		return ;
+// 	}
+// 	if (infos->pid == CHILD)
+// 	{
+// 		path = ft_strdup("./imgcat");
+// 		if (path)
+// 		{
+// 			char	*args[] = {"imgcat", "download.png", NULL};
+// 			execve(path, args, NULL);
+// 			printf("execve error\n");
+// 		}
+// 		else
+// 			printf("ft_strdup error\n");
+// 		return ;
+// 	}
+// 	waitpid(infos->pid, NULL, 0);
+// }
 
 int	main(int argc, char *argv[], char *envp[])
 {

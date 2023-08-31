@@ -1,7 +1,7 @@
 #include "minishell.h"
 #define FOUND 0
 
-static char *path_command_join(char **bin_dir, char *command, int index)
+static char	*path_command_join(char **bin_dir, char *command, int index)
 {
 	char	*path_command;
 
