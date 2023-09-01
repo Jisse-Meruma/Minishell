@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:47:17 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:22:45 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cmd_cd(t_infos *infos, char *input)
 	{
 		if (!cmd_check_env_exist(infos, "HOME"))
 			return (void_ret_error("minishell: cd: HOME not set\n", 2));
-		str = ft_strdup("/");
+		str = cmd_get_env_char(infos, "HOME");
 	}
 	else
 		str = ft_strdup(input);

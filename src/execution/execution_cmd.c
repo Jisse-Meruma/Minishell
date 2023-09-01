@@ -11,17 +11,17 @@ bool	exec_heredoc(char *end_of_file, t_infos *infos, int *fd)
 
 bool	start_heredoc(t_command *command, t_infos *infos, int *fd)
 {
-	int file_disciptor;
+	int				file_disciptor;
 	t_lst_redirects	*redirect;
 
-	file_disciptor == -2;
+	file_disciptor = -2;
 	redirect = command->lst_redirects;
 	while (redirect)
 	{
 		if (redirect->token != HERE_DOC)
 		{
 			redirect = redirect->next;
-			continue;
+			continue ;
 		}
 		if (file_disciptor != -2)
 			close(file_disciptor);
@@ -35,7 +35,7 @@ bool	start_heredoc(t_command *command, t_infos *infos, int *fd)
 
 bool	start_read(t_command *command, t_infos *infos, int *fd)
 {
-	int file_disciptor;
+	int				file_disciptor;
 	t_lst_redirects	*redirect;
 
 	file_disciptor = -2;
@@ -45,7 +45,7 @@ bool	start_read(t_command *command, t_infos *infos, int *fd)
 		if (redirect->token != STDINN_FILE)
 		{
 			redirect = redirect->next;
-			continue;
+			continue ;
 		}
 		if (file_disciptor != -2)
 			close(file_disciptor);
@@ -62,7 +62,7 @@ bool	start_read(t_command *command, t_infos *infos, int *fd)
 
 bool	start_write(t_command *command, t_infos *infos, int *fd)
 {
-	int file_disciptor;
+	int				file_disciptor;
 	t_lst_redirects	*redirect;
 
 	file_disciptor = -2;
@@ -72,7 +72,7 @@ bool	start_write(t_command *command, t_infos *infos, int *fd)
 		if (redirect->token != APPEND_FILE && redirect->token != STDOUT_FILE)
 		{
 			redirect = redirect->next;
-			continue;
+			continue ;
 		}
 		if (file_disciptor != -2)
 			close(file_disciptor);
@@ -90,19 +90,17 @@ bool	start_write(t_command *command, t_infos *infos, int *fd)
 	return (true);
 }
 
+//return true just for the makefile
 bool dup_redirects(t_command *command, t_infos *infos)
 {
 	int				fd;
 	t_lst_redirects	*redirect;
-	
+
 	if (!start_heredoc(command, infos, &infos->read_fd))
 		return (false);
 	if (!start_read(command, infos, &infos->read_fd))
 		return (false);
 	if (!start_write(command, infos, &infos->write_fd))
 
-	
-	
-
-
+	return (true);
 }
