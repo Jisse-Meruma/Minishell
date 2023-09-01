@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:07 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:45:08 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/01 15:27:30 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	cmd_check_env_exist(t_infos *infos, char *env)
 	current = infos->head;
 	while (current != NULL)
 	{
-		if (!ft_strncmp(env, current->name, ft_strlen(env)))
+		if (!ft_strncmp(env, current->name, (ft_strlen(env) + 1)))
 			return (1);
 		current = current->next;
 	}
