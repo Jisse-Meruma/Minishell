@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   execution.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:21:49 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/02 18:04:06 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 
 	if (cmd->order == LAST_CMD || cmd->order == ONE_CMD)
 		close(infos->pipes[1]);
-	dup_all(cmd, infos, 1);
+	if (!dup_redirects(cmd, infos))
+		exit(EXIT_FAILURE);
 	if (cmd->cmd_is_blt != NOT_BUILT)
 		exec_built(infos, cmd);
 	else
@@ -55,7 +56,7 @@ int	child_birth(t_command *cmd, t_infos *infos, int id)
 			infos->read_fd = -2;
 		else
 			infos->read_fd = infos->pipes[0];
-		if (cmd->order != LAST_CMD)
+		if (cmd->order != LAST_CMD && cmd->order != ONE_CMD)
 		{
 			if (pipe(infos->pipes) == -1)
 				return (ret_error("Pipe Error", 2, 1));
@@ -63,16 +64,14 @@ int	child_birth(t_command *cmd, t_infos *infos, int id)
 		id = fork();
 		if (id == -1)
 			return (ret_error("Fork Error", 2, 1));
-		if (id != 0)
-		{
+		if (id == 0)
+			exec_cmd_child(cmd, infos);
+		if (cmd->order != ONE_CMD && cmd->order != LAST_CMD)
 			close(infos->pipes[1]);
-			if (infos->read_fd != -2)
-				close(infos->read_fd);
-			cmd = cmd->next;
-		}
+		if (infos->read_fd != -2)
+			close(infos->read_fd);
+		cmd = cmd->next;
 	}
-	if (id == 0)
-		exec_cmd_child(cmd, infos);
 	return (id);
 }
 

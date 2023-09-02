@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 15:28:33 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:18:06 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/02 15:28:32 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			open_here_doc(char *end_of_file, char **path);
 void		start_exec(t_command *commands, t_infos *infos);
 void		dup_in_out(t_command *commands, t_infos *infos);
 int			dup_all(t_command *cmd, t_infos *infos, int orexit);
+bool		dup_redirects(t_command *command, t_infos *infos);
 char		**get_envp(t_infos *infos);
 int			ft_isnumber(char *str);
 void		ft_2d_print(char **str);
@@ -120,6 +121,7 @@ void		free_cmd_struct(t_command *commands);
 // Debug the write and read pipes remove afte
 int			redirect_is_out(t_command *commands);
 void		print_error(char *str, char *error);
+void		minishell_perror(char *str);
 void		ex_print_error(char *str, char *error, int exitnb);
 void		free_infos(t_infos *infos);
 char		**ft_split_first(char *str, char c);
