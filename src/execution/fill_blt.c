@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fill_blt.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:13:52 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/02 16:03:42 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   fill_blt.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:13:52 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/06 13:53:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_built(t_infos *infos, t_command *cmd)
 	if (!compare(cmd->cmd_argv[0], "pwd"))
 		cmd_pwd(infos);
 	else if (!compare(cmd->cmd_argv[0], "echo"))
-		cmd_echo(cmd);
+		cmd_echo(cmd, infos);
 	else if (!compare(cmd->cmd_argv[0], "env"))
 		cmd_env(infos);
 	else if (!compare(cmd->cmd_argv[0], "getenv"))

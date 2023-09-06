@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 15:20:57 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/02 16:32:21 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   init.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 15:20:57 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/06 13:54:44 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	init(t_infos *infos, char **envp)
 	cmd_get_env_pwd(infos, "PWD");
 	if (!add_shlvl(infos))
 		return (ft_free_lst(infos->head), 1);
-	g_glo.error = 0;
+	infos->error = 0;
 	return (0);
 }

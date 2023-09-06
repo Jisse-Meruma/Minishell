@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:09 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:53:01 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 14:11:31 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	exec_export(t_infos *infos, char *str)
 	char	**function;
 
 	if (!str[0])
-		return (not_valid_id(str, "export"));
+		return (not_valid_id(str, "export", infos));
 	new_node = (t_node *) malloc(sizeof(t_node));
 	if (!new_node)
-		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2));
+		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2, infos));
 	function = ft_split_first(str, '=');
 	if (!function)
 	{
 		free(new_node);
-		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2));
+		return (ft_free_lst(infos->head), exit_error("Malloc fail", 2, infos));
 	}
 	node_type(function, new_node, str);
 	if (cmd_check_env_exist(infos, function[0]))
@@ -93,7 +93,7 @@ void	cmd_export(t_infos *infos, t_command *cmd)
 	int	arg;
 
 	arg = 1;
-	g_glo.error = 0;
+	infos->error = 0;
 	if (!cmd->cmd_argv[arg])
 		return (show_declare(infos, 1));
 	while (cmd->cmd_argv[arg])

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:07 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:27:30 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 14:13:01 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	cmd_get_env_pwd(t_infos *infos, char *env)
 		{
 			infos->pwd = ft_strdup(current->data);
 			if (!infos->pwd)
-				void_ret_error("Malloc fail", 2);
+				void_ret_error("Malloc fail", 2, infos);
 			return ;
 		}
 		current = current->next;

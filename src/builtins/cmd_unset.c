@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:44:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/01 15:17:15 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 14:07:09 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exec_unset(t_infos *infos, char *arg)
 	if (!arg)
 		return ;
 	if (!arg[0])
-		return (not_valid_id(arg, "unset"));
+		return (not_valid_id(arg, "unset", infos));
 	//under new funciton
 	current = infos->head;
 	next = current->next;
@@ -61,7 +61,7 @@ void	cmd_unset(t_infos *infos, t_command *cmd)
 	int	arg;
 
 	arg = 1;
-	g_glo.error = 0;
+	infos->error = 0;
 	if (!cmd->cmd_argv[arg])
 		return ;
 	while (cmd->cmd_argv[arg])

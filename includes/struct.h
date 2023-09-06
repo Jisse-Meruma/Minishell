@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:02:41 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 15:26:45 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 13:46:15 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ extern t_glo				g_glo;
 
 typedef struct s_infos
 {
+	int						error;
 	int						read_fd;
 	int						write_fd;
 	int						pipes[2];

@@ -6,19 +6,20 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:45:12 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 13:51:02 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//check the frees of exit
 void	cmd_exit(t_infos *infos, char **args)
 {
 	if (ft_2d_arrlen(args) == 1)
 	{
 		free(infos->pwd);
 		ft_free_lst(infos->head);
-		g_glo.error = 0;
+		infos->error = 0;
 		exit(0);
 	}
 	else if (ft_2d_arrlen(args) == 2)
@@ -28,11 +29,10 @@ void	cmd_exit(t_infos *infos, char **args)
 		free(infos->pwd);
 		ft_free_lst(infos->head);
 		exit(ft_atoi(args[1]));
-		g_glo.error = 0;
 	}
 	else
 	{
-		g_glo.error = 1;
+		infos->error = 1;
 		perror("Error");
 	}
 }

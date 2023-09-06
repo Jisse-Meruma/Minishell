@@ -29,7 +29,7 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	if (!env || !begin)
 		return (free(env), NULL);
 	if (!ft_strncmp(env, "?", 2))
-		env_expand = ft_itoa(g_glo.error);
+		env_expand = ft_itoa(infos->error);
 	else
 		env_expand = cmd_get_env_char(infos, env);
 	new_line = env_strjoin(line, env_expand, begin, index + i);
@@ -57,7 +57,7 @@ char	*search_env_var(char *line, t_infos *infos, int index)
 			line = env_creation(line, infos, index, &position);
 			if (!line)
 			{
-				g_glo.error = 1;
+				infos->error = 1;
 				return (NULL);
 			}
 			index += position - 1;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:18:06 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/02 15:28:32 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/06 14:13:40 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ int			cmd_check_env_exist(t_infos *infos, char *env);
 void		cmd_unset(t_infos *infos, t_command *cmd);
 void		exec_export(t_infos *infos, char *str);
 void		cmd_export(t_infos *infos, t_command *cmd);
-void		cmd_echo(t_command *cmd);
+void		cmd_echo(t_command *cmd, t_infos *infos);
 void		cmd_exit(t_infos *infos, char **args);
 void		ft_free_lst(t_node *head);
-void		not_valid_id(char *str, char *cmd);
+void		not_valid_id(char *str, char *cmd, t_infos *infos);
 
 void		mainsignal(void);
 void		signal_cmd(t_infos *infos);
 int			list_env(char **env, t_infos *infos);
 
 int			ret_error(char *str, int fd, int ret);
-void		void_ret_error(char *str, int fd);
-void		exit_error(char *str, int fd);
+void		void_ret_error(char *str, int fd, t_infos *infos);
+void		exit_error(char *str, int fd, t_infos *infos);
 
 t_command	*parser(char *line, t_infos *infos);
 
@@ -120,7 +120,7 @@ void		free_cmd_struct(t_command *commands);
 
 // Debug the write and read pipes remove afte
 int			redirect_is_out(t_command *commands);
-void		print_error(char *str, char *error);
+void		print_error(char *str, char *error, t_infos *infos);
 void		minishell_perror(char *str);
 void		ex_print_error(char *str, char *error, int exitnb);
 void		free_infos(t_infos *infos);

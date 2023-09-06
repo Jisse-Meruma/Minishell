@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/02 18:04:06 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execution.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/06 15:17:49 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 		if (path)
 		{
 			execve(path, cmd->cmd_argv, get_envp(infos));
-			print_error(cmd->cmd_argv[0], strerror(errno));
+			print_error(cmd->cmd_argv[0], strerror(errno), infos);
 		}
 		if (errno == 13)
-			g_glo.error = 126;
+			infos->error = 126;
 		else
-			g_glo.error = 127;
+			infos->error = 127;
 	}
-	exit(g_glo.error);
+	exit(infos->error);
 }
 
 int	child_birth(t_command *cmd, t_infos *infos, int id)
@@ -75,13 +75,13 @@ int	child_birth(t_command *cmd, t_infos *infos, int id)
 	return (id);
 }
 
-void	wait_exec(int id)
+void	wait_exec(int id, t_infos *infos)
 {
 	int32_t	status;
 
 	waitpid(id, &status, 0);
 	if (WIFEXITED(status))
-		g_glo.error = WEXITSTATUS(status);
+		infos->error = WEXITSTATUS(status);
 	while (wait(NULL) != -1)
 		;
 	return ;
@@ -110,5 +110,5 @@ void	start_exec(t_command *cmd, t_infos *infos)
 		return ;
 	}
 	id = child_birth(cmd, infos, id);
-	wait_exec(id);
+	wait_exec(id, infos);
 }

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:14:02 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 14:05:49 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 14:09:27 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,14 +198,14 @@ int	exec_in(t_infos *infos, t_lst_redirects *redi)
 		read_fd = here_doc(redi->filename, infos);
 	if (read_fd == -1)
 	{
-		print_error(redi->filename, strerror(errno));
+		print_error(redi->filename, strerror(errno), infos);
 		return (-1);
 	}
 	if (!next_redir(redi, 1))
 	{
 		if (dup2(read_fd, STDIN_FILENO) == -1)
 		{
-			print_error(redi->filename, strerror(errno));
+			print_error(redi->filename, strerror(errno), infos);
 			return (close(read_fd), -1);
 		}
 	}
@@ -221,14 +221,14 @@ int	exec_out(t_infos *infos, t_lst_redirects *redi)
 		infos->write_fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
 	if (infos->write_fd == -1)
 	{
-		print_error(redi->filename, strerror(errno));
+		print_error(redi->filename, strerror(errno), infos);
 		return (-1);
 	}
 	if (!next_redir(redi, 0))
 	{
 		if (dup2(infos->write_fd, STDOUT_FILENO) == -1)
 		{
-			print_error(redi->filename, strerror(errno));
+			print_error(redi->filename, strerror(errno), infos);
 			return (close(infos->write_fd), -1);
 		}
 	}

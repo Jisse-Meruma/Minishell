@@ -37,7 +37,6 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	g_glo.error = 0;
 	if (init(&infos, envp))
 		return (EXIT_FAILURE);
 	mainsignal();
@@ -46,6 +45,8 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		add_history(line);
 		command = parser(line, &infos);
+		if (!command)
+			infos.error = 1;
 		if (command && command->cmd_argv)
 			start_exec(command, &infos);
 		free_cmd_struct(command);

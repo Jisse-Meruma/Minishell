@@ -74,10 +74,7 @@ int	ft_lexer(t_lexer **lexer, char *line)
 			return (SUCCES);
 		check = line_creation(lexer, line, &index, &len);
 		if (check == 0)
-		{
-			g_glo.error = 1;
 			return (ERROR);
-		}
 		if (line[index] && check == 1)
 		{
 			if (lexer_node(lexer, line, index, len))

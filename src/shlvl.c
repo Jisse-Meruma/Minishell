@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 15:18:22 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 15:18:23 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 14:13:31 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ bool	add_one_shlvl(t_infos *infos, int shlvlnb)
 	++shlvlnb;
 	strshlvl = ft_itoa(shlvlnb);
 	if (!strshlvl)
-		return (void_ret_error("Error in SHLVL\n", 2), false);
+		return (void_ret_error("Error in SHLVL\n", 2, infos), false);
 	export_str = ft_strjoin("SHLVL=", strshlvl);
 	if (!export_str)
 	{
 		free(strshlvl);
-		return (void_ret_error("Error in SHLVL\n", 2), false);
+		return (void_ret_error("Error in SHLVL\n", 2, infos), false);
 	}
 	exec_export(infos, export_str);
 	free(export_str);
@@ -47,7 +47,7 @@ bool	updateshlvl(t_infos *infos)
 
 	shlvl = cmd_get_env_char(infos, "SHLVL");
 	if (!shlvl)
-		return (void_ret_error("Error in SHLVL\n", 2), false);
+		return (void_ret_error("Error in SHLVL\n", 2, infos), false);
 	if (!ft_isnumber(shlvl))
 		return (exec_export(infos, "SHLVL=1"), false);
 	shlvlnb = ft_atoi(shlvl);
