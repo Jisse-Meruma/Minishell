@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:15 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 13:53:54 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/06 15:30:46 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	echoprint(char *str)
 	}
 }
 
-// echo is working now with str as argv skipping the first argument
 void	cmd_echo(t_command *cmd, t_infos *infos)
 {
 	bool	n;
