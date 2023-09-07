@@ -6,11 +6,11 @@
 int	g_pidchild;
 
 //not used
-void	f_sig(int sig)
-{
-	if (sig == SIGINT)
-		kill(g_pidchild, SIGKILL);
-}
+// void	f_sig(int sig)
+// {
+// 	if (sig == SIGINT)
+// 		kill(g_pidchild, SIGKILL);
+// }
 
 //when ./minishell inside itself multiple time, print the SIGINT for all minishell
 void	f_sigmain(int sig)
@@ -28,20 +28,20 @@ void	f_sigmain(int sig)
 }
 
 //not used
-void	signal_cmd(t_infos *infos)
-{
-	if (infos->pid)
-	{
-		g_pidchild = infos->pid;
-		signal(SIGINT, f_sig);
-		signal(SIGQUIT, f_sig);
-	}
-}
+// void	signal_cmd(t_infos *infos)
+// {
+// 	if (infos->pid)
+// 	{
+// 		g_pidchild = infos->pid;
+// 		signal(SIGINT, f_sig);
+// 		signal(SIGQUIT, f_sig);
+// 	}
+// }
 
 void	mainsignal(void)
 {
 	//not used
-	extern int	rl_catch_signals;
+	// extern int	rl_catch_signals;
 
 	signal(SIGINT, f_sigmain);
 	signal(SIGQUIT, f_sigmain);

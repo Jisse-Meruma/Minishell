@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:57 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:13:58 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/07 15:27:22 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*env_str(t_node *current)
 	return (str);
 }
 
-//return the current linked list as a char **arr for exec, good
 char	**get_envp(t_infos *infos)
 {
 	t_node	*current;

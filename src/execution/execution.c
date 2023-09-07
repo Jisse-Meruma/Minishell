@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 15:17:49 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/07 15:23:06 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,30 @@ void	wait_exec(int id, t_infos *infos)
 	return ;
 }
 
+void	one_blt(t_command *cmd, t_infos *infos)
+{
+	int	origin;
+
+	origin = dup(STDOUT_FILENO);
+	if (!dup_all(cmd, infos, 0))
+		exec_built(infos, cmd);
+	if (infos->write_fd)
+	{
+		close(infos->write_fd);
+		dup2(origin, STDOUT_FILENO);
+		close(origin);
+	}
+	return ;
+}
+
 void	start_exec(t_command *cmd, t_infos *infos)
 {
 	int		id;
-	int		origin;
-	int		dup_err;
 
 	id = 1;
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
-	{
-		origin = dup(STDOUT_FILENO);
-		dup_err = dup_all(cmd, infos, 0);
-		if (!dup_err)
-			exec_built(infos, cmd);
-		if (infos->write_fd)
-		{
-			close(infos->write_fd);
-			dup2(origin, STDOUT_FILENO);
-			close(origin);
-		}
-		return ;
-	}
+		return (one_blt(cmd, infos));
 	id = child_birth(cmd, infos, id);
 	wait_exec(id, infos);
 }
