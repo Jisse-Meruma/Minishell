@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/07 15:23:06 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/12 14:15:41 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ void	wait_exec(int id, t_infos *infos)
 		;
 	return ;
 }
+
+// void	one_blt(t_command *cmd, t_infos *infos)
+// {
+// 	if (!dup_all(cmd, infos, 0))
+// 		exec_built(infos, cmd);
+// 	if (infos->write_fd)
+// 	{
+// 		close(infos->write_fd);
+// 		dup2(STDOUT_FILENO, infos->write_fd);
+// 	}
+// 	return ;
+// }
 
 void	one_blt(t_command *cmd, t_infos *infos)
 {

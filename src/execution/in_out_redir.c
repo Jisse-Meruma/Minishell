@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:14:02 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:09:27 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/12 14:06:00 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 #include <fcntl.h>
 
 // check if theres a next redirect of the same type later to only dup the last one
-int		next_redir(t_lst_redirects *redi, int type)
+int		next_redir(t_lst_redirects *redi, int inorout)
 {
 	t_lst_redirects *other;
 
 	other = redi->next;
 	while (other)
 	{
-		if (type == 1)
-		{
-			if (other->token == STDINN_FILE && other->token == HERE_DOC)
-				return (1);
-		}
-		else
-		{
-			if (other->token == STDOUT_FILE && other->token == APPEND_FILE)
-				return (1);
-		}
+		if (inorout &&other->token == STDINN_FILE && other->token == HERE_DOC)
+			return (1);
+		if (!inorout && other->token == STDOUT_FILE && other->token == APPEND_FILE)
+			return (1);
 		other = other->next;
 	}
 	return (0);
@@ -197,10 +191,7 @@ int	exec_in(t_infos *infos, t_lst_redirects *redi)
 	else
 		read_fd = here_doc(redi->filename, infos);
 	if (read_fd == -1)
-	{
-		print_error(redi->filename, strerror(errno), infos);
-		return (-1);
-	}
+		return (print_error(redi->filename, strerror(errno), infos), -1);
 	if (!next_redir(redi, 1))
 	{
 		if (dup2(read_fd, STDIN_FILENO) == -1)
@@ -220,10 +211,7 @@ int	exec_out(t_infos *infos, t_lst_redirects *redi)
 	else
 		infos->write_fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
 	if (infos->write_fd == -1)
-	{
-		print_error(redi->filename, strerror(errno), infos);
-		return (-1);
-	}
+		return (print_error(redi->filename, strerror(errno), infos), -1);
 	if (!next_redir(redi, 0))
 	{
 		if (dup2(infos->write_fd, STDOUT_FILENO) == -1)

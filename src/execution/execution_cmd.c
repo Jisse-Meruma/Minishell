@@ -131,6 +131,7 @@ bool	start_write(t_command *command, t_infos *infos, int *check)
 			redirect = redirect->next;
 			continue ;
 		}
+		//next line is impossible why is there this line ?
 		if (file_disciptor != -2)
 			close(file_disciptor);
 		if (redirect->token == STDOUT_FILE)
