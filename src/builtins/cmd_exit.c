@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/20 12:45:09 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/20 16:26:26 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ void call_exit(t_infos *infos)
 	exit(255);
 }
 
+void exception_exit(t_infos *infos, char *str){
+	int ex_nb;
+	
+	ex_nb = -1;
+	if (!compare(str, "-9223372036854775807"))
+		ex_nb = 1;
+	else if (!compare(str, "-9223372036854775808"))
+		ex_nb = 0;
+	if (ex_nb != -1){
+		free(infos->pwd);
+		ft_free_lst(infos->head);
+		exit(ex_nb);
+	}
+}
 //check the frees of exit
 void	cmd_exit(t_infos *infos, char **args)
 {
@@ -32,7 +46,8 @@ void	cmd_exit(t_infos *infos, char **args)
 	}
 	else if (ft_2d_arrlen(args) == 2)
 	{
-		if (!ft_isnumber(args[1]))
+		exception_exit(infos, args[1]);
+		if (!ft_isnumber64(args[1]))
 			return (call_exit(infos));
 		free(infos->pwd);
 		ft_free_lst(infos->head);

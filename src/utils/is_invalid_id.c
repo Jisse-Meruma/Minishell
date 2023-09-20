@@ -1,5 +1,43 @@
 #include "minishell.h"
 
+int ft_atoi64_overflow(const char *str, int64_t *numb)
+{
+    int i;
+    int sign;
+
+    i = 0;
+    sign = 1;
+    *numb = 0;
+    if (!str)
+        return 1;
+    while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
+           || str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+        i++;
+    if (str[i] == '-') 
+    {
+        sign = -1;
+        i++;
+    } 
+    else if (str[i] == '+')
+        i++;
+    while (str[i] >= '0' && str[i] <= '9') 
+    {
+        int digit = str[i] - '0';
+        if (*numb > INT64_MAX / 10 || (*numb == INT64_MAX / 10 && digit > INT64_MAX % 10))
+        {
+            if (sign == 1) 
+                *numb = INT64_MAX;
+            else
+                *numb = INT64_MIN;
+            return 1;
+        }
+        *numb = *numb * 10 + digit;
+        i++;
+    }
+    *numb *= sign;
+    return (0);
+}
+
 int check_valid_id(char *str){
     int i;
 
