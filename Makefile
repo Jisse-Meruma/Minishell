@@ -63,6 +63,7 @@ SRC 	:=	main.c			\
 			utils/ft_our_lst_size.c		\
 			utils/free_struc.c			\
 			utils/ft_split_first.c		\
+			utils/is_invalid_id.c		\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))

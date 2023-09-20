@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:13:40 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/20 12:13:20 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,6 @@ void		minishell_perror(char *str);
 void		ex_print_error(char *str, char *error, int exitnb);
 void		free_infos(t_infos *infos);
 char		**ft_split_first(char *str, char c);
+int			check_valid_id(char *str);
 
 #endif

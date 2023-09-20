@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:09 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:11:31 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/20 12:13:07 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	exec_export(t_infos *infos, char *str)
 	t_node	*new_node;
 	char	**function;
 
-	if (!str[0])
+	if (!check_valid_id(str))
 		return (not_valid_id(str, "export", infos));
 	new_node = (t_node *) malloc(sizeof(t_node));
 	if (!new_node)
