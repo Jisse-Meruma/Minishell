@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_command.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/21 11:55:07 by jmeruma           #+#    #+#             */
+/*   Updated: 2023/09/21 11:55:08 by jmeruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+void	ft_free_lst(t_node *head)
+{
+	t_node	*next;
+	t_node	*current;
+
+	current = head;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current->name);
+		free(current->data);
+		free(current);
+		current = next;
+	}
+}
 
 int	unexpected_token(t_lexer *node)
 {

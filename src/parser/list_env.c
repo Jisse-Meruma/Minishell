@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_env.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/21 11:55:14 by jmeruma           #+#    #+#             */
+/*   Updated: 2023/09/21 11:55:15 by jmeruma          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -7,22 +19,6 @@ void	ft_free_node(t_node *node)
 	free(node->name);
 	free(node->data);
 	free(node);
-}
-
-void	ft_free_lst(t_node *head)
-{
-	t_node	*next;
-	t_node	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		next = current->next;
-		free(current->name);
-		free(current->data);
-		free(current);
-		current = next;
-	}
 }
 
 t_node	*create_node(char *str)
