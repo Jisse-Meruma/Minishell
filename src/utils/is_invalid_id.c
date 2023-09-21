@@ -1,5 +1,36 @@
 #include "minishell.h"
 
+void	move_cmd(t_command *cmd, t_infos *infos)
+{
+	int i;
+
+	i = 1;
+	if (cmd->cmd_argv[1])
+	{
+		free(cmd->cmd_argv[0]);
+		while (cmd->cmd_argv[i])
+		{
+			cmd->cmd_argv[i - 1] = cmd->cmd_argv[i];
+			++i;
+		}
+		cmd->cmd_argv[i - 1] = NULL;
+	}
+}
+
+void fix_cmd(t_command *cmd, t_infos *infos, int *ex)
+{
+	if (cmd->cmd_argv[1])
+	{
+		while (!cmd->cmd_argv[0][0] && cmd->cmd_argv[1])
+			move_cmd(cmd, infos);
+	}
+	else
+	{
+		infos->error = 0;
+		*ex = 0;
+	}
+}
+
 int ft_atoi64_overflow(const char *str, int64_t *numb)
 {
 	int i;

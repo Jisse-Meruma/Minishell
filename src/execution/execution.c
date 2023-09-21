@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/21 13:39:16 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execution.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/21 15:15:24 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 	exit(infos->error);
 }
 
-int	child_birth(t_command *cmd, t_infos *infos, int id)
+int	child_birth(t_command *cmd, t_infos *infos, int id, int ex)
 {
-	while (cmd && id != 0)
+	while (cmd && id != 0 && ex)
 	{
 		if (cmd->order <= 1)
 			infos->read_fd = -2;
@@ -119,11 +119,15 @@ void	one_blt(t_command *cmd, t_infos *infos)
 void	start_exec(t_command *cmd, t_infos *infos)
 {
 	int		id;
+	int		execution;
 
 	id = 1;
+	execution = 1;
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
 		return (one_blt(cmd, infos));
-	id = child_birth(cmd, infos, id);
+	if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
+		fix_cmd(cmd, infos, &execution);
+	id = child_birth(cmd, infos, id, execution);
 	wait_exec(id, infos);
 }

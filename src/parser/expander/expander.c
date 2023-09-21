@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:55:43 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/09/21 11:55:44 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   expander.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 11:55:43 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/09/21 15:50:27 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,22 @@ char	*env_creation(char *line, t_infos *infos, int index, int *len)
 	begin = ft_substr(line, 0, index);
 	index++;
 	i = env_name_lenght(line, index, *len);
+	if (i == *len)
+		return (free(begin), *len += 1, line);
 	env = ft_substr(line, index, i);
 	if (!env || !begin)
 		return (free(env), NULL);
-	if (!ft_strncmp(env, "?", 2))
+	if (!ft_strncmp(env, "?", 1))
+	{
 		env_expand = ft_itoa(infos->error);
+		i = *len + 1;
+	}
 	else
 		env_expand = cmd_get_env_char(infos, env);
 	new_line = env_strjoin(line, env_expand, begin, index + i);
 	if (env_expand)
 		*len = ft_strlen(env_expand);
-	free(env);
-	return (new_line);
+	return (free(env), new_line);
 }
 
 char	*search_env_var(char *line, t_infos *infos, int index)

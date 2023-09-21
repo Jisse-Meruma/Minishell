@@ -1,16 +1,80 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:55:22 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/09/21 11:56:27 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parser.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 11:55:22 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/09/21 15:36:07 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	printing(t_command *command)
+{
+	int				i;
+	t_lst_redirects	*redirect;
+
+	i = 1;
+	while (command)
+	{
+		printf("/----------------------------\\\n");
+		printf("CMD = %s\n", command->cmd_argv[0]);
+		if (!command->cmd_argv[0])
+			return;
+		printf("ARG = ");
+		while (command->cmd_argv[i])
+		{
+			printf("%s, ", command->cmd_argv[i]);
+			i++;
+		}
+		printf("\n");
+		printf("stdin redirect = ");
+		redirect = command->lst_redirects;
+		while (redirect)
+		{
+			if (redirect->token == STDINN_FILE)
+				printf("%s, ", redirect->filename);
+			redirect = redirect->next;
+		}
+		printf("\n");
+		printf("stdout redirect = ");
+		redirect = command->lst_redirects;
+		while (redirect)
+		{
+			if (redirect->token == STDOUT_FILE)
+				printf("%s, ", redirect->filename);
+			redirect = redirect->next;
+		}
+		printf("\n");
+		printf("append redirect = ");
+		redirect = command->lst_redirects;
+		while (redirect)
+		{
+			if (redirect->token == APPEND_FILE)
+				printf("%s, ", redirect->filename);
+			redirect = redirect->next;
+		}
+		printf("\n");
+		printf("here_doc redirect = ");
+		redirect = command->lst_redirects;
+		while (redirect)
+		{
+			if (redirect->token == HERE_DOC)
+			{
+				printf("%s, ", redirect->filename);
+				//here_doc(redirect->filename);
+			}
+			redirect = redirect->next;
+		}
+		printf("\n");
+		printf("/----------------------------\\\n");
+		command = command->next;
+		i = 1;
+	}
+}
 
 t_command	*parser(char *line, t_infos *infos)
 {
@@ -38,5 +102,6 @@ t_command	*parser(char *line, t_infos *infos)
 		return (lexer_free(&lexer), NULL);
 	}
 	lexer_free(&lexer);
+	//printing(command);
 	return (command);
 }
