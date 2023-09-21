@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:42:13 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 17:12:28 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	    parent_closing(t_infos *infos, int write_fd);
 bool	    dup_read(t_command *command, t_infos *infos, int check);
 bool	    dup_write(t_command *command, t_infos *infos, int check);
 int	        check_read_priority(t_command *command);
+int         minishell_continue(t_lst_redirects **redi, bool choice);
 
 // Debug the write and read pipes remove afte
 void		print_error(char *str, char *error, t_infos *infos);

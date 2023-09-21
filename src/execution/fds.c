@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:26:07 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:41:51 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 17:12:15 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,11 @@ int	check_read_priority(t_command *command)
 		redirect = redirect->next;
 	}
 	return (priority);
+}
+
+int	minishell_continue(t_lst_redirects **redi, bool choice)
+{
+	if (choice == true)
+		*redi = (*redi)->next;
+	return (choice);
 }

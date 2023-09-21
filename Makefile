@@ -54,7 +54,6 @@ SRC 	:=	main.c			\
 			execution/execution.c 		\
 			execution/execution_cmd.c	\
 			execution/get_envp.c		\
-			execution/in_out_redir.c	\
 			execution/fds.c				\
 			execution/fill_blt.c		\
 			utils/ret_error.c			\

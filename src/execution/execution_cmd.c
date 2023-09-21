@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   execution_cmd.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 17:11:22 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/21 17:12:09 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <fcntl.h>
 #define FILE 1
@@ -13,114 +25,109 @@ bool	exec_heredoc(char *end_of_file, t_infos *infos, int *fd)
 
 bool	start_heredoc(t_command *cmd, t_infos *infos, int *check, int priority)
 {
-	int				file_disciptor;
-	t_lst_redirects	*redirect;
+	int				fd;
+	t_lst_redirects	*redi;
 
-	file_disciptor = -2;
-	redirect = cmd->lst_redirects;
-	while (redirect)
+	fd = -2;
+	redi = cmd->lst_redirects;
+	while (redi)
 	{
-		if (redirect->token != HERE_DOC)
+		if (redi->token != HERE_DOC)
 		{
-			redirect = redirect->next;
+			redi = redi->next;
 			continue ;
 		}
-		if (file_disciptor != -2)
-			close(file_disciptor);
-		if (!exec_heredoc(redirect->filename, infos, &file_disciptor))
+		if (fd != -2)
+			close(fd);
+		if (!exec_heredoc(redi->filename, infos, &fd))
 			return (false);
 		*check = FILE;
-		redirect = redirect->next;
+		redi = redi->next;
 	}
 	if (cmd->order > 1 && *check == FILE)
 		close(infos->read_fd);
 	if (priority != 1)
-		return (close(file_disciptor), true);
-	infos->read_fd = file_disciptor;
+		return (close(fd), true);
+	infos->read_fd = fd;
 	return (true);
 }
 
 bool	start_read(t_command *cmd, t_infos *infos, int *check, int priority)
 {
-	int				file_disciptor;
-	t_lst_redirects	*redirect;
+	int				fd;
+	t_lst_redirects	*redi;
 
-	file_disciptor = -2;
-	redirect = cmd->lst_redirects;
-	while (redirect)
+	fd = -2;
+	redi = cmd->lst_redirects;
+	while (redi)
 	{
-		if (redirect->token != STDINN_FILE)
-		{
-			redirect = redirect->next;
+		if (minishell_continue(&redi, redi->token != STDINN_FILE))
 			continue ;
-		}
-		if (file_disciptor != -2)
-			close(file_disciptor);
-		file_disciptor = open(redirect->filename, O_RDONLY);
-		if (file_disciptor == -1)
-			return (minishell_perror(redirect->filename), false);
+		if (fd != -2)
+			close(fd);
+		fd = open(redi->filename, O_RDONLY);
+		if (fd == -1)
+			return (minishell_perror(redi->filename), false);
 		*check = FILE;
-		redirect = redirect->next;
+		redi = redi->next;
 	}
 	if (cmd->order <= 1 && *check == FILE && priority == 2)
 		close(infos->read_fd);
 	if (priority != 2)
-		return (close(file_disciptor), true);
-	infos->read_fd = file_disciptor;
+		return (close(fd), true);
+	infos->read_fd = fd;
 	return (true);
 }
 
-bool	start_write(t_command *command, t_infos *infos, int *check)
+bool	start_write(t_command *cmd, t_infos *infos, int *check)
 {
-	int				file_disciptor;
-	t_lst_redirects	*redirect;
+	int				fd;
+	t_lst_redirects	*redi;
 
-	file_disciptor = -2;
-	redirect = command->lst_redirects;
-	while (redirect)
+	fd = -2;
+	redi = cmd->lst_redirects;
+	while (redi)
 	{
-		if (redirect->token != APPEND_FILE && redirect->token != STDOUT_FILE)
-		{
-			redirect = redirect->next;
+		if (minishell_continue(&redi, redi->token != APPEND_FILE \
+		&& redi->token != STDOUT_FILE))
 			continue ;
-		}
-		if (file_disciptor != -2)
-			close(file_disciptor);
-		if (redirect->token == STDOUT_FILE)
-			file_disciptor = open(redirect->filename, O_WRONLY | O_CREAT | O_TRUNC, 0000644);
-		else if (redirect->token == APPEND_FILE)
-			file_disciptor = open(redirect->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
-		if (file_disciptor == -1)
-			return (minishell_perror(redirect->filename), false);
+		if (fd != -2)
+			close(fd);
+		if (redi->token == STDOUT_FILE)
+			fd = open(redi->filename, O_WRONLY | O_CREAT | O_TRUNC, 0000644);
+		else if (redi->token == APPEND_FILE)
+			fd = open(redi->filename, O_WRONLY | O_APPEND | O_CREAT, 0000644);
+		if (fd == -1)
+			return (minishell_perror(redi->filename), false);
 		*check = FILE;
-		redirect = redirect->next;
+		redi = redi->next;
 	}
 	if (*check == FILE)
-		infos->write_fd = file_disciptor;
+		infos->write_fd = fd;
 	return (true);
 }
 
-bool dup_redirects(t_command *command, t_infos *infos)
+bool	dup_redirects(t_command *cmd, t_infos *infos)
 {
 	int	priority;
 	int	check_read;
-	int check_write;
-	
+	int	check_write;
+
 	check_read = NO_FILE;
 	check_write = NO_FILE;
-	priority = check_read_priority(command);
+	priority = check_read_priority(cmd);
 	if (priority != 0)
 	{
-		if (!start_heredoc(command, infos, &check_read, priority))
+		if (!start_heredoc(cmd, infos, &check_read, priority))
 			return (false);
-		if (!start_read(command, infos, &check_read, priority))
+		if (!start_read(cmd, infos, &check_read, priority))
 			return (false);
 	}
-	if (!start_write(command, infos, &check_write))
+	if (!start_write(cmd, infos, &check_write))
 		return (false);
-	if (!dup_read(command, infos, check_read))
+	if (!dup_read(cmd, infos, check_read))
 		return (false);
-	if (!dup_write(command, infos, check_write))
+	if (!dup_write(cmd, infos, check_write))
 		return (false);
 	return (true);
 }
