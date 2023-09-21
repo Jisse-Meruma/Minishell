@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   list_env.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 11:55:14 by jmeruma           #+#    #+#             */
-/*   Updated: 2023/09/21 11:55:15 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   list_env.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 11:55:14 by jmeruma       #+#    #+#                 */
+/*   Updated: 2023/09/21 13:22:15 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_node	*create_node(char *str)
 	new_node = (t_node *)ft_calloc(1, sizeof(t_node));
 	if (!new_node)
 		return (NULL);
-	env = ft_split(str, '=');
+	env = ft_split_first(str, '=');
 	if (!env)
 		return (free(new_node), NULL);
 	new_node->name = ft_strdup(env[0]);
