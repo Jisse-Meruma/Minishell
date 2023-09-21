@@ -104,12 +104,14 @@ clean:
 	@echo $(Cyan) Sweeping.. 💥 $(Color_Off)
 	@echo -----------------------
 	@$(MAKE) -C libft clean
+	@rm -rf $(OBJ_DIR)
 	@$(RM) $(OBJ) $(BON_OBJ)
 
 fclean:
 	@echo $(Red) Thorough sweeping.. 💥 $(Color_Off)
 	@echo -----------------------
 	@$(MAKE) -C libft fclean
+	@rm -rf $(OBJ_DIR)
 	@$(RM) $(NAME) $(OBJ) $(BON_OBJ)
 
 re: fclean all
