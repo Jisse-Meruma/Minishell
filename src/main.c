@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 13:53:10 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:43:03 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 17:19:58 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,23 @@ t_glo	g_glo;
 // 	waitpid(infos->pid, NULL, 0);
 // }
 
+int	exit_properly(t_infos *infos, char *line)
+{
+	if (!line)
+		ft_printf("exit\n");
+	free_infos(infos);
+	return (0);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	char		*line;
 	t_infos		infos;
 	t_command	*command;
 
-	(void)argc;
 	(void)argv;
+	if (argc != 1)
+		return (ret_error("Too many Arguments!\n", 2, 1));
 	if (init(&infos, envp))
 		return (EXIT_FAILURE);
 	mainsignal();
@@ -65,8 +74,5 @@ int	main(int argc, char *argv[], char *envp[])
 		free(line);
 		line = readline("Celeste-shell$ ");
 	}
-	if (!line)
-		ft_printf("exit\n");
-	free_infos(&infos);
-	return (0);
+	return (exit_properly(&infos, line));
 }

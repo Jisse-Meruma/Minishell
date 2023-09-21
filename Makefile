@@ -8,16 +8,12 @@ LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/inc
 
 HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include -I /opt/homebrew/opt/readline/include
 
-# LIBS		:=	./libft/libft.a -lreadline -I /Users/$(USER)/.homebrew/opt/readline/include -L/Users/$(USER)/.homebrew/opt/readline/lib
-
-# HEADER		:=	-I libft -I includes -I /Users/$(USER)/.homebrew/opt/readline/include
-
 HEADERS		:=	libft/libft.h includes/minishell.h includes/struct.h
 OBJ_DIR		:=	./obj
 SRC_DIR 	:=	./src
 
 ### UTILS #####################################################
-CFLAGS	:=	-Wall -Wextra
+CFLAGS	:=	-Wall -Wextra -Werror
 RM		:=	rm -rf
 
 SRC 	:=	main.c			\
@@ -67,9 +63,6 @@ SRC 	:=	main.c			\
 
 OBJ		:=	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
-## BON_SRC :=
-
-## BON_OBJ :=  $(BON_SRC:_bonus.c=_bonus.o)
 
 ## Regular Colors ##############################################
 Color_Off	=	"\033[0m"			# Text Reset

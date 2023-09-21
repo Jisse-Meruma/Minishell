@@ -6,12 +6,14 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:26:17 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 17:28:25 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {

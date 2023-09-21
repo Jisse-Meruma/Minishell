@@ -5,3 +5,5 @@ minishell
 obj/
 *.zip
 *.txt
+parser_printing
+minishell_tester
