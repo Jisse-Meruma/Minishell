@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 13:00:21 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 16:43:43 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	update_old_and_pwd(t_infos *infos)
 	free(infos->pwd);
 	if (!getcwd(s, sizeof(s)))
 	{
-		printf("minishell: cd: error retrieving current directory: getcwd: cannot access parent directories: %s\n", strerror(errno));
+		ft_putstr_fd("minishell: cd: error retrieving current directory:", 2);
+		ft_putstr_fd(" getcwd: cannot access parent directories: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
 		infos->error = 1;
 	}
 	infos->pwd = ft_strdup(s);

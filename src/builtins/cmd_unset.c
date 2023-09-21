@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:44:59 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:07:09 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 16:32:05 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,12 @@ void	exec_unset(t_infos *infos, char *arg)
 		return ;
 	if (!arg[0])
 		return (not_valid_id(arg, "unset", infos));
-	//under new funciton
 	current = infos->head;
 	next = current->next;
 	if (!compare(current->name, arg))
 	{
 		infos->head = current->next;
-		freenode(current);
-		return ;
+		return (freenode(current));
 	}
 	while (next != NULL)
 	{

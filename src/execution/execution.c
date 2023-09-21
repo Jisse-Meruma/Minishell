@@ -6,18 +6,12 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 15:15:24 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 16:26:17 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <fcntl.h>
-
-void	parent_closing(t_infos *infos, int write_fd)
-{
-	close(infos->read_fd);
-	close(write_fd);
-}
 
 void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
@@ -86,18 +80,6 @@ void	wait_exec(int id, t_infos *infos)
 		;
 	return ;
 }
-
-// void	one_blt(t_command *cmd, t_infos *infos)
-// {
-// 	if (!dup_all(cmd, infos, 0))
-// 		exec_built(infos, cmd);
-// 	if (infos->write_fd)
-// 	{
-// 		close(infos->write_fd);
-// 		dup2(STDOUT_FILENO, infos->write_fd);
-// 	}
-// 	return ;
-// }
 
 void	one_blt(t_command *cmd, t_infos *infos)
 {

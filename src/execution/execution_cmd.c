@@ -3,53 +3,6 @@
 #define FILE 1
 #define NO_FILE 0
 
-int	check_read_priority(t_command *command)
-{
-	int	priority;
-	t_lst_redirects	*redirect;
-
-	priority = 0;
-	redirect = command->lst_redirects;
-	while (redirect)
-	{
-		if (redirect->token == HERE_DOC)
-			priority = 1;
-		if (redirect->token == STDINN_FILE)
-			priority = 2;
-		redirect = redirect->next;
-	}
-	return (priority);
-}
-
-bool	dup_read(t_command *command, t_infos *infos, int check)
-{
-	if (check == FILE || command->order > 1)
-	{
-		if (dup2(infos->read_fd, STDIN_FILENO) == -1)
-			return (close(infos->read_fd), false);
-		close(infos->read_fd);
-	}
-	return (true);
-}
-
-bool	dup_write(t_command *command, t_infos *infos, int check)
-{
-	if (check == FILE)
-	{
-		if (dup2(infos->write_fd, STDOUT_FILENO) == -1)
-			return (close(infos->write_fd), false);
-		close(infos->write_fd);
-		close(infos->pipes[1]);
-	}
-	else if (command->order != LAST_CMD && command->order != ONE_CMD)
-	{
-		if (dup2(infos->pipes[1], STDOUT_FILENO) == -1)
-			return (close(infos->pipes[1]), false);
-		close(infos->pipes[1]);
-	}
-	return (true);
-}
-
 bool	exec_heredoc(char *end_of_file, t_infos *infos, int *fd)
 {
 	*fd = here_doc(end_of_file, infos);
@@ -58,13 +11,13 @@ bool	exec_heredoc(char *end_of_file, t_infos *infos, int *fd)
 	return (true);
 }
 
-bool	start_heredoc(t_command *command, t_infos *infos, int *check, int priority)
+bool	start_heredoc(t_command *cmd, t_infos *infos, int *check, int priority)
 {
 	int				file_disciptor;
 	t_lst_redirects	*redirect;
 
 	file_disciptor = -2;
-	redirect = command->lst_redirects;
+	redirect = cmd->lst_redirects;
 	while (redirect)
 	{
 		if (redirect->token != HERE_DOC)
@@ -79,7 +32,7 @@ bool	start_heredoc(t_command *command, t_infos *infos, int *check, int priority)
 		*check = FILE;
 		redirect = redirect->next;
 	}
-	if (command->order > 1 && *check == FILE)
+	if (cmd->order > 1 && *check == FILE)
 		close(infos->read_fd);
 	if (priority != 1)
 		return (close(file_disciptor), true);
@@ -87,13 +40,13 @@ bool	start_heredoc(t_command *command, t_infos *infos, int *check, int priority)
 	return (true);
 }
 
-bool	start_read(t_command *command, t_infos *infos, int *check, int priority)
+bool	start_read(t_command *cmd, t_infos *infos, int *check, int priority)
 {
 	int				file_disciptor;
 	t_lst_redirects	*redirect;
 
 	file_disciptor = -2;
-	redirect = command->lst_redirects;
+	redirect = cmd->lst_redirects;
 	while (redirect)
 	{
 		if (redirect->token != STDINN_FILE)
@@ -109,7 +62,7 @@ bool	start_read(t_command *command, t_infos *infos, int *check, int priority)
 		*check = FILE;
 		redirect = redirect->next;
 	}
-	if (command->order <= 1 && *check == FILE && priority == 2)
+	if (cmd->order <= 1 && *check == FILE && priority == 2)
 		close(infos->read_fd);
 	if (priority != 2)
 		return (close(file_disciptor), true);
@@ -131,7 +84,6 @@ bool	start_write(t_command *command, t_infos *infos, int *check)
 			redirect = redirect->next;
 			continue ;
 		}
-		//next line is impossible why is there this line ?
 		if (file_disciptor != -2)
 			close(file_disciptor);
 		if (redirect->token == STDOUT_FILE)
@@ -148,7 +100,6 @@ bool	start_write(t_command *command, t_infos *infos, int *check)
 	return (true);
 }
 
-//return true just for the makefile
 bool dup_redirects(t_command *command, t_infos *infos)
 {
 	int	priority;

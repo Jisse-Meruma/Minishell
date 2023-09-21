@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   free_cmd_struct.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 16:33:23 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/21 16:33:24 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	free_redirect_lst(t_lst_redirects *redirect)

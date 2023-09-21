@@ -6,13 +6,13 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 12:45:40 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 16:33:03 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void call_exit(t_infos *infos)
+void	call_exit(t_infos *infos)
 {
 	ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 	free(infos->pwd);
@@ -20,21 +20,23 @@ void call_exit(t_infos *infos)
 	exit(2);
 }
 
-void exception_exit(t_infos *infos, char *str){
-	int ex_nb;
-	
+void	exception_exit(t_infos *infos, char *str)
+{
+	int	ex_nb;
+
 	ex_nb = -1;
 	if (!compare(str, "-9223372036854775807"))
 		ex_nb = 1;
 	else if (!compare(str, "-9223372036854775808"))
 		ex_nb = 0;
-	if (ex_nb != -1){
+	if (ex_nb != -1)
+	{
 		free(infos->pwd);
 		ft_free_lst(infos->head);
 		exit(ex_nb);
 	}
 }
-//check the frees of exit
+
 void	cmd_exit(t_infos *infos, char **args)
 {
 	if (ft_2d_arrlen(args) == 1)

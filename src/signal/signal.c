@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   signal.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 16:24:33 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/21 16:24:34 by mbernede      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 #define CHILD 0
 
-//when ./minishell inside itself multiple time, print the SIGINT for all minishell
 void	f_sigmain(int sig)
 {
 	if (sig == SIGINT)
