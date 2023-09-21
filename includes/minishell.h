@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:26:08 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/21 12:54:19 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int			init(t_infos *infos, char **envp);
 
 int			compare(char *s1, char *s2);
 
-void		cmd_cd(t_infos *infos, char *input);
+void		cmd_cd(t_infos *infos, char **input);
 void		cmd_pwd(t_infos *infos);
 void		cmd_env(t_infos *infos);
 void		cmd_get_env(t_infos *infos, char *env);

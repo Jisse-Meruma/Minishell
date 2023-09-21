@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/20 16:26:26 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/21 12:45:40 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void call_exit(t_infos *infos)
 	ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
 	free(infos->pwd);
 	ft_free_lst(infos->head);
-	exit(255);
+	exit(2);
 }
 
 void exception_exit(t_infos *infos, char *str){

@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:05:54 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 14:12:53 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 12:51:43 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	exit_error(char *str, int fd, t_infos *infos)
 
 void	minishell_perror(char *str)
 {
-	write(1, "Celeste-shell: ", 15);
+	write(2, "Celeste-shell: ", 15);
 	perror(str);
 }

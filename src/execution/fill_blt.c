@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:52 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/12 14:09:13 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/21 12:48:22 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	exec_built(t_infos *infos, t_command *cmd)
 	else if (!compare(cmd->cmd_argv[0], "exit"))
 		cmd_exit(infos, cmd->cmd_argv);
 	else if (!compare(cmd->cmd_argv[0], "cd"))
-		cmd_cd(infos, cmd->cmd_argv[1]);
+		cmd_cd(infos, cmd->cmd_argv);
 	else if (!compare(cmd->cmd_argv[0], "unset"))
 		cmd_unset(infos, cmd);
 	else if (!compare(cmd->cmd_argv[0], "export"))
