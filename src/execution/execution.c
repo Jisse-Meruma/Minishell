@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   execution.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/12 14:15:41 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/21 13:39:16 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,9 @@ void	one_blt(t_command *cmd, t_infos *infos)
 	int	origin;
 
 	origin = dup(STDOUT_FILENO);
-	if (!dup_all(cmd, infos, 0))
-		exec_built(infos, cmd);
+	if (!dup_redirects(cmd, infos))
+		return ;
+	exec_built(infos, cmd);
 	if (infos->write_fd)
 	{
 		close(infos->write_fd);
