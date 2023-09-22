@@ -6,13 +6,19 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/12 13:53:10 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 13:58:25 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 17:02:14 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 // #include <sys/time.h>
 // #include <sys/wait.h>
+
+//fix <a echo with a=textfile
+//signal activation/deactivation for badeline or strlc
+//pipe
+//cat cat ls
+
 
 int	g_signal;
 

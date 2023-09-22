@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 14:03:25 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 16:26:55 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
 	char	*path;
 
+	//close(infos->pipes[0]);
 	if (cmd->order == LAST_CMD || cmd->order == ONE_CMD)
 		close(infos->pipes[1]);
 	if (!dup_redirects(cmd, infos))
