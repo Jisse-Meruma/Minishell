@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:09 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/20 12:13:07 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/22 12:51:56 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	change_env_type(t_infos *infos, t_env_data type, char *env_name)
 	}
 }
 
-//theres leaks in this functions
 void	exec_export(t_infos *infos, char *str)
 {
 	t_node	*new_node;

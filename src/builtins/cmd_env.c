@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:13 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/08/31 13:45:14 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 12:41:33 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ void	cmd_env(t_infos *infos)
 		}
 		current = current->next;
 	}
+	infos->error = 0;
 }

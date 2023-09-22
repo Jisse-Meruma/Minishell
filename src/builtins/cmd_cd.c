@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:43:43 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 12:51:19 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ void	cmd_cd(t_infos *infos, char **input)
 	}
 	free(str);
 	update_old_and_pwd(infos);
+	infos->error = 0;
 }

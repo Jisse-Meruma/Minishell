@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:24:33 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:24:34 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 13:53:12 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 #include <sys/wait.h>
 #define CHILD 0
 
+extern int	g_signal;
+
 void	f_sigmain(int sig)
 {
 	if (sig == SIGINT)
 	{
 		printf("\n");
-		g_glo.error = 130;
+		g_signal = 130;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}
 	else
-		g_glo.error = 131;
+		g_signal = 131;
 }
 
 void	mainsignal(void)
 {
-	extern int	rl_catch_signals;
-
 	signal(SIGINT, f_sigmain);
 	signal(SIGQUIT, f_sigmain);
-	rl_catch_signals = 1;
 }

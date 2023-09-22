@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:15 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 15:30:46 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 14:01:36 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,4 @@ void	cmd_echo(t_command *cmd, t_infos *infos)
 	if (n == false)
 		write(1, "\n", 1);
 	infos->error = 0;
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:02:41 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 13:46:15 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 13:51:54 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,6 @@ typedef struct s_node
 	t_env_data				type;
 	struct s_node			*next;
 }	t_node;
-
-typedef struct s_glo
-{
-	int						error;
-}	t_glo;
-
-extern t_glo				g_glo;
 
 typedef struct s_infos
 {

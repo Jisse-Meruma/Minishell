@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 15:20:57 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/06 13:54:44 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 13:21:38 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	init(t_infos *infos, char **envp)
 	if (!add_shlvl(infos))
 		return (ft_free_lst(infos->head), 1);
 	infos->error = 0;
+	mainsignal();
 	return (0);
 }

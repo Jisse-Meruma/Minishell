@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 11:55:43 by jmeruma       #+#    #+#                 */
-/*   Updated: 2023/09/21 15:50:27 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/22 13:48:32 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ bool	expanding(t_lexer **lexer, t_infos *infos)
 		string_free = node->argument;
 		node->argument = search_env_var(node->argument, infos, 0);
 		if (node->argument == NULL)
-			return (ERROR);
+			return (ret_error("Expension Fail!", 2, ERROR));
 		if (ft_strlen(node->argument) == 0)
 		{
 			if (ambiguous_redir(lexer, node, string_free))
