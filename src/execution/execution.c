@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 16:26:55 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/26 17:02:52 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
 	char	*path;
 
+	//this line kinda fix the cat | cat | ls until cat tho
 	//close(infos->pipes[0]);
+	mainsignal(0);
 	if (cmd->order == LAST_CMD || cmd->order == ONE_CMD)
 		close(infos->pipes[1]);
 	if (!dup_redirects(cmd, infos))
@@ -49,11 +51,11 @@ int	child_birth(t_command *cmd, t_infos *infos, int id, int ex)
 {
 	while (cmd && id != 0 && ex)
 	{
-		if (cmd->order <= 1)
+		if (cmd->order <= FIRST_CMD)
 			infos->read_fd = -2;
 		else
 			infos->read_fd = infos->pipes[0];
-		if (cmd->order != LAST_CMD && cmd->order != ONE_CMD)
+		if (cmd->order != ONE_CMD && cmd->order != LAST_CMD)
 		{
 			if (pipe(infos->pipes) == -1)
 				return (ret_error("Pipe Error", 2, 1));
@@ -89,7 +91,7 @@ void	one_blt(t_command *cmd, t_infos *infos)
 	int	origin;
 
 	origin = dup(STDOUT_FILENO);
-	if (!dup_redirects(cmd, infos))
+	if (!blt_dup_redirects(cmd, infos))
 	{
 		infos->error = 1;
 		return ;
@@ -111,10 +113,12 @@ void	start_exec(t_command *cmd, t_infos *infos)
 	id = 1;
 	execution = 1;
 	fill_blt_cmdnb(cmd);
-	if ((cmd->next == NULL) && (cmd->cmd_is_blt > 1))
+	if ((cmd->next == NULL) && (cmd->cmd_is_blt > NOT_BUILT))
 		return (one_blt(cmd, infos));
 	if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
 		fix_cmd(cmd, infos, &execution);
+	mainsignal(1);
 	id = child_birth(cmd, infos, id, execution);
 	wait_exec(id, infos);
+	mainsignal(0);
 }

@@ -52,6 +52,7 @@ SRC 	:=	main.c			\
 			execution/get_envp.c		\
 			execution/fds.c				\
 			execution/fill_blt.c		\
+			execution/built_exec.c		\
 			utils/ret_error.c			\
 			utils/compare.c				\
 			utils/ft_isnumber.c			\

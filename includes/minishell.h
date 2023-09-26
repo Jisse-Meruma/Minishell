@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 13:51:59 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/26 16:38:59 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void		free_cmd_struct(t_command *commands);
 //EXECUTION
 void		start_exec(t_command *commands, t_infos *infos);
 bool		dup_redirects(t_command *command, t_infos *infos);
+bool		blt_dup_redirects(t_command *cmd, t_infos *infos);
 char		**get_envp(t_infos *infos);
 int			ft_isnumber(char *str);
 void		ft_2d_print(char **str);
@@ -116,7 +117,7 @@ char		*path_creation(t_infos *infos, char *command);
 int			init(t_infos *infos, char **envp);
 int			compare(char *s1, char *s2);
 void		ft_free_lst(t_node *head);
-void		mainsignal(void);
+void		mainsignal(int mode);
 int			list_env(char **env, t_infos *infos);
 int			ret_error(char *str, int fd, int ret);
 void		void_ret_error(char *str, int fd, t_infos *infos);
