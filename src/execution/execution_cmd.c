@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 17:11:22 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/26 16:47:44 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/27 18:40:36 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 bool	exec_heredoc(char *end_of_file, t_infos *infos, int *fd)
 {
+	mainsignal(2);
 	*fd = here_doc(end_of_file, infos);
 	if (*fd == -1)
 		return (false);
