@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:24:33 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/26 15:16:54 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/27 15:08:28 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	mainsignal(int mode)
 	if (mode == 1)
 	{
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);	
+	}
+	if (mode == 2)
+	{
+		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);	
 	}
 }

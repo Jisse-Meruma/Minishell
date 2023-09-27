@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/26 17:02:52 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/27 14:09:00 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 	//this line kinda fix the cat | cat | ls until cat tho
 	//close(infos->pipes[0]);
 	mainsignal(0);
-	if (cmd->order == LAST_CMD || cmd->order == ONE_CMD)
-		close(infos->pipes[1]);
+	//WTF IM DRUNK AF 
+	// if (cmd->order == LAST_CMD)
+	// 	close(infos->pipes[1]);
 	if (!dup_redirects(cmd, infos))
 		exit(EXIT_FAILURE);
 	if (cmd->cmd_is_blt != NOT_BUILT)
@@ -47,14 +48,26 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 	exit(infos->error);
 }
 
-int	child_birth(t_command *cmd, t_infos *infos, int id, int ex)
+void	ft_read(t_command *cmd, t_infos *infos)
+{
+	if (cmd->order <= FIRST_CMD)
+		infos->read_fd = -2;
+	else
+		infos->read_fd = infos->pipes[0];
+}
+
+//not used yet
+void	close_infos_pipes(t_infos *infos)
+{
+	close(infos->pipes[0]);
+	close(infos->pipes[1]);
+}
+
+int	commands(t_command *cmd, t_infos *infos, int id, int ex)
 {
 	while (cmd && id != 0 && ex)
 	{
-		if (cmd->order <= FIRST_CMD)
-			infos->read_fd = -2;
-		else
-			infos->read_fd = infos->pipes[0];
+		ft_read(cmd, infos);
 		if (cmd->order != ONE_CMD && cmd->order != LAST_CMD)
 		{
 			if (pipe(infos->pipes) == -1)
@@ -118,7 +131,8 @@ void	start_exec(t_command *cmd, t_infos *infos)
 	if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
 		fix_cmd(cmd, infos, &execution);
 	mainsignal(1);
-	id = child_birth(cmd, infos, id, execution);
+	id = commands(cmd, infos, id, execution);
 	wait_exec(id, infos);
+	close(infos->pipes[0]);
 	mainsignal(0);
 }
