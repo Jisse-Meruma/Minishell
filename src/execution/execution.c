@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/27 14:09:00 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/27 19:09:07 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 	char	*path;
 
 	//this line kinda fix the cat | cat | ls until cat tho
-	//close(infos->pipes[0]);
+	if (cmd->order < LAST_CMD)
+		close(infos->pipes[0]);
 	mainsignal(0);
 	//WTF IM DRUNK AF 
 	// if (cmd->order == LAST_CMD)
