@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   fill_blt.c                                         :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:13:52 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 12:48:22 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   fill_blt.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:13:52 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/28 13:15:49 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,12 @@ void	fill_blt_cmdnb(t_command *cmd)
 			cmd->order = CMD;
 		cmd = cmd->next;
 	}
+}
+
+void	ft_read(t_command *cmd, t_infos *infos)
+{
+	if (cmd->order <= FIRST_CMD)
+		infos->read_fd = -2;
+	else
+		infos->read_fd = infos->pipes[0];
 }

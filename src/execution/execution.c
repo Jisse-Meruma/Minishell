@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   execution.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/27 19:09:07 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/28 13:50:03 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,19 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 {
 	char	*path;
 
-	//this line kinda fix the cat | cat | ls until cat tho
-	if (cmd->order < LAST_CMD)
+	if (cmd->order != LAST_CMD && cmd->order != ONE_CMD)
 		close(infos->pipes[0]);
 	mainsignal(0);
-	//WTF IM DRUNK AF 
-	// if (cmd->order == LAST_CMD)
-	// 	close(infos->pipes[1]);
 	if (!dup_redirects(cmd, infos))
 		exit(EXIT_FAILURE);
 	if (cmd->cmd_is_blt != NOT_BUILT)
 		exec_built(infos, cmd);
 	else
 	{
-		if (cmd->cmd_argv[0][0] == '.')
-			path = cmd->cmd_argv[0];
-		else
+		if (cmd->cmd_argv[0][0] != '.')
 			path = path_creation(infos, cmd->cmd_argv[0]);
+		else
+			path = cmd->cmd_argv[0];
 		if (path)
 		{
 			execve(path, cmd->cmd_argv, get_envp(infos));
@@ -43,25 +39,8 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 		}
 		if (errno == 13)
 			infos->error = 126;
-		else
-			infos->error = 127;
 	}
 	exit(infos->error);
-}
-
-void	ft_read(t_command *cmd, t_infos *infos)
-{
-	if (cmd->order <= FIRST_CMD)
-		infos->read_fd = -2;
-	else
-		infos->read_fd = infos->pipes[0];
-}
-
-//not used yet
-void	close_infos_pipes(t_infos *infos)
-{
-	close(infos->pipes[0]);
-	close(infos->pipes[1]);
 }
 
 int	commands(t_command *cmd, t_infos *infos, int id, int ex)

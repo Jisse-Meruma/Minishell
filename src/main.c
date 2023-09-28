@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   main.c                                             :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/09/12 13:53:10 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/26 16:51:53 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/12 13:53:10 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/28 12:57:48 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-// #include <sys/time.h>
-// #include <sys/wait.h>
-
-
-//heredoc signal
-//pipe
-//cat cat ls
-
 
 int	g_signal;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   minishell.h                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/26 16:38:59 by mbernede      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/31 13:18:06 by mbernede          #+#    #+#             */
+/*   Updated: 2023/09/28 13:16:31 by jmeruma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ bool		dup_read(t_command *command, t_infos *infos, int check);
 bool		dup_write(t_command *command, t_infos *infos, int check);
 int			check_read_priority(t_command *command);
 int			minishell_continue(t_lst_redirects **redi, bool choice);
+void		ft_read(t_command *cmd, t_infos *infos);
 
 //PARSER
 t_command	*parser(char *line, t_infos *infos);
