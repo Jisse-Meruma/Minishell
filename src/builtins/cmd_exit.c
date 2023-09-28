@@ -6,18 +6,20 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:33:03 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 00:48:20 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	call_exit(t_infos *infos)
+void	call_exit(t_infos *infos, int ex, char *arg)
 {
-	ft_putstr_fd("minishell: exit: numeric argument required\n", 2);
+	ft_putstr_fd("Celeste-Shell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	free(infos->pwd);
 	ft_free_lst(infos->head);
-	exit(2);
+	exit(ex);
 }
 
 void	exception_exit(t_infos *infos, char *str)
@@ -37,7 +39,7 @@ void	exception_exit(t_infos *infos, char *str)
 	}
 }
 
-void	cmd_exit(t_infos *infos, char **args)
+void	exit_no_arg(t_infos *infos, char **args)
 {
 	if (ft_2d_arrlen(args) == 1)
 	{
@@ -46,18 +48,25 @@ void	cmd_exit(t_infos *infos, char **args)
 		infos->error = 0;
 		exit(0);
 	}
-	else if (ft_2d_arrlen(args) == 2)
+}
+
+void	cmd_exit(t_infos *infos, char **args)
+{
+	exit_no_arg(infos, args);
+	exception_exit(infos, args[1]);
+	if (!ft_isnumber64(args[1]))
 	{
-		exception_exit(infos, args[1]);
-		if (!ft_isnumber64(args[1]))
-			return (call_exit(infos));
-		free(infos->pwd);
-		ft_free_lst(infos->head);
-		exit(ft_atoi(args[1]));
+		ft_putstr_fd("exit\n", 2);
+		return (call_exit(infos, 255, args[1]));
 	}
-	else
+	if (ft_2d_arrlen(args) > 2)
 	{
+		ft_putstr_fd("exit\n", 2);
 		infos->error = 1;
-		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		ft_putstr_fd("Celeste-Shell: exit: too many arguments\n", 2);
+		return ;
 	}
+	free(infos->pwd);
+	ft_free_lst(infos->head);
+	exit(ft_atoi(args[1]));
 }
