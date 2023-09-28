@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:13:50 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/28 13:50:03 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execution.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/28 13:59:57 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 			execve(path, cmd->cmd_argv, get_envp(infos));
 			print_error(cmd->cmd_argv[0], strerror(errno), infos);
 		}
-		if (errno == 13)
-			infos->error = 126;
+		set_error(infos, errno);
 	}
 	exit(infos->error);
 }

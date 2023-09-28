@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 13:18:06 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/28 13:16:31 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   minishell.h                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/28 14:00:21 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int			list_env(char **env, t_infos *infos);
 int			ret_error(char *str, int fd, int ret);
 void		void_ret_error(char *str, int fd, t_infos *infos);
 void		exit_error(char *str, int fd, t_infos *infos);
+void		set_error(t_infos *infos, int err);
 
 //Redirect file opening
 int			here_doc(char *end_of_file, t_infos *infos);

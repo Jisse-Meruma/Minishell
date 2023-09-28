@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   execution_cmd.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 17:11:22 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/28 13:49:42 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   execution_cmd.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 17:11:22 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/28 14:19:34 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,30 +128,6 @@ bool	dup_redirects(t_command *cmd, t_infos *infos)
 		return (false);
 	if (!dup_read(cmd, infos, check_read))
 		return (false);
-	if (!dup_write(cmd, infos, check_write))
-		return (false);
-	return (true);
-}
-
-bool	blt_dup_redirects(t_command *cmd, t_infos *infos)
-{
-	int	priority;
-	int	check_read;
-	int	check_write;
-
-	check_read = NO_FILE;
-	check_write = NO_FILE;
-	priority = check_read_priority(cmd);
-	if (priority != 0)
-	{
-		if (!start_heredoc(cmd, infos, &check_read, priority))
-			return (false);
-		if (!start_read(cmd, infos, &check_read, priority))
-			return (false);
-	}
-	if (!start_write(cmd, infos, &check_write))
-		return (false);
-	close(infos->read_fd);
 	if (!dup_write(cmd, infos, check_write))
 		return (false);
 	return (true);
