@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 18:24:34 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 01:18:09 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ void	wait_exec(int id, t_infos *infos)
 		printf("\n");
 		infos->error = 130;
 	}
-	if (status == 131)
+	if (status == 131 || status == 3)
 	{
 		printf("Quit\n");
-		infos->error = status;
+		infos->error = 131;
 	}
 	else if (WIFEXITED(status))
 		infos->error = WEXITSTATUS(status);

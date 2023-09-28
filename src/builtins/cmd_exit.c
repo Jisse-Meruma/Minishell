@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:11 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/29 00:48:20 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/29 01:20:31 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	cmd_exit(t_infos *infos, char **args)
 	exception_exit(infos, args[1]);
 	if (!ft_isnumber64(args[1]))
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit\n", 1);
 		return (call_exit(infos, 255, args[1]));
 	}
 	if (ft_2d_arrlen(args) > 2)
 	{
-		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit\n", 1);
 		infos->error = 1;
 		ft_putstr_fd("Celeste-Shell: exit: too many arguments\n", 2);
 		return ;

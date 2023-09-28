@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 12:51:19 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 01:09:24 by maxb          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	cmd_cd(t_infos *infos, char **input)
 
 	if (ft_2d_arrlen(input) > 2)
 		return (void_ret_error(" too many arguments", 2, infos));
-	if (!input[0])
+	if (!input[1])
 	{
 		if (!cmd_check_env_exist(infos, "HOME"))
 			return (void_ret_error("minishell: cd: HOME not set\n", 2, infos));
-		str = cmd_get_env_char(infos, "HOME");
+		str = ft_strdup(cmd_get_env_char(infos, "HOME"));
 	}
 	else
 		str = ft_strdup(input[1]);
