@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:24:33 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:15:28 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 18:16:19 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,10 @@ void	mainsignal(int mode)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);
+	}
+	if (mode == 3)
+	{
+		signal(SIGINT, f_sigmain);
+		signal(SIGQUIT, SIG_DFL);
 	}
 }

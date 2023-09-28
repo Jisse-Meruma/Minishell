@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:52 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:16:06 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:46:58 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ bool	blt_dup_redirects(t_command *cmd, t_infos *infos)
 	}
 	if (!start_write(cmd, infos, &check_write))
 		return (false);
-	close(infos->read_fd);
+	if (infos->read_fd > 0)
+		close(infos->read_fd);
 	if (!dup_write(cmd, infos, check_write))
 		return (false);
 	return (true);

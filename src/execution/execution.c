@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 13:59:57 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 18:16:04 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 
 	if (cmd->order != LAST_CMD && cmd->order != ONE_CMD)
 		close(infos->pipes[0]);
-	mainsignal(0);
+	mainsignal(3);
 	if (!dup_redirects(cmd, infos))
 		exit(EXIT_FAILURE);
 	if (cmd->cmd_is_blt != NOT_BUILT)
@@ -71,8 +71,15 @@ void	wait_exec(int id, t_infos *infos)
 	int32_t	status;
 
 	waitpid(id, &status, 0);
-	if (WIFEXITED(status))
+	if (status == 131)
+	{
+		printf("Quit\n");
+		infos->error = status;
+	}
+	else if (WIFEXITED(status))
 		infos->error = WEXITSTATUS(status);
+	if (infos->error == 130)
+		printf("\n");
 	while (wait(NULL) != -1)
 		;
 	return ;
@@ -107,11 +114,10 @@ void	start_exec(t_command *cmd, t_infos *infos)
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > NOT_BUILT))
 		return (one_blt(cmd, infos));
-	if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
-		fix_cmd(cmd, infos, &execution);
+	// if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
+	// 	fix_cmd(cmd, infos, &execution);
 	mainsignal(1);
 	id = commands(cmd, infos, id, execution);
 	wait_exec(id, infos);
-	close(infos->pipes[0]);
 	mainsignal(0);
 }

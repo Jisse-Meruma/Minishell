@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:00:21 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:37:07 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ bool		dup_write(t_command *command, t_infos *infos, int check);
 int			check_read_priority(t_command *command);
 int			minishell_continue(t_lst_redirects **redi, bool choice);
 void		ft_read(t_command *cmd, t_infos *infos);
+bool		start_heredoc(t_command *cmd, t_infos *infos, int *check, \
+int priority);
+bool		start_read(t_command *cmd, t_infos *infos, int *check, \
+int priority);
+bool		start_write(t_command *cmd, t_infos *infos, int *check);
 
 //PARSER
 t_command	*parser(char *line, t_infos *infos);

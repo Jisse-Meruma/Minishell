@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:26:07 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 17:12:15 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 14:55:18 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ bool	dup_write(t_command *command, t_infos *infos, int check)
 		if (dup2(infos->write_fd, STDOUT_FILENO) == -1)
 			return (close(infos->write_fd), false);
 		close(infos->write_fd);
-		close(infos->pipes[1]);
+		if (command->order != LAST_CMD && command->order != ONE_CMD)
+			close(infos->pipes[1]);
 	}
 	else if (command->order != LAST_CMD && command->order != ONE_CMD)
 	{

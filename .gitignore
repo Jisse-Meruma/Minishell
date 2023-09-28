@@ -1,9 +1,0 @@
-.o
-.DS_Store
-.*
-minishell
-obj/
-*.zip
-*.txt
-parser_printing
-minishell_tester/

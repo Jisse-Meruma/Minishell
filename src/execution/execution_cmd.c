@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 17:11:22 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:19:34 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 15:00:46 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	start_read(t_command *cmd, t_infos *infos, int *check, int priority)
 		*check = FILE;
 		redi = redi->next;
 	}
-	if (cmd->order <= 1 && *check == FILE && priority == 2)
+	if (cmd->order > FIRST_CMD && *check == FILE && priority == 2)
 		close(infos->read_fd);
 	if (priority != 2)
 		return (close(fd), true);
