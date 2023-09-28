@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 18:16:04 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/28 18:24:34 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void	wait_exec(int id, t_infos *infos)
 	int32_t	status;
 
 	waitpid(id, &status, 0);
+	if (status == 2)
+	{
+		printf("\n");
+		infos->error = 130;
+	}
 	if (status == 131)
 	{
 		printf("Quit\n");
@@ -78,8 +83,6 @@ void	wait_exec(int id, t_infos *infos)
 	}
 	else if (WIFEXITED(status))
 		infos->error = WEXITSTATUS(status);
-	if (infos->error == 130)
-		printf("\n");
 	while (wait(NULL) != -1)
 		;
 	return ;
