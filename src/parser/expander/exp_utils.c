@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 11:55:41 by jmeruma       #+#    #+#                 */
-/*   Updated: 2023/09/21 15:37:22 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 11:42:15 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	ambiguous_redir(t_lexer	**lexer, t_lexer *node, char *str)
 		prev_node = prev_node->next;
 	if (!is_redirect(prev_node->token))
 		return (false);
-	write(2, "minishell: ", 11);
+	write(2, "Celeste-shell: ", 11);
 	write(2, str, ft_strlen(str));
 	write(2, ": ambiguous redirect\n", 21);
 	return (true);

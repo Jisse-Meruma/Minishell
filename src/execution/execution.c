@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/29 01:18:09 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/29 11:34:16 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 		{
 			execve(path, cmd->cmd_argv, get_envp(infos));
 			print_error(cmd->cmd_argv[0], strerror(errno), infos);
+			set_error(infos, errno);
 		}
-		set_error(infos, errno);
 	}
 	exit(infos->error);
 }

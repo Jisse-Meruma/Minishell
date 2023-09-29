@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:45:17 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/29 01:09:24 by maxb          ########   odam.nl         */
+/*   Updated: 2023/09/29 11:42:01 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	update_old_and_pwd(t_infos *infos)
 	free(infos->pwd);
 	if (!getcwd(s, sizeof(s)))
 	{
-		ft_putstr_fd("minishell: cd: error retrieving current directory:", 2);
+		ft_putstr_fd("Celeste-shell: cd: error retrieving current directory:", 2);
 		ft_putstr_fd(" getcwd: cannot access parent directories: ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		infos->error = 1;
@@ -40,7 +40,7 @@ void	cmd_cd(t_infos *infos, char **input)
 	if (!input[1])
 	{
 		if (!cmd_check_env_exist(infos, "HOME"))
-			return (void_ret_error("minishell: cd: HOME not set\n", 2, infos));
+			return (void_ret_error("Celeste-shell: cd: HOME not set\n", 2, infos));
 		str = ft_strdup(cmd_get_env_char(infos, "HOME"));
 	}
 	else
@@ -49,7 +49,7 @@ void	cmd_cd(t_infos *infos, char **input)
 		void_ret_error("Malloc Error", 2, infos);
 	if (chdir(str) < 0)
 	{
-		write(2, "minishell: cd: ", 15);
+		write(2, "Celeste-shell: cd: ", 15);
 		perror(str);
 		infos->error = 1;
 		free(str);

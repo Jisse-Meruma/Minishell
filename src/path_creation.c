@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   path_creation.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jmeruma <jmeruma@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/21 16:28:04 by mbernede          #+#    #+#             */
-/*   Updated: 2023/09/28 13:51:10 by jmeruma          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   path_creation.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/09/21 16:28:04 by mbernede      #+#    #+#                 */
+/*   Updated: 2023/09/29 11:36:42 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/stat.h>
 #define FOUND 0
 
 static char	*path_command_join(char **bin_dir, char *command, int index)
@@ -68,6 +69,18 @@ char	*path_creation(t_infos *infos, char *command)
 		infos->error = 127;
 		return (NULL);
 	}
+	// struct stat path_stat;
+	// if (stat(command, &path_stat) == 0)
+	// {
+	// 	if (S_ISDIR(path_stat.st_mode)) 
+	// 	{
+	// 		print_error(command, "is a directory", infos);
+	// 		infos->error = 126;
+	// 		return (NULL);
+	// 	}
+	// 	else if (access(command, F_OK | X_OK) == 0)
+	// 		return (command);
+	// }
 	if (access(command, F_OK | X_OK) == FOUND)
 		return (command);
 	path_var = cmd_get_env_char(infos, "PATH");
