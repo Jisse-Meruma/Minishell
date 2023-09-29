@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/28 14:37:07 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 11:46:00 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define ERROR 1
 # define SUCCES 0
 # define ER_MLC "Malloc Error"
+# define ER_CD_HOME "Celeste-shell: cd: HOME not set\n"
+# define ER_CD_CURDIR "Celeste-shell: cd: error retrieving current directory:"
 
 //BUILTINS
 //arg_error_blt
