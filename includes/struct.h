@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 14:02:41 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/22 13:51:54 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 12:17:11 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define STRUCT_H
 
 # include <signal.h>
+# include <stdbool.h>
 
 typedef enum s_token
 {

@@ -6,7 +6,7 @@
 /*   By: mbernede <mbernede@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/21 16:15:34 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/21 16:23:37 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 12:31:44 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,12 @@ void	move_cmd(t_command *cmd)
 	}
 }
 
-void	fix_cmd(t_command *cmd, t_infos *infos, int *ex)
+void	fix_cmd(t_command *cmd)
 {
 	if (cmd->cmd_argv[1])
 	{
 		while (!cmd->cmd_argv[0][0] && cmd->cmd_argv[1])
 			move_cmd(cmd);
-	}
-	else
-	{
-		infos->error = 0;
-		*ex = 0;
 	}
 }
 

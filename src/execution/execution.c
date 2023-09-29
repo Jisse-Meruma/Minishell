@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:13:50 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/29 11:34:16 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 12:32:18 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	exec_cmd_child(t_command *cmd, t_infos *infos)
 	exit(infos->error);
 }
 
-int	commands(t_command *cmd, t_infos *infos, int id, int ex)
+int	commands(t_command *cmd, t_infos *infos, int id)
 {
-	while (cmd && id != 0 && ex)
+	while (cmd && id != 0)
 	{
 		ft_read(cmd, infos);
 		if (cmd->order != ONE_CMD && cmd->order != LAST_CMD)
@@ -78,7 +78,7 @@ void	wait_exec(int id, t_infos *infos)
 	}
 	if (status == 131 || status == 3)
 	{
-		printf("Quit\n");
+		ft_putstr_fd("Quit (core dumped)\n", 2);
 		infos->error = 131;
 	}
 	else if (WIFEXITED(status))
@@ -110,17 +110,15 @@ void	one_blt(t_command *cmd, t_infos *infos)
 void	start_exec(t_command *cmd, t_infos *infos)
 {
 	int		id;
-	int		execution;
 
 	id = 1;
-	execution = 1;
 	fill_blt_cmdnb(cmd);
 	if ((cmd->next == NULL) && (cmd->cmd_is_blt > NOT_BUILT))
 		return (one_blt(cmd, infos));
-	// if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
-	// 	fix_cmd(cmd, infos, &execution);
+	if (cmd && cmd->cmd_argv[0] && !cmd->cmd_argv[0][0])
+		fix_cmd(cmd);
 	mainsignal(1);
-	id = commands(cmd, infos, id, execution);
+	id = commands(cmd, infos, id);
 	wait_exec(id, infos);
 	mainsignal(0);
 }

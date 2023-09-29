@@ -6,7 +6,7 @@
 /*   By: jmeruma <jmeruma@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/08/31 13:18:06 by mbernede      #+#    #+#                 */
-/*   Updated: 2023/09/29 11:46:00 by mbernede      ########   odam.nl         */
+/*   Updated: 2023/09/29 12:32:41 by mbernede      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,6 @@ char		**ft_split_first(char *str, char c);
 int			check_valid_id(char *str);
 int			ft_atoi64_overflow(const char *str, int64_t *numb);
 int			ft_isnumber64(char *str);
-void		fix_cmd(t_command *cmd, t_infos *infos, int *ex);
+void		fix_cmd(t_command *cmd);
 
 #endif
